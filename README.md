@@ -1,0 +1,1 @@
+# Mezogazdasagi_hozamszamito
