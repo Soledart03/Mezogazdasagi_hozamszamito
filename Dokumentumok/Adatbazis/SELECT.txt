@@ -1,0 +1,33 @@
+SELECT g.nev AS gazda_nev,
+       f.helyrajzi_szam,
+       n.nev AS noveny_nev,
+       tz.vetes_idopont,
+       t.viz,
+       t.tomeg,
+       t.osszeg,
+       t.szemet
+FROM Gazda_fiok g
+JOIN Fold f ON g.id = f.gazda_id
+JOIN Tervezes tz ON f.id = tz.fold_id
+JOIN Noveny n ON tz.noveny_id = n.id
+JOIN Tervezt t ON tz.tervezet_id = t.id
+WHERE g.nev = 'Kovács István'
+  AND tz.vetes_idopont = '2025-03-15';
+
+--------------------------------------------
+
+SELECT
+    n.id AS noveny_id,
+    n.nev AS noveny_nev,
+    n.fajtaja,
+    i.id AS input_anyag_id,
+    i.nev AS input_anyag_nev,
+    i.ar AS input_anyag_ar,
+    k.hasznalat,
+    k.ajanlott_mennyiseg
+FROM
+    mezogazd.noveny n
+JOIN
+    mezogazd.kezeles k ON n.id = k.noveny_id
+JOIN
+    mezogazd.input_anyag i ON k.input_anyag_id = i.id;
