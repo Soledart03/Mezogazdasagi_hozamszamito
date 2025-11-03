@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Okt 14. 08:08
+-- Létrehozás ideje: 2025. Nov 02. 12:09
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -155,14 +155,14 @@ INSERT INTO `noveny` (`id`, `nev`, `fajtaja`, `ar`, `kep`) VALUES
 CREATE TABLE `noveny_input` (
   `noveny_id` int(11) NOT NULL,
   `inputanyag_id` int(11) NOT NULL,
-  `ajanlott_mennyiseg` decimal(10,2) DEFAULT NULL
+  `termes_per_kilo` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `noveny_input`
 --
 
-INSERT INTO `noveny_input` (`noveny_id`, `inputanyag_id`, `ajanlott_mennyiseg`) VALUES
+INSERT INTO `noveny_input` (`noveny_id`, `inputanyag_id`, `termes_per_kilo`) VALUES
 (1, 1, 25.00),
 (1, 2, 10.00),
 (2, 1, 30.00),
