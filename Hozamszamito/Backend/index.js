@@ -21,6 +21,7 @@ app.get('/api/gazda', (req, res) => {
  res.json(results);
  });
 });
+//szi apu
 app.get('/api/gazdkiad', (req, res) => {
  db.query('SELECT g.nev,f.muvelesi_ag,k.tipus FROM gazda_fiok AS g JOIN fold AS f ON g.id = f.gazda_id JOIN kiadas AS k ON f.id = k.fold_id ', (err, results) => {
  if (err) throw err;
