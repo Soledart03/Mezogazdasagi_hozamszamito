@@ -1,6 +1,14 @@
 <h2>Gazdák:</h2>
+<button (click)="gazdatolt()"> Gazdák összes földjének művelési ága és kiadása </button>
 <ul>
  <li *ngFor="let x of adattarolo">
  {{x.id}} - {{ x.nev }} - {{ x.email }}
+ </li>
+</ul>
+<h2>Gazdák összes földjének művelési ága és kiadása:</h2>
+<button (click)="gazdafoldkiad()"> Gazdák összes földjének művelési ága és kiadása </button>
+<ul >
+ <li *ngFor="let y of adattarolo2">
+ {{y.nev}} - {{ y.muvelesi_ag }} - {{ y.tipus }}
  </li>
 </ul>

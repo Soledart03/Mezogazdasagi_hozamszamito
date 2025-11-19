@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Mezogazd } from '../mezogazd';
 @Component({
   selector: 'app-mezogazd-comp',
@@ -6,17 +6,21 @@ import { Mezogazd } from '../mezogazd';
   templateUrl: './mezogazd-comp.html',
   styleUrl: './mezogazd-comp.css',
 })
-export class MezogazdComp implements OnInit {
+export class MezogazdComp {
   adattarolo: any[] = [];
+  adattarolo2: any[] = [];
   constructor(private serv: Mezogazd){}
-  ngOnInit(): void {
-    this.gazdatolt();
-  }
+  
  gazdatolt(): void {
+  
   this.serv.getGazda().subscribe(data => {
     this.adattarolo = data;
   })
-  //eddig jutottam így gyorsan, holnap vagy ma este írjál vagy 5 lekérdezést meg én is írok 5-öt holnap szerintem, 
-  //tiéd a szűréses enyém meg a joinolásos ha úgy jó neked
+}
+gazdafoldkiad(): void {
+  
+  this.serv.getgazdKiad().subscribe(data => {
+    this.adattarolo2 = data;
+  })
 }
 }
