@@ -1,5 +1,5 @@
 <h2>Gazdák:</h2>
-<button (click)="gazdatolt()"> Gazdák összes földjének művelési ága és kiadása </button>
+<button (click)="gazdatolt()"> Összes gazda </button>
 <ul>
  <li *ngFor="let x of adattarolo">
  {{x.id}} - {{ x.nev }} - {{ x.email }}
@@ -13,7 +13,7 @@
  </li>
 </ul>
 <h2>Növények adatai:</h2>
-<button (click)="novenyadat()"> Gazdák összes földjének művelési ága és kiadása </button>
+<button (click)="novenyadat()"> Növények adatai </button>
 <ul >
  <li *ngFor="let y of adattarolo3">
  {{y.nnev}} - {{ y.inev }} - {{ y.termes_per_kilo }}
