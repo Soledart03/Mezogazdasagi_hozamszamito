@@ -27,6 +27,12 @@ app.get('/api/gazdkiad', (req, res) => {
  res.json(results);
  });
 });
+app.get('/api/novenyadat', (req, res) => {
+ db.query('SELECT n.nnev, i.inev, ni.termes_per_kilo FROM noveny AS n JOIN noveny_input AS ni ON n.id = ni.noveny_id JOIN input_anyag AS i ON i.id = ni.inputanyag_id; ', (err, results) => {
+ if (err) throw err;
+ res.json(results);
+ });
+});
 const PORT = 3000;
 app.listen(PORT, () => {
  console.log(`Server running on http://localhost:${PORT}`);

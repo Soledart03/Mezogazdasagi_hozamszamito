@@ -9,6 +9,7 @@ import { Mezogazd } from '../mezogazd';
 export class MezogazdComp {
   adattarolo: any[] = [];
   adattarolo2: any[] = [];
+  adattarolo3: any[] = [];
   constructor(private serv: Mezogazd){}
   
  gazdatolt(): void {
@@ -21,6 +22,12 @@ gazdafoldkiad(): void {
   
   this.serv.getgazdKiad().subscribe(data => {
     this.adattarolo2 = data;
+  })
+}
+novenyadat(): void {
+  
+  this.serv.getnovenyadat().subscribe(data => {
+    this.adattarolo3 = data;
   })
 }
 }
