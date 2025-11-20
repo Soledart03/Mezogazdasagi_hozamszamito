@@ -19,3 +19,38 @@
  {{y.nnev}} - {{ y.inev }} - {{ y.termes_per_kilo }}
  </li>
 </ul>
+<h2>Előzőév:</h2>
+<button (click)="elozoev()"> Előzőév </button>
+<ul >
+ <li *ngFor="let y of adattarolo4">
+ {{y.elozo_evi_hasznositas}}
+ </li>
+</ul>
+<h2>Gazdanev:</h2>
+<button (click)="gazdanev()"> Gazdanev </button>
+<ul >
+ <li *ngFor="let y of adattarolo5">
+ {{y.nev}}
+ </li>
+</ul>
+<h2>Veti:</h2>
+<button (click)="veti()"> Veti </button>
+<ul>
+ <li *ngFor="let y of adattarolo6">
+ {{y.vetes_idopont}}
+ </li>
+</ul>
+<h2>Datumbuza:</h2>
+<button (click)="datumbuza()"> Datumbuza </button>
+<ul >
+ <li *ngFor="let y of adattarolo7">
+ {{y.datum}}
+ </li>
+</ul>
+<h2>Termikili:</h2>
+<button (click)="termikili()"> Termikili </button>
+<ul >
+ <li *ngFor="let y of adattarolo8">
+ {{y.nnev}} - {{y.termes_per_kilo}}
+ </li>
+</ul>
