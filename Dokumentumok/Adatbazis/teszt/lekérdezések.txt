@@ -23,3 +23,6 @@ SELECT k.datum FROM kiadas AS k JOIN noveny AS n ON k.noveny_id = n.id WHERE n.n
 
 SELECT n.nnev, ni.termes_per_kilo FROM noveny_input AS ni JOIN noveny AS n ON ni.noveny_id = n.id WHERE n.nnev LIKE 'Búza';
 
+5 insert into
+
+INSERT INTO `noveny` (`id`, `nnev`, `kep`) VALUES (NULL, 'cirok', 'https://thumbs.dreamstime.com/b/crop-sign-emoji-icon-illustration-wheat-vector-symbol-emoticon-design-clip-art-sign-comic-style-crop-sign-emoji-icon-illustration-408222366.jpg');
