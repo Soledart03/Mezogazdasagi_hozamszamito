@@ -75,7 +75,18 @@ app.get('/api/termikili', (req, res) => {
  res.json(results);
  });
 });
-
+// ------------------ POST New Game ------------------
+app.post('/api/games', (req, res) => {
+    const { title, genre, publisher, release_year, rating } = req.body;
+    db.query(
+    'INSERT INTO games (title, genre, publisher, release_year, rating) VALUES (?, ?, ?, ?, ?)',
+    [title, genre, publisher, release_year, rating],
+    (err, results) => {
+    if (err) throw err;
+    res.json({ id: results.insertId, title, genre, publisher, release_year, rating });
+    }
+    );
+   });
 // ------------------ PUT Update Game ------------------
 app.put('/api/games/:id', (req, res) => {
     const id = req.params.id;
