@@ -23,18 +23,28 @@ app.get('/api/gazda', (req, res) => {
  });
 });
 //idáig
+//1
 app.get('/api/gazdkiad', (req, res) => {
  db.query('SELECT g.nev,f.muvelesi_ag,k.tipus FROM gazda_fiok AS g JOIN fold AS f ON g.id = f.gazda_id JOIN kiadas AS k ON f.id = k.fold_id', (err, results) => {
  if (err) throw err;
  res.json(results);
  });
 });
+//2
 app.get('/api/novenyadat', (req, res) => {
  db.query('SELECT n.nnev, i.inev, ni.termes_per_kilo FROM noveny AS n JOIN noveny_input AS ni ON n.id = ni.noveny_id JOIN input_anyag AS i ON i.id = ni.inputanyag_id', (err, results) => {
  if (err) throw err;
  res.json(results);
  });
 });
+//3
+app.get('/api/vetesiidopont', (req, res) => {
+ db.query(`SELECT gf.email, f.helyrajzi_szam, t.vetes_idopont FROM gazda_fiok AS gf JOIN fold AS f ON f.gazda_id = gf.id JOIN terv AS t ON t.fold_id = f.id;`, (err, results) => {
+ if (err) throw err;
+ res.json(results);
+ });
+});
+
 
 //Koszta1
 app.get('/api/elozoev', (req, res) => {
