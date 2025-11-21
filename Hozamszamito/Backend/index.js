@@ -76,6 +76,28 @@ app.get('/api/termikili', (req, res) => {
  });
 });
 
+// ------------------ PUT Update Game ------------------
+app.put('/api/games/:id', (req, res) => {
+    const id = req.params.id;
+    const { title, genre, publisher, release_year, rating } = req.body;
+    db.query(
+    'UPDATE games SET title=?, genre=?, publisher=?, release_year=?, rating=? WHERE id=?',
+    [title, genre, publisher, release_year, rating, id],
+    (err) => {
+    if (err) throw err;
+    res.json({ message: 'Game updated' });
+    }
+    );
+   });
+   // ------------------ DELETE Game ------------------
+   app.delete('/api/games/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('DELETE FROM games WHERE id=?', [id], (err) => {
+    if (err) throw err;
+    res.json({ message: 'Game deleted' });
+    });
+   });
+   
 
 
 const PORT = 3000;
