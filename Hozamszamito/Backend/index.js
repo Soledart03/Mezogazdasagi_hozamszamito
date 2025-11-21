@@ -37,7 +37,23 @@ app.get('/api/novenyadat', (req, res) => {
  res.json(results);
  });
 });
-//3
+//3(new)
+app.get('/api/vetesiidopont', (req, res) => {
+ db.query(`SELECT gf.email, f.helyrajzi_szam, t.vetes_idopont FROM gazda_fiok AS gf JOIN fold AS f ON f.gazda_id = gf.id JOIN terv AS t ON t.fold_id = f.id;`, (err, results) => {
+ if (err) throw err;
+ res.json(results);
+ });
+});
+
+//4(new)
+app.get('/api/tipi', (req, res) => {
+ db.query(`SELECT n.nnev AS noveny_nev, t.tomeg, k.tipus FROM noveny AS n LEFT JOIN terv AS t ON t.noveny_id = n.id LEFT JOIN kiadas AS k ON k.noveny_id = n.id;`, (err, results) => {
+ if (err) throw err;
+ res.json(results);
+ });
+});
+
+//5(nincs kész és nem is lesz mostanában :))
 app.get('/api/vetesiidopont', (req, res) => {
  db.query(`SELECT gf.email, f.helyrajzi_szam, t.vetes_idopont FROM gazda_fiok AS gf JOIN fold AS f ON f.gazda_id = gf.id JOIN terv AS t ON t.fold_id = f.id;`, (err, results) => {
  if (err) throw err;
