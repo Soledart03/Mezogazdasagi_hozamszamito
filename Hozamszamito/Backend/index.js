@@ -76,14 +76,14 @@ app.get('/api/termikili', (req, res) => {
  });
 });
 // ------------------ POST New Game ------------------
-app.post('/api/games', (req, res) => {
-    const { title, genre, publisher, release_year, rating } = req.body;
+app.post('/api/gazdafel', (req, res) => {
+    const { nev, email, jelszo} = req.body;
     db.query(
-    'INSERT INTO games (title, genre, publisher, release_year, rating) VALUES (?, ?, ?, ?, ?)',
-    [title, genre, publisher, release_year, rating],
+    'INSERT INTO games (nev, email, jelszo) VALUES (?, ?, ?)',
+    [nev, email, jelszo],
     (err, results) => {
     if (err) throw err;
-    res.json({ id: results.insertId, title, genre, publisher, release_year, rating });
+    res.json({ id: results.insertId, nev, email, jelszo });
     }
     );
    });
