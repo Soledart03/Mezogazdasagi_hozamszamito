@@ -1,0 +1,25 @@
+lekérdezések
+
+5 sima get
+SELECT g.nev,f.muvelesi_ag,k.tipus FROM gazda_fiok AS g JOIN fold AS f ON g.id = f.gazda_id JOIN kiadas AS k ON f.id = k.fold_id;
+
+SELECT n.nnev, i.inev, ni.termes_per_kilo FROM noveny AS n JOIN noveny_input AS ni ON n.id = ni.noveny_id JOIN input_anyag AS i ON i.id = ni.inputanyag_id;
+
+SELECT gf.email, f.helyrajzi_szam, t.vetes_idopont FROM gazda_fiok AS gf JOIN fold AS f ON f.gazda_id = gf.id JOIN terv AS t ON t.fold_id = f.id;
+
+SELECT n.nnev AS noveny_nev, t.tomeg, k.tipus FROM noveny AS n LEFT JOIN terv AS t ON t.noveny_id = n.id LEFT JOIN kiadas AS k ON k.noveny_id = n.id;
+
+
+
+5 where, group by, order by
+
+SELECT f.elozo_evi_hasznositas FROM fold AS f JOIN gazda_fiok AS g ON f.gazda_id = g.id WHERE g.nev = 'Kovács Péter;
+
+SELECT g.nev FROM gazda_fiok AS g JOIN fold AS f ON f.gazda_id = g.id WHERE f.helyrajzi_szam = '9101/5';
+
+SELECT t.vetes_idopont FROM terv AS t JOIN fold AS f ON t.fold_id = f.id WHERE t.fold_id = 1;
+
+SELECT k.datum FROM kiadas AS k JOIN noveny AS n ON k.noveny_id = n.id WHERE n.nnev LIKE 'Búza';
+
+SELECT n.nnev, ni.termes_per_kilo FROM noveny_input AS ni JOIN noveny AS n ON ni.noveny_id = n.id WHERE n.nnev LIKE 'Búza';
+

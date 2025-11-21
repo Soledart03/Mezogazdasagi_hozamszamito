@@ -1,0 +1,8 @@
+SQL 
+kép, lekérdezések (crud) 5, mindenre szöveggel magyarázva, eredményről is kép, 
+10 get(order by, where, group by) - 5join, 5 szűréssel foglalkozik, ugyanúgy szöveg
+importálási file, összesen 25 lekérdezés
+elmélet - történet, záradék?
+védés fejből a kód, csak kérdés 
+
+
