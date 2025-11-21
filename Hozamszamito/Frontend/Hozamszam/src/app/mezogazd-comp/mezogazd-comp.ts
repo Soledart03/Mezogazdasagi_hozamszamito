@@ -56,4 +56,5 @@ termikili(): void {
    this.adattarolo8 = data;
  })
 }
+
 }

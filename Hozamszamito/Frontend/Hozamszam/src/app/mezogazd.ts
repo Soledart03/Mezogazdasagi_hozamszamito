@@ -38,5 +38,7 @@ export class Mezogazd {
   gettermikili(): Observable<any> {
     return this.http.get<any>(this.api8);
   }
-  
+  Reg(gazda: any): Observable<any> {
+    return this.http.post<any>(this.api, gazda);
+    }
 }

@@ -54,3 +54,13 @@
  {{y.nnev}} - {{y.termes_per_kilo}}
  </li>
 </ul>
+
+<form (ngSubmit)="editMode ? updateGame() : addGame()">
+    <input placeholder="Cím" [(ngModel)]="newGame.title" name="title" required>
+    <input placeholder="Műfaj" [(ngModel)]="newGame.genre" name="genre" required>
+    <input placeholder="Kiadó" [(ngModel)]="newGame.publisher" name="publisher">
+    
+   
+    <button type="submit">{{editMode ? 'Mentés' : 'Hozzáadás'}}</button>
+   </form>
+   
