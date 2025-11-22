@@ -1,27 +1,69 @@
 lekérdezések
 
 5 sima get
+
+//Minden gazda esetén kilistázza:
+//A gazda nevét, a hozzá tartozó föld művelési ágát, az adott földhöz kapcsolódó kiadás típusát.
+//Melyik gazda milyen művelési ágú földjén milyen típusú kiadást végeztek?
+//1.lekérdezés
 SELECT g.nev,f.muvelesi_ag,k.tipus FROM gazda_fiok AS g JOIN fold AS f ON g.id = f.gazda_id JOIN kiadas AS k ON f.id = k.fold_id;
 
+//Kilistázza:
+//A növény nevét, a hozzá tartozó inputanyag (pl. műtrágya) nevét, és hogy 1 kg terméshez mennyi inputanyag szükséges
+//Melyik növény milyen inputanyagot igényel, és mennyi kell belőle 1 kg terméshez?
+//2.lekérdezés
 SELECT n.nnev, i.inev, ni.termes_per_kilo FROM noveny AS n JOIN noveny_input AS ni ON n.id = ni.noveny_id JOIN input_anyag AS i ON i.id = ni.inputanyag_id;
 
+//Kilistázza:
+//A gazda e-mail címét, az adott föld helyrajzi számát, és a földre vonatkozó vetési terv dátumát.
+//Melyik gazda (email címe alapján) melyik földjén mikor vet?
+//3.lekérdezés
 SELECT gf.email, f.helyrajzi_szam, t.vetes_idopont FROM gazda_fiok AS gf JOIN fold AS f ON f.gazda_id = gf.id JOIN terv AS t ON t.fold_id = f.id;
 
+//Kilistázza:
+//Minden növény nevét, ha van terv hozzá, akkor a vetés tömegét, ha van kiadás hozzá, akkor a kiadás típusát.
+//Listázza az összes növényt a hozzá tartozó tervekkel és kiadások típusaival (ha vannak).
+//4.lekérdezés
 SELECT n.nnev AS noveny_nev, t.tomeg, k.tipus FROM noveny AS n LEFT JOIN terv AS t ON t.noveny_id = n.id LEFT JOIN kiadas AS k ON k.noveny_id = n.id;
+
+//Kilistázza:
+//A gazda nevét, a föld helyrajzi számát, az inputanyag nevét, amelyből kiadás történt és a kiadás összegét.
+//5.lekérdezés
+SELECT gf.nev AS gazda, f.helyrajzi_szam, i.inev AS inputanyag, k.osszeg FROM gazda_fiok AS gf JOIN fold AS f ON f.gazda_id = gf.id JOIN kiadas AS k ON k.fold_id = f.id JOIN input_anyag AS i ON i.id = k.inputanyag_id;
 
 
 
 5 where, group by, order by
 
-SELECT f.elozo_evi_hasznositas FROM fold AS f JOIN gazda_fiok AS g ON f.gazda_id = g.id WHERE g.nev = 'Kovács Péter;
+//Lekéri:
+//Annak a gazdának a földjeit, akinek a neve „Kovács Péter” és ezeknek a földeknek az előző évi hasznosítását.
+//Mivotl termesztve Kovács Péter földjeiben az előző évben?
+//6.lekérdezés
+SELECT f.elozo_evi_hasznositas FROM fold AS f JOIN gazda_fiok AS g ON f.gazda_id = g.id WHERE g.nev = 'Kovács Péter';
 
+//Lekéri
+//Megkeresi azt a földet, amelynek a helyrajzi száma 9101/5 és lekérdezi annak a gazdának a nevét, akié a föld.
+//Ki a tulajdonosa a „9101/5” helyrajzi számú földnek?
+//7.lekérdezés
 SELECT g.nev FROM gazda_fiok AS g JOIN fold AS f ON f.gazda_id = g.id WHERE f.helyrajzi_szam = '9101/5';
 
+//Lekéri
+//Megkeresi azt a tervet, amely a 1-es számú földre (fold_id = 1) vonatkozik és lekérdezi a vetés időpontját.
+//Mikor volt vetve az 1-es id-jú föld?
+//8.lekérdezés
 SELECT t.vetes_idopont FROM terv AS t JOIN fold AS f ON t.fold_id = f.id WHERE t.fold_id = 1;
 
-SELECT k.datum FROM kiadas AS k JOIN noveny AS n ON k.noveny_id = n.id WHERE n.nnev LIKE 'Búza';
+//Lekéri
+//A föld helyrajzi számát, területét és művelési ágát a föld nagysága szerint növekvő sorrendben.
+//Írd ki a a föld helyrajzi számát, területét és művelési ágát a föld nagysága szerint növekvő sorrendben.
+SELECT helyrajzi_szam, terulet, muvelesi_ag FROM fold ORDER BY terulet DESC;
 
-SELECT n.nnev, ni.termes_per_kilo FROM noveny_input AS ni JOIN noveny AS n ON ni.noveny_id = n.id WHERE n.nnev LIKE 'Búza';
+//Csoportosítja
+//A kiadásokat típus szerint össezadva (pl. műtrágya, üzemanyag, stb.).
+//Csoportosítsd a kiadásoakt össezadva típus szerint.
+SELECT tipus, SUM(osszeg) AS osszes_kiadas FROM kiadas GROUP BY tipus;
+
+
 
 5 insert into
 
