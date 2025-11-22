@@ -56,11 +56,13 @@ SELECT t.vetes_idopont FROM terv AS t JOIN fold AS f ON t.fold_id = f.id WHERE t
 //Lekéri
 //A föld helyrajzi számát, területét és művelési ágát a föld nagysága szerint növekvő sorrendben.
 //Írd ki a a föld helyrajzi számát, területét és művelési ágát a föld nagysága szerint növekvő sorrendben.
+//9.lekérdezés
 SELECT helyrajzi_szam, terulet, muvelesi_ag FROM fold ORDER BY terulet DESC;
 
 //Csoportosítja
 //A kiadásokat típus szerint össezadva (pl. műtrágya, üzemanyag, stb.).
 //Csoportosítsd a kiadásoakt össezadva típus szerint.
+//10.lekérdezés
 SELECT tipus, SUM(osszeg) AS osszes_kiadas FROM kiadas GROUP BY tipus;
 
 
