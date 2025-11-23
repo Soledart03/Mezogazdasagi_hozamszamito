@@ -69,4 +69,97 @@ SELECT tipus, SUM(osszeg) AS osszes_kiadas FROM kiadas GROUP BY tipus;
 
 5 insert into
 
+//Hozzáaadja a növény táblához a cirkot és a hozzá tartozó értékeket
+//11.lekérdezés
 INSERT INTO `noveny` (`id`, `nnev`, `kep`) VALUES (NULL, 'cirok', 'https://thumbs.dreamstime.com/b/crop-sign-emoji-icon-illustration-wheat-vector-symbol-emoticon-design-clip-art-sign-comic-style-crop-sign-emoji-icon-illustration-408222366.jpg');
+
+//Hozzáaadja a gazda fiók táblához Kiss Péter és a hozzá tartozó értékeket
+//12.lekérdezés
+INSERT INTO gazda_fiok (nev, email, jelszo) VALUES ('Kiss Péter', 'peter.kiss@example.com', 'jelszo123');
+
+//Hozzáaad a növény input táblához egy új rekordot
+//13.lekérdezés
+INSERT INTO noveny_input (noveny_id, inputanyag_id, termes_per_kilo) VALUES (6, 9, 1100);
+
+//Hozzáaad a föld táblához egy új rekordot
+//14.lekérdezés
+INSERT INTO fold ( terulet, muvelesi_ag, helyrajzi_szam, elozo_evi_hasznositas, gazda_id ) VALUES ( 12.50, 'szántó', '0123/45', 'kukorica', 1 );
+
+//Hozzáaad a növény input táblához egy új rekordot
+//15.lekérdezés
+INSERT INTO noveny_input (noveny_id, inputanyag_id, termes_per_kilo) VALUES (6, 9, 1100);
+
+
+5 delete
+
+//Kitörli azt a gazda fiókot amelynek az id-ja 1.
+//16. lekérdezés
+DELETE FROM gazda_fiok WHERE id = 1;
+
+//Kitörli azt a földet és a hozzájuk tartozó információkat amelynek az id-ja 3.
+//17. lekérdezés
+//Kapcsolódó kiadások törlése
+DELETE FROM kiadas
+WHERE fold_id = 3;
+//Kapcsolódó tervek törlése
+DELETE FROM terv
+WHERE fold_id = 3;
+// Maga a föld törlése
+DELETE FROM fold
+WHERE id = 3;
+
+//Kitörli azt az input aynagot és a hozzájuk tartozó információkat amelynek az id-ja 5.
+//18. lekérdezés
+//Kapcsolódó noveny_input rekordok törlése
+DELETE FROM noveny_input
+WHERE inputanyag_id = 5;
+//Kapcsolódó kiadások törlése
+DELETE FROM kiadas
+WHERE inputanyag_id = 5;
+//Maga az input anyag törlése
+DELETE FROM input_anyag
+WHERE id = 5;
+
+//Kitörli azt a kiadást amelyenk az id-ja 10.
+//19.lekérdezés
+DELETE FROM kiadas
+WHERE id = 10;
+
+//Kitörli azt a tervet amelyenk az id-ja 7.
+//20.lekérdezés
+DELETE FROM terv
+WHERE id = 7;
+
+
+5 update
+
+
+//föld terület módosítása
+//21.lekérdezés
+UPDATE fold
+SET terulet = 20.50
+WHERE id = 1;
+
+//föld művelési ág módosítása
+//22.lekérdezés
+UPDATE fold
+SET muvelesi_ag = 'legelő'
+WHERE id = 2;
+
+//kiadás összeg módosítása
+//23.lekérdezés
+UPDATE kiadas
+SET osszeg = 45000
+WHERE id = 3;
+
+//gazda fiok email módosítása
+//24.lekérdezés
+UPDATE gazda_fiok
+SET email = 'uj.email@example.com'
+WHERE id = 1;
+
+//gazda_fiok jelszó módosítása
+//25.lekérdezés
+UPDATE gazda_fiok
+SET jelszo = 'ujTitkosJelszo123'
+WHERE id = 2;
