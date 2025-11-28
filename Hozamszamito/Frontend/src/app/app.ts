@@ -8,4 +8,11 @@ import { Component, signal } from '@angular/core';
 })
 export class App {
   protected readonly title = signal('Frontend');
+  menu: 'none'|'login'|'register' = 'none';
+  openMenu(type:'login'|'register'){
+    this.menu = type;
+  }
+  closeMenu(){
+    this.menu = 'none';
+  }
 }

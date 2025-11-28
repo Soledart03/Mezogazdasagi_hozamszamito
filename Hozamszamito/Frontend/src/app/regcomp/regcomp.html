@@ -1,1 +1,10 @@
-<p>regcomp works!</p>
+<div class="popup">
+    <h2>Regisztráció</h2>
+    <form (ngSubmit)="gazdaHozzaad()">
+        <input [(ngModel)]="ujgazd.nev" name="nev" placeholder="Név" required>
+        <input [(ngModel)]="ujgazd.email" name="email" placeholder="Email" required>
+        <input [(ngModel)]="ujgazd.jelszo" name="jelszo" placeholder="Jelszó" required>
+        <button type="submit">Hozzáadás</button>
+    </form>
+    <button (click)="closeMenu()">Close</button>
+</div>
