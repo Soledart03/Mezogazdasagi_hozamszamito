@@ -7,12 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { Regcomp } from './regcomp/regcomp';
 import { FormsModule } from '@angular/forms';
 import { Fooldal } from './fooldal/fooldal';
+import { Navbar } from './navbar/navbar';
 
 @NgModule({
   declarations: [
     App,
     Regcomp,
-    Fooldal
+    Fooldal,
+    Navbar
   ],
   imports: [
     BrowserModule,
