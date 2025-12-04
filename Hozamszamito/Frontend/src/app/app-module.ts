@@ -8,13 +8,15 @@ import { Regcomp } from './regcomp/regcomp';
 import { FormsModule } from '@angular/forms';
 import { Fooldal } from './fooldal/fooldal';
 import { Navbar } from './navbar/navbar';
+import { Loginform } from './loginform/loginform';
 
 @NgModule({
   declarations: [
     App,
     Regcomp,
     Fooldal,
-    Navbar
+    Navbar,
+    Loginform
   ],
   imports: [
     BrowserModule,

@@ -1,27 +1,26 @@
-import { Component,EventEmitter, Output,Input } from '@angular/core';
+import { Component,EventEmitter, Output,Input  } from '@angular/core';
 import { Gazdaservice } from '../gazdaservice';
 @Component({
-  selector: 'app-regcomp',
+  selector: 'app-loginform',
   standalone: false,
-  templateUrl: './regcomp.html',
-  styleUrl: './regcomp.css',
+  templateUrl: './loginform.html',
+  styleUrl: './loginform.css',
 })
-export class Regcomp {
-  
+export class Loginform {
+  gazdak:any[]=[];
   ujgazd = {nev:'',email:'',jelszo:''}
   constructor(private gserv:Gazdaservice){}
-  gazdaHozzaad():void{
-    this.gserv.addGazda(this.ujgazd).subscribe({
+  logcheck():void{
+    this.gserv.logc(this.ujgazd).subscribe({
       next:()=>{
         window.alert('Sikeres Bejelentkezés');
-        this.ujgazd = {nev:'',email:'',jelszo:''};
         this.closeMenu();
       },
       error:(err)=>{
         window.alert(err.error.error);
       }
-      
     })
+    
   }
   @Input()IsMenu: boolean = false;
   @Input()show:boolean = true;

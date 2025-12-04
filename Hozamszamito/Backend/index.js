@@ -18,14 +18,27 @@ db.connect(err => {
  console.log('MySQL kapcsolódva.');
 });
 const apiurl = '/api/gazda';
-
-app.get(apiurl, (req, res) => {
- db.query('SELECT * FROM gazda_fiok', (err, results) => {
- if (err) throw err;
- res.json(results);
- });
+app.post('/api/log', async (req,res)=>{
+    const { nev, email, jelszo} = req.body;
+    
+    db.query('SELECT jelszo FROM gazda_fiok WHERE nev = ? AND email = ?',[nev,email],(err,results)=>{
+        
+        if(err) throw err;
+        
+        bcrypt.compare(jelszo,results[0].jelszo,(err,result)=>{
+            if(err) throw err;
+            if(!result){
+                
+                return res.status(401).json({error:'Helytelen jelszó'});
+            }
+            
+            res.json({success:true});
+        });
+    
+        
+    })
+    
 });
-
 app.post(apiurl, async (req, res) => {
     const { nev, email, jelszo} = req.body;
     const haspas = await bcrypt.hash(jelszo,10);

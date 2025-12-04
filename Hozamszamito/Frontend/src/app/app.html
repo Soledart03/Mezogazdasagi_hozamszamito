@@ -5,3 +5,8 @@
   [isMenu] = "true"
   (close)="closeMenu()"
 ></app-regcomp>
+<app-loginform
+*ngIf="menu === 'login'"
+  [isMenu] = "true"
+  (close)="closeMenu()">
+</app-loginform>
