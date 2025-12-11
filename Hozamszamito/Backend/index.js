@@ -18,10 +18,20 @@ db.connect(err => {
  console.log('MySQL kapcsolódva.');
 });
 const apiurl = '/api/gazda';
+app.get(apiurl+'/:id', async (req,res)=>{
+    console.log(req.params.id);
+    db.query('SELECT id, nev, email FROM gazda_fiok WHERE id=?',[req.params.id],(err,result)=>{
+        if(err) throw err;
+        if(result.length == 0) throw err;
+        console.log(result);
+        res.json(result);
+
+    })
+})
 app.post('/api/log', async (req,res)=>{
-    const { nev, email, jelszo} = req.body;
+    const {id, nev, email, jelszo} = req.body;
     
-    db.query('SELECT jelszo FROM gazda_fiok WHERE nev = ? AND email = ?',[nev,email],(err,results)=>{
+    db.query('SELECT id,nev,jelszo FROM gazda_fiok WHERE nev = ? AND email = ?',[nev,email],(err,results)=>{
         
         if(err) throw err;
         
@@ -32,7 +42,7 @@ app.post('/api/log', async (req,res)=>{
                 return res.status(401).json({error:'Helytelen jelszó'});
             }
             
-            res.json({success:true});
+            res.json({success:true,id:results[0].id});
         });
     
         
@@ -52,6 +62,7 @@ app.post(apiurl, async (req, res) => {
     );
    });
    
+
 const PORT = 3000;
 app.listen(PORT, () => {
  console.log(`Server running on http://localhost:${PORT}`);

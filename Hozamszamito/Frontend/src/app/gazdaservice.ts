@@ -14,4 +14,7 @@ export class Gazdaservice {
   logc(gazda:{'nev','email','jelszo'}):Observable<any>{
     return this.http.post(this.apilogin,gazda);
   }
+  getGazda(id:number):Observable<any>{
+    return this.http.get(this.api+'/'+id);
+  }
 }

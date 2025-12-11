@@ -18,7 +18,9 @@ export class Regcomp {
         this.closeMenu();
       },
       error:(err)=>{
+        console.log('Nem megy',this.ujgazd.nev)
         window.alert(err.error.error);
+
       }
       
     })
