@@ -49,6 +49,13 @@ app.post('/api/log', async (req,res)=>{
     })
     
 });
+app.get('/api/gfold',(req,res)=>{
+    db.query('SELECT * FROM fold WHERE fold.gazda_id = 8;',(err,result)=>{
+        if(err) throw err;
+        res.json(result);
+    })
+})
+
 app.post(apiurl, async (req, res) => {
     const { nev, email, jelszo} = req.body;
     const haspas = await bcrypt.hash(jelszo,10);
