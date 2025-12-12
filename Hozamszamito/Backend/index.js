@@ -55,8 +55,8 @@ app.get('/api/gfold/:id',(req,res)=>{
     db.query('SELECT * FROM fold WHERE fold.gazda_id = ?;',[req.params.id],(err,result)=>{
         if(err) throw err;
         res.json(result);
-    })
-})  
+    });
+});  
 
 app.post(apiurl, async (req, res) => {
     const { nev, email, jelszo} = req.body;
@@ -95,12 +95,32 @@ app.post(apiurl, async (req, res) => {
  }
  );
 });
+app.put('/api/gazdaup/:id', (req, res) => {
+ const id = req.params.id;
+ const {nev,email,jelszo} = req.body;
+ db.query(
+ 'UPDATE gazda SET nev=?,email=?,jelszo=? WHERE id=?',
+ [nev,email,jelszo,id],
+ (err) => {
+ if (err) throw err;
+ res.json({ message: 'Gazda frissült!' });
+ }
+ );
+});
 
    app.delete('/api/dfold/:id', (req, res) => {
     const id = req.params.id;
     db.query('DELETE FROM fold WHERE id=?', [id], (err) => {
     if (err) throw err;
     res.json({ message: 'Föld törölve!'});
+    });
+    });
+
+    app.delete('/api/gazdad/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('DELETE FROM fold WHERE id=?', [id], (err) => {
+    if (err) throw err;
+    res.json({ message: 'Gazda törölve!'});
     });
     });
     
