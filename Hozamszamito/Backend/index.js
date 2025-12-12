@@ -28,6 +28,8 @@ app.get(apiurl+'/:id', async (req,res)=>{
 
     })
 })
+
+
 app.post('/api/log', async (req,res)=>{
     const {id, nev, email, jelszo} = req.body;
     
@@ -49,12 +51,12 @@ app.post('/api/log', async (req,res)=>{
     })
     
 });
-app.get('/api/gfold',(req,res)=>{
-    db.query('SELECT * FROM fold WHERE fold.gazda_id = 8;',(err,result)=>{
+app.get('/api/gfold/:id',(req,res)=>{
+    db.query('SELECT * FROM fold WHERE fold.gazda_id = ?;',[req.params.id],(err,result)=>{
         if(err) throw err;
         res.json(result);
     })
-})
+})  
 
 app.post(apiurl, async (req, res) => {
     const { nev, email, jelszo} = req.body;
@@ -68,7 +70,40 @@ app.post(apiurl, async (req, res) => {
     }
     );
    });
-   
+   //Postman needed
+   app.post(apiurl, async (req, res) => {
+    const {terulet, muvelesi_ag, helyrajzi_szam,elozo_evi_hasznositas,gazda_id} = req.body;
+    
+    db.query(
+    'INSERT INTO fold(terulet,muvelesi_ag,helyrajzi_szam,elozo_evi_hasznositas,gazda_id) VALUES(?,?,?,?,?)',
+    [terulet, muvelesi_ag, helyrajzi_szam,elozo_evi_hasznositas,gazda_id],
+    (err, results) => {
+    if (err) throw err;
+    res.json({ id: results.insertId, terulet, muvelesi_ag, helyrajzi_szam,elozo_evi_hasznositas,gazda_id});
+    }
+    );
+   });
+   app.put('/api/ufold/:id', (req, res) => {
+ const id = req.params.id;
+ const {terulet, muvelesi_ag, helyrajzi_szam,elozo_evi_hasznositas,gazda_id} = req.body;
+ db.query(
+ 'UPDATE fold SET terulet=?, muvelesi_ag=?, helyrajzi_szam=?,elozo_evi_hasznositas=?,gazda_id=? WHERE id=?',
+ [terulet, muvelesi_ag, helyrajzi_szam,elozo_evi_hasznositas,gazda_id,id],
+ (err) => {
+ if (err) throw err;
+ res.json({ message: 'Föld frissítve!' });
+ }
+ );
+});
+
+   app.delete('/api/dfold/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('DELETE FROM fold WHERE id=?', [id], (err) => {
+    if (err) throw err;
+    res.json({ message: 'Föld törölve!'});
+    });
+    });
+    
 
 const PORT = 3000;
 app.listen(PORT, () => {
