@@ -155,6 +155,7 @@ app.get('/api/inp', async (req,res)=>{
     })
     
 })
+//kiadás kezelők
 app.get('/api/kiad/:id', async (req,res)=>{
     const id = req.params.id;
     db.query('SELECT id,datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id FROM kiadas WHERE id=?',[id],(err,result)=>{
@@ -195,6 +196,49 @@ app.delete('/api/kiad/:id', (req, res) => {
     db.query('DELETE FROM kiadas WHERE id=?', [id], (err) => {
     if (err) throw err;
     res.json({ message: 'Kiadás törölve!'});
+    });
+    });
+//tervezetkezelők
+app.get('/api/terv/:id', async (req,res)=>{
+    const id = req.params.id;
+    db.query('SELECT id,fold_id,noveny_id,vetes_idopont,tomeg,osszeg FROM terv WHERE id=?',[id],(err,result)=>{
+        if(err) throw err;
+        if(result.length == 0) throw err;
+        console.log(result);
+        res.json(result);
+
+    })
+    
+})
+app.post('/api/terv', async (req, res) => {
+    const {fold_id,noveny_id,vetes_idopont,tomeg,osszeg} = req.body;
+    
+    db.query(
+    'INSERT INTO terv(fold_id,noveny_id,vetes_idopont,tomeg,osszeg) VALUES(?,?,?,?,?)',
+    [fold_id,noveny_id,vetes_idopont,tomeg,osszeg],
+    (err, results) => {
+    if (err) throw err;
+    res.json({ id: results.insertId, fold_id,noveny_id,vetes_idopont,tomeg,osszeg});
+    }
+    );
+   });
+   app.put('/api/terv/:id', (req, res) => {
+ const id = req.params.id;
+ const {fold_id,noveny_id,vetes_idopont,tomeg,osszeg} = req.body;
+ db.query(
+ 'UPDATE terv SET fold_id,noveny_id,vetes_idopont,tomeg,osszeg WHERE id=?',
+ [fold_id,noveny_id,vetes_idopont,tomeg,osszeg,id],
+ (err) => {
+ if (err) throw err;
+ res.json({ message: 'Tervezet frissült!' });
+ }
+ );
+});
+app.delete('/api/terv/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('DELETE FROM terv WHERE id=?', [id], (err) => {
+    if (err) throw err;
+    res.json({ message: 'Tervezet törölve!'});
     });
     });
 const PORT = 3000;
