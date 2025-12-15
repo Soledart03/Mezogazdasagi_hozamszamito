@@ -155,7 +155,48 @@ app.get('/api/inp', async (req,res)=>{
     })
     
 })
+app.get('/api/kiad/:id', async (req,res)=>{
+    const id = req.params.id;
+    db.query('SELECT id,datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id FROM kiadas WHERE id=?',[id],(err,result)=>{
+        if(err) throw err;
+        if(result.length == 0) throw err;
+        console.log(result);
+        res.json(result);
 
+    })
+    
+})
+app.post('/api/kiad', async (req, res) => {
+    const {datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id} = req.body;
+    
+    db.query(
+    'INSERT INTO kiadas(datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id) VALUES(?,?,?,?,?,?,?)',
+    [datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id],
+    (err, results) => {
+    if (err) throw err;
+    res.json({ id: results.insertId, datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id});
+    }
+    );
+   });
+   app.put('/api/kiad/:id', (req, res) => {
+ const id = req.params.id;
+ const {datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id} = req.body;
+ db.query(
+ 'UPDATE kiad SET datum=?,osszeg=?,tipus=?,leiras=?,fold_id=?,noveny_id=?,inputanyag_id=? WHERE id=?',
+ [datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id,id],
+ (err) => {
+ if (err) throw err;
+ res.json({ message: 'Kiadás frissült!' });
+ }
+ );
+});
+app.delete('/api/kiad/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('DELETE FROM kiadas WHERE id=?', [id], (err) => {
+    if (err) throw err;
+    res.json({ message: 'Kiadás törölve!'});
+    });
+    });
 const PORT = 3000;
 app.listen(PORT, () => {
  console.log(`Server running on http://localhost:${PORT}`);
