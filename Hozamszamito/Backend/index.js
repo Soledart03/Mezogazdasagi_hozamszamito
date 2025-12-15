@@ -123,7 +123,38 @@ app.put('/api/gazdaup/:id', (req, res) => {
     res.json({ message: 'Gazda törölve!'});
     });
     });
+
+
+    app.get('/api/noveny', async (req,res)=>{
+    db.query('SELECT id,nnev,kep FROM noveny',(err,result)=>{
+        if(err) throw err;
+        if(result.length == 0) throw err;
+        console.log(result);
+        res.json(result);
+
+    })
     
+})
+app.get('/api/noveny_i', async (req,res)=>{
+    db.query('SELECT noveny_id,inputanyag_id,termes_per_kilo FROM noveny_input',(err,result)=>{
+        if(err) throw err;
+        if(result.length == 0) throw err;
+        console.log(result);
+        res.json(result);
+
+    })
+    
+})
+app.get('/api/inp', async (req,res)=>{
+    db.query('SELECT id,inev,ar,fajta FROM input_anyag',(err,result)=>{
+        if(err) throw err;
+        if(result.length == 0) throw err;
+        console.log(result);
+        res.json(result);
+
+    })
+    
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {
