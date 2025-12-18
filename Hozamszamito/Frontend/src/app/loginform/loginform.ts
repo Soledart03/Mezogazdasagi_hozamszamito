@@ -14,10 +14,10 @@ export class Loginform {
     this.gserv.logc(this.ujgazd).subscribe({
       next:(res)=>{
         console.log(res);
-        window.alert('Sikeres Bejelentkezés');
+        
         this.gserv.getGazda(res.id).subscribe(data=>{
           this.gazdak = data;
-          console.log(this.gazdak);
+          window.alert('Sikeres Bejelentkezés');
         })
         console.log(res.id);
         
