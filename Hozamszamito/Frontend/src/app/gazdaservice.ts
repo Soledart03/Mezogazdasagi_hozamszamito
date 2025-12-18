@@ -17,4 +17,5 @@ export class Gazdaservice {
   getGazda(id:number):Observable<any>{
     return this.http.get(this.api+'/'+id);
   }
+  
 }
