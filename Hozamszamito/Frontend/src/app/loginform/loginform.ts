@@ -7,7 +7,7 @@ import { Gazdaservice } from '../gazdaservice';
   styleUrl: './loginform.css',
 })
 export class Loginform {
-  gazdak:any;
+  public gazdak:any;
   ujgazd = {nev:'',email:'',jelszo:''}
   constructor(private gserv:Gazdaservice){}
   logcheck():void{
@@ -35,5 +35,8 @@ export class Loginform {
   closeMenu(){
     this.show = false;
     this.close.emit();
+  }
+  gazdkiad(){
+    return this.gazdak;
   }
 }

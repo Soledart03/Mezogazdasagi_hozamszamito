@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { App } from '../app';
+import { Loginform } from '../loginform/loginform';
 @Component({
   selector: 'app-navbar',
   standalone: false,
@@ -7,8 +8,9 @@ import { App } from '../app';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-constructor(private app:App){}
+constructor(private app:App, log:Loginform){}
   openMenu(type: any){
     this.app.openMenu(type);
   }
+  
 }
