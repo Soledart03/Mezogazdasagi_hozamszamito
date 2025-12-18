@@ -1,8 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-dark navi">
-
-    <button class="bg-light navbut"><span>Föld hozzáadás</span></button>
-    <button class="bg-light navbut"><span>Tervek</span></button>
-    <button class="bg-light navbut  ms-auto text-end" (click)="openMenu('register')"><span>Regisztráció</span></button>
-    <button class="bg-light navbut  ms-auto text-end" (click)="openMenu('login')"><span>Bejelentkezés</span></button>
-
-</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-4 shadow-sm">
+  
+    <a class="navbar-brand fw-bold text-success" href="#">
+      MEHOSZ
+    </a>
+  
+   
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Föld hozzáadása</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tervek megtekintése</a>
+        </li>
+        
+      </ul>
+  
+     
+      <div class="d-flex align-items-center gap-3">
+        <button
+          class="btn btn-link text-dark text-decoration-none"
+          (click)="openMenu('login')"
+        >
+          Bejelentkezés
+        </button>
+  
+        <button
+          class="btn btn-success px-4"
+          (click)="openMenu('register')"
+        >
+          Regisztráció
+        </button>
+      </div>
+    </div>
+  </nav>
