@@ -9,7 +9,7 @@ import { Gazdaservice } from '../gazdaservice';
 })
 export class Foldek implements OnInit {
 constructor(private app:App,private gazdaser:Gazdaservice){}
-private foldek:any[]=[];
+protected foldek:any[]=[];
 ngOnInit(): void {
   this.foldGetId();
 }
