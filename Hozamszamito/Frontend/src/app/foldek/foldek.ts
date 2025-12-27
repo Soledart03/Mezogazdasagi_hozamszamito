@@ -16,7 +16,7 @@ ngOnInit(): void {
 openMenu(type: any){
     this.app.openMenu(type);
   }
-id:1;
+id = 1;
 foldGetId(){
   this.gazdaser.getFoldida(this.id).subscribe(data=>this.foldek=data)
 }
