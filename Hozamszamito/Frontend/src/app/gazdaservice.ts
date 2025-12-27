@@ -24,7 +24,7 @@ export class Gazdaservice {
     return this.http.get('http://localhost:3000/api/foldszam');
   }
   getFoldida(id:number):Observable<any>{
-    return this.http.get('http://localhost:3000/api/gfold/:id');
+    return this.http.get('http://localhost:3000/api/gfold'+'/'+id);
   }
 
 }
