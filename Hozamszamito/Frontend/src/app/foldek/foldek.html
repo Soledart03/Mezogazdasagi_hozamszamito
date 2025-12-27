@@ -3,11 +3,16 @@
 <button class="btn btn-success px-4" (click)="openMenu('foldfelvisz')">Új Föld hozzáadása</button>
 
 
-<div *ngFor="let x of foldek" class="card ">
+<div *ngFor="let x of foldek" class="card">
   
   <div class="card-body">
     <h5 class="card-title">Föld1</h5>
-    <p class="card-text">{{foldek}}</p>
-    <a href="#" class="btn btn-primary">Módisítás</a>
+    <p class="card-text">{{x.terulet}}<br> 
+                        {{x.muvelesi_ag}}<br> 
+                        {{x.helyrajzi_szam}}<br> 
+                        {{x.elozo_evi_hasznositas}}
+
+    </p>
+    <a href="#" class="btn btn-primary">Módosítás</a>
   </div>
 </div>
