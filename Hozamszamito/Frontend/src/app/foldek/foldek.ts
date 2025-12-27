@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { App } from '../app';
 import { Gazdaservice } from '../gazdaservice';
 @Component({
@@ -7,9 +7,12 @@ import { Gazdaservice } from '../gazdaservice';
   templateUrl: './foldek.html',
   styleUrl: './foldek.css',
 })
-export class Foldek {
+export class Foldek implements OnInit {
 constructor(private app:App,private gazdaser:Gazdaservice){}
 private foldek:any[]=[];
+ngOnInit(): void {
+  this.foldGetId();
+}
 openMenu(type: any){
     this.app.openMenu(type);
   }
