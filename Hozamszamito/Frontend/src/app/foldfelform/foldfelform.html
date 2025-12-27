@@ -1,5 +1,5 @@
 <div class="popup">
-    <h2>Regisztráció</h2>
+    <h2>Föld felvitel</h2>
     <form (ngSubmit)="foldHozzaad()">
         <input [(ngModel)]="ujfold.terulet" name="terulet" placeholder="Terület" required>
         <input [(ngModel)]="ujfold.muvelesi_ag" name="muvelesi_ag" placeholder="Művelési_ág" required>
@@ -7,7 +7,7 @@
         <input [(ngModel)]="ujfold.elozo_evi_hasznositas" name="elozo_evi_hasznositas" placeholder="Előző évi hasznosítás" required>
 
         
-        <button type="submit">Hozzáadás</button>
+        <button type="submit">Felvitel</button>
     </form>
     <button (click)="closeMenu()">Close</button>
 </div>
