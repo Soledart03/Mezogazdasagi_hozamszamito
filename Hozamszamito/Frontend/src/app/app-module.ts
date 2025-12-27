@@ -10,6 +10,7 @@ import { Fooldal } from './fooldal/fooldal';
 import { Navbar } from './navbar/navbar';
 import { Loginform } from './loginform/loginform';
 import { Foldek } from './foldek/foldek';
+import { Foldfelform } from './foldfelform/foldfelform';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { Foldek } from './foldek/foldek';
     Fooldal,
     Navbar,
     Loginform,
-    Foldek
+    Foldek,
+    Foldfelform
   ],
   imports: [
     BrowserModule,
