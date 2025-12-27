@@ -20,7 +20,10 @@ export class Gazdaservice {
   getGazda(id:number):Observable<any>{
     return this.http.get(this.api+'/'+id);
   }
-  getoszfold():Observable<any>{
+  getOszFold():Observable<any>{
+    return this.http.get('http://localhost:3000/api/foldszam');
+  }
+  getFoldida():Observable<any>{
     return this.http.get('http://localhost:3000/api/foldszam');
   }
 
