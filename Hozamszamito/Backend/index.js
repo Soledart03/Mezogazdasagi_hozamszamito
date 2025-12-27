@@ -70,7 +70,17 @@ app.post(apiurl, async (req, res) => {
     }
     );
    });
+
    //Postman needed
+   app.get('/api/foldszam',(req,res)=>{
+    db.query('SELECT COUNT(*) FROM fold;',(err,result)=>{
+        if(err) throw err;
+        res.json(result);
+    });
+});  
+
+   
+
    app.post('/api/pfold', async (req, res) => {
     const {terulet, muvelesi_ag, helyrajzi_szam,elozo_evi_hasznositas,gazda_id} = req.body;
     

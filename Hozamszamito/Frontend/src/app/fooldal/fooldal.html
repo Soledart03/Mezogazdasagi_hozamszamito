@@ -27,7 +27,8 @@
         
           <div class="d-flex stats gap-5">
             <div>
-              <h4>500+</h4>
+              <h4 *ngFor="let x of szamolo">{{ x['COUNT(*)'] }}</h4>
+
               <span>Termőföld</span>
             </div>
             <div>
