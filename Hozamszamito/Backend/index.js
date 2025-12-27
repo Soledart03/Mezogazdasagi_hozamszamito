@@ -71,7 +71,7 @@ app.post(apiurl, async (req, res) => {
     );
    });
    //Postman needed
-   app.post(apiurl, async (req, res) => {
+   app.post('/api/pfold', async (req, res) => {
     const {terulet, muvelesi_ag, helyrajzi_szam,elozo_evi_hasznositas,gazda_id} = req.body;
     
     db.query(

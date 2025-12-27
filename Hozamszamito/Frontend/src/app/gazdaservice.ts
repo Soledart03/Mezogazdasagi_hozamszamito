@@ -11,6 +11,9 @@ export class Gazdaservice {
   addGazda(gazda:{'nev','email','jelszo'}):Observable<any>{
     return this.http.post(this.api,gazda);
   }
+  addFold(fold:{'terulet','muvelesi_ag','helyrajzi_szam','elozo_evi_hasznositas','gazda_id'}){
+    return this.http.post('http://localhost:3000/api/pfold',fold);
+  }
   logc(gazda:{'nev','email','jelszo'}):Observable<any>{
     return this.http.post(this.apilogin,gazda);
   }
