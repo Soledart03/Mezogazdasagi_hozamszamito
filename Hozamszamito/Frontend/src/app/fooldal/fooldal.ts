@@ -17,7 +17,7 @@ export class Fooldal implements OnInit{
   }
 
   loadFold(){
-    this.gazdservice.getoszfold().subscribe(data => this.szamolo = data);
+    this.gazdservice.getOszFold().subscribe(data => this.szamolo = data);
   }
   
 } 
