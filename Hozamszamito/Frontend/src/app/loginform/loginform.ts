@@ -36,7 +36,5 @@ export class Loginform {
     this.show = false;
     this.close.emit();
   }
-  gazdkiad(){
-    return this.gazdak;
-  }
+  
 }
