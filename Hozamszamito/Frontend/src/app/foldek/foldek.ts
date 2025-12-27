@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { App } from '../app';
+import { Gazdaservice } from '../gazdaservice';
 @Component({
   selector: 'app-foldek',
   standalone: false,
@@ -7,9 +8,14 @@ import { App } from '../app';
   styleUrl: './foldek.css',
 })
 export class Foldek {
-constructor(private app:App){}
+constructor(private app:App,private gazdaser:Gazdaservice){}
+private foldek:any[]=[];
 openMenu(type: any){
     this.app.openMenu(type);
   }
+id:1;
+foldGetId(){
+  this.gazdaser.getFoldida(this.id).subscribe(data=>this.foldek=data)
+}
   
 }

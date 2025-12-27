@@ -23,7 +23,7 @@ export class Gazdaservice {
   getOszFold():Observable<any>{
     return this.http.get('http://localhost:3000/api/foldszam');
   }
-  getFoldida():Observable<any>{
+  getFoldida(id:number):Observable<any>{
     return this.http.get('http://localhost:3000/api/gfold/:id');
   }
 
