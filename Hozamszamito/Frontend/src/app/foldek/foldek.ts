@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { App } from '../app';
 @Component({
   selector: 'app-foldek',
   standalone: false,
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './foldek.css',
 })
 export class Foldek {
-
+constructor(private app:App){}
+openMenu(type: any){
+    this.app.openMenu(type);
+  }
+  
 }
