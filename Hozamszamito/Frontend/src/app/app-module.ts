@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { Fooldal } from './fooldal/fooldal';
 import { Navbar } from './navbar/navbar';
 import { Loginform } from './loginform/loginform';
+import { Foldek } from './foldek/foldek';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { Loginform } from './loginform/loginform';
     Regcomp,
     Fooldal,
     Navbar,
-    Loginform
+    Loginform,
+    Foldek
   ],
   imports: [
     BrowserModule,
