@@ -11,6 +11,7 @@ import { Navbar } from './navbar/navbar';
 import { Loginform } from './loginform/loginform';
 import { Foldek } from './foldek/foldek';
 import { Foldfelform } from './foldfelform/foldfelform';
+import { Terv } from './terv/terv';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { Foldfelform } from './foldfelform/foldfelform';
     Navbar,
     Loginform,
     Foldek,
-    Foldfelform
+    Foldfelform,
+    Terv
   ],
   imports: [
     BrowserModule,
