@@ -2,19 +2,11 @@
 <div class="text-center mb-4">
   <h1 class="mb-4">Földjeid</h1>
 
-  <button
-    class="btn btn-success px-4"
-    (click)="openMenu('foldfelvisz')"
-  >
-    Új föld hozzáadása
-  </button>
+  <button class="btn btn-success px-4" (click)="openMenu('foldfelvisz')">Új föld hozzáadása</button>
 </div>
 
 <div class="row">
-  <div
-    *ngFor="let x of foldek"
-    class="col-md-4 mb-4"
-  >
+  <div *ngFor="let x of foldek" class="col-md-4 mb-4">
     <div class="card h-100 shadow-sm">
       <div class="card-body d-flex flex-column">
         <h5 class="card-title">
@@ -27,9 +19,7 @@
           <strong>Előző évi hasznosítás:</strong> {{ x.elozo_evi_hasznositas }}
         </p>
 
-        <button class="btn btn-primary mt-auto">
-          Módosítás
-        </button>
+        <button class="btn btn-primary mt-auto">Módosítás</button>
       </div>
     </div>
   </div>
