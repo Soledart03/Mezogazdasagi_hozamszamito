@@ -3,36 +3,15 @@
     <h2 class="popup-title">Bejelentkezés</h2>
 
     <form (ngSubmit)="logcheck()" class="popup-form">
-      <input
-        [(ngModel)]="ujgazd.nev"
-        name="nev"
-        placeholder="Név"
-        required
-      />
+      <input [(ngModel)]="ujgazd.nev" name="nev" placeholder="Név" required/>
 
-      <input
-        [(ngModel)]="ujgazd.email"
-        name="email"
-        placeholder="Email"
-        type="email"
-        required
-      />
+      <input [(ngModel)]="ujgazd.email" name="email" placeholder="Email" type="email" required/>
 
-      <input
-        [(ngModel)]="ujgazd.jelszo"
-        name="jelszo"
-        placeholder="Jelszó"
-        type="password"
-        required
-      />
+      <input [(ngModel)]="ujgazd.jelszo" name="jelszo" placeholder="Jelszó" type="password" required/>
 
-      <button type="submit" class="btn-primary">
-        Bejelentkezés
-      </button>
+      <button type="submit" class="btn-primary">Bejelentkezés</button>
     </form>
 
-    <button class="btn-secondary" (click)="closeMenu()">
-      Mégse
-    </button>
+    <button class="btn-danger" (click)="closeMenu()">Mégse</button>
   </div>
 </div>

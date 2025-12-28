@@ -131,9 +131,10 @@
   background: #157347;
 }
 
-.btn-secondary {
+.btn-danger {
   width: 100%;
   margin-top: 0.75rem;
+  border-radius: 8px;
   background: transparent;
   border: none;
   color: #555;

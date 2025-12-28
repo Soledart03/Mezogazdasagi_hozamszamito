@@ -3,36 +3,15 @@
     <h2 class="popup-title">Regisztráció</h2>
 
     <form (ngSubmit)="gazdaHozzaad()" class="popup-form">
-      <input
-        [(ngModel)]="ujgazd.nev"
-        name="nev"
-        placeholder="Név"
-        required
-      />
+      <input [(ngModel)]="ujgazd.nev" name="nev" placeholder="Név" required/>
 
-      <input
-        [(ngModel)]="ujgazd.email"
-        name="email"
-        type="email"
-        placeholder="Email"
-        required
-      />
+      <input [(ngModel)]="ujgazd.email" name="email" type="email" placeholder="Email" required/>
 
-      <input
-        [(ngModel)]="ujgazd.jelszo"
-        name="jelszo"
-        type="password"
-        placeholder="Jelszó"
-        required
-      />
+      <input [(ngModel)]="ujgazd.jelszo" name="jelszo" type="password" placeholder="Jelszó" required/>
 
-      <button type="submit" class="btn-primary">
-        Regisztráció
-      </button>
+      <button type="submit" class="btn-primary">Regisztráció</button>
     </form>
 
-    <button class="btn-secondary" (click)="closeMenu()">
-      Mégse
-    </button>
+    <button class="btn-danger" (click)="closeMenu()">Mégse</button>
   </div>
 </div>
