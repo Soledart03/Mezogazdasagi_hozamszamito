@@ -68,3 +68,75 @@
   font-size: 0.9rem;
   color: #666;
 }
+
+
+.hero-section {
+  min-height: 80vh;   
+}
+
+
+
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.popup {
+  background: #fff;
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: popupFade 0.3s ease;
+}
+
+.popup-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.popup-form input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.popup-form input:focus {
+  outline: none;
+  border-color: #198754;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 0.7rem;
+  background: #198754;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #157347;
+}
+
+.btn-secondary {
+  width: 100%;
+  margin-top: 0.75rem;
+  background: transparent;
+  border: none;
+  color: #555;
+  cursor: pointer;
+}
+

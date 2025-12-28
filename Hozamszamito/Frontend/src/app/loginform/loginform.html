@@ -1,10 +1,38 @@
-<div class="popup">
-    <h2>Bejelentkezés</h2>
-    <form (ngSubmit)="logcheck()">
-        <input [(ngModel)]="ujgazd.nev" name="nev" placeholder="Név" required>
-        <input [(ngModel)]="ujgazd.email" name="email" placeholder="Email" required>
-        <input [(ngModel)]="ujgazd.jelszo" name="jelszo" placeholder="Jelszó" type="password" required>
-        <button type="submit" >Bejelentkezés</button>
+<div class="popup-overlay">
+  <div class="popup">
+    <h2 class="popup-title">Bejelentkezés</h2>
+
+    <form (ngSubmit)="logcheck()" class="popup-form">
+      <input
+        [(ngModel)]="ujgazd.nev"
+        name="nev"
+        placeholder="Név"
+        required
+      />
+
+      <input
+        [(ngModel)]="ujgazd.email"
+        name="email"
+        placeholder="Email"
+        type="email"
+        required
+      />
+
+      <input
+        [(ngModel)]="ujgazd.jelszo"
+        name="jelszo"
+        placeholder="Jelszó"
+        type="password"
+        required
+      />
+
+      <button type="submit" class="btn-primary">
+        Bejelentkezés
+      </button>
     </form>
-    <button (click)="closeMenu()">Close</button>
+
+    <button class="btn-secondary" (click)="closeMenu()">
+      Mégse
+    </button>
+  </div>
 </div>

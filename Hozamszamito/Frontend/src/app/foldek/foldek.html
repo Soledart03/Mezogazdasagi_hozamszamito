@@ -1,18 +1,36 @@
-<h1>Földjeid</h1>
+<br>
+<div class="text-center mb-4">
+  <h1 class="mb-4">Földjeid</h1>
 
-<button class="btn btn-success px-4" (click)="openMenu('foldfelvisz')">Új Föld hozzáadása</button>
+  <button
+    class="btn btn-success px-4"
+    (click)="openMenu('foldfelvisz')"
+  >
+    Új föld hozzáadása
+  </button>
+</div>
 
+<div class="row">
+  <div
+    *ngFor="let x of foldek"
+    class="col-md-4 mb-4"
+  >
+    <div class="card h-100 shadow-sm">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">
+          {{ x.helyrajzi_szam }}
+        </h5>
 
-<div *ngFor="let x of foldek" class="card">
-  
-  <div class="card-body">
-    <h5 class="card-title">Föld1</h5>
-    <p class="card-text">{{x.terulet}}<br> 
-                        {{x.muvelesi_ag}}<br> 
-                        {{x.helyrajzi_szam}}<br> 
-                        {{x.elozo_evi_hasznositas}}
+        <p class="card-text mb-4">
+          <strong>Terület (hektár):</strong> {{ x.terulet }}<br>
+          <strong>Művelési ág:</strong> {{ x.muvelesi_ag }}<br>
+          <strong>Előző évi hasznosítás:</strong> {{ x.elozo_evi_hasznositas }}
+        </p>
 
-    </p>
-    <a href="#" class="btn btn-primary">Módosítás</a>
+        <button class="btn btn-primary mt-auto">
+          Módosítás
+        </button>
+      </div>
+    </div>
   </div>
 </div>
