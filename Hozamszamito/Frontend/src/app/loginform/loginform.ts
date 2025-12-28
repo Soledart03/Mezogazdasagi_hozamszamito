@@ -8,18 +8,20 @@ import { Gazdaservice } from '../gazdaservice';
 })
 export class Loginform {
   public gazdak:any;
+  
   ujgazd = {nev:'',email:'',jelszo:''}
   constructor(private gserv:Gazdaservice){}
   logcheck():void{
     this.gserv.logc(this.ujgazd).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         
         this.gserv.getGazda(res.id).subscribe(data=>{
           this.gazdak = data;
+          this.gserv.setGazdaData(this.gazdak);
           window.alert('Sikeres Bejelentkezés');
         })
-        console.log(res.id);
+        //console.log(res.id);
         
         this.closeMenu();
       },

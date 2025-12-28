@@ -25,6 +25,8 @@
         <button class="btn btn-link text-dark text-decoration-none" (click)="openMenu('login')">Bejelentkezés</button>
 
         <button class="btn btn-success px-4" (click)="openMenu('register')">Regisztráció</button>
+        <p *ngIf="loginsucces"></p>
+        
       </div>
     </div>
   </nav>
