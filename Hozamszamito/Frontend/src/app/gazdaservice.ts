@@ -27,8 +27,9 @@ export class Gazdaservice {
     return data ? JSON.parse(data) : null;
   }
 
-  getGazdaData() {
-    return this.gazdaData;
+  getGazdaData(gazda:any) {
+    this.gazdaSubject.next(gazda);
+    localStorage.setItem('bejelentkezettGazda', JSON.stringify(gazda));
   }
 
   isLoggedIn() {
