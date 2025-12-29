@@ -11,9 +11,11 @@ export class Foldek implements OnInit {
 constructor(private app:App,private gazdaser:Gazdaservice){}
 foldek:any[]=[];
 ngOnInit() {
+  
   this.gazdaser.gazda$.subscribe(gazda => {
     this.gazdaId = gazda?.id ?? null;
   });
+  this.foldGetId();
 }
 openMenu(type: any){
     this.app.openMenu(type);
