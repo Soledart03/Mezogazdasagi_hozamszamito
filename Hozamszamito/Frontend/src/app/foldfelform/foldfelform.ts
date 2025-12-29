@@ -1,4 +1,4 @@
-import { Component,EventEmitter, Output,Input } from '@angular/core';
+import { Component,EventEmitter, Output,Input, OnInit } from '@angular/core';
 import { Gazdaservice } from '../gazdaservice';
 @Component({
   selector: 'app-foldfelform',
@@ -6,14 +6,24 @@ import { Gazdaservice } from '../gazdaservice';
   templateUrl: './foldfelform.html',
   styleUrl: './foldfelform.css',
 })
-export class Foldfelform {
-ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:''}
+export class Foldfelform implements OnInit {
   constructor(private gserv:Gazdaservice){}
+  gazdaId: number;
+  ngOnInit() {
+    
+    this.gserv.gazda$.subscribe(gazda => {
+      this.gazdaId = gazda?.id ?? null;
+    });
+    
+  }
+  ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:0}
+  
   foldHozzaad():void{
+    this.ujfold.gazda_id = this.gazdaId;
     this.gserv.addFold(this.ujfold).subscribe({
       next:()=>{
         window.alert('Sikeres földhozzáadás!');
-        this.ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:''}
+        this.ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:0}
         this.closeMenu();
       },
       error:(err)=>{

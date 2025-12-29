@@ -10,6 +10,7 @@ import { Gazdaservice } from '../gazdaservice';
 export class Foldek implements OnInit {
 constructor(private app:App,private gazdaser:Gazdaservice){}
 foldek:any[]=[];
+gazdaId: number;
 ngOnInit() {
   
   this.gazdaser.gazda$.subscribe(gazda => {
@@ -20,7 +21,6 @@ ngOnInit() {
 openMenu(type: any){
     this.app.openMenu(type);
   }
-gazdaId: number;
 foldGetId(){
   this.gazdaser.getFoldida(this.gazdaId).subscribe(data=>this.foldek=data)
 }

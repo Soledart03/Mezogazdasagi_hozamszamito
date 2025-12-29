@@ -32,7 +32,8 @@ import { Terv } from './terv/terv';
   providers: [
     provideBrowserGlobalErrorListeners(),
     Loginform,
-    Navbar
+    Navbar,
+    
   ],
   bootstrap: [App]
 })
