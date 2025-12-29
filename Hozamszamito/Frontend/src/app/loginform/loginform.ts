@@ -1,5 +1,6 @@
 import { Component,EventEmitter, Output,Input  } from '@angular/core';
 import { Gazdaservice } from '../gazdaservice';
+import { Navbar } from '../navbar/navbar';
 @Component({
   selector: 'app-loginform',
   standalone: false,
@@ -17,8 +18,10 @@ export class Loginform {
         //console.log(res);
         
         this.gserv.getGazda(res.id).subscribe(data=>{
-          this.gazdak = data;
-          this.gserv.setGazdaData(this.gazdak);
+        
+          const gazda = data[0];
+          this.gserv.setGazdaData(gazda);
+          
           window.alert('Sikeres Bejelentkezés');
         })
         //console.log(res.id);

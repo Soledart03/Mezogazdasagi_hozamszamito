@@ -1,19 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+const GAZDA_KEY = 'bejelentkezettGazda';
 @Injectable({
   providedIn: 'root',
 })
 export class Gazdaservice {
   private api = 'http://localhost:3000/api/gazda';
   private apilogin = 'http://localhost:3000/api/log';
-  gazdadata: any[]=[];
-   setGazdaData(data: any[]) {
-    this.gazdadata = data;
+  private gazdaData: any = null;
+  private loggedIn = false;
+  private gazdaSubject = new BehaviorSubject<any>(this.loadFromStorage());
+  gazda$ = this.gazdaSubject.asObservable();
+
+  setGazdaData(data: any) {
+    this.gazdaSubject.next(data);
+    localStorage.setItem(GAZDA_KEY, JSON.stringify(data));
+  }
+  clearGazda() {
+    this.gazdaSubject.next(null);
+    localStorage.removeItem(GAZDA_KEY);
+  }
+  private loadFromStorage() {
+    const data = localStorage.getItem(GAZDA_KEY);
+    return data ? JSON.parse(data) : null;
   }
 
-  getGazdaData(): any[] {
-    return this.gazdadata;
+  getGazdaData() {
+    return this.gazdaData;
+  }
+
+  isLoggedIn() {
+    return this.loggedIn;
   }
   constructor(private http:HttpClient){}
   addGazda(gazda:{'nev','email','jelszo'}):Observable<any>{

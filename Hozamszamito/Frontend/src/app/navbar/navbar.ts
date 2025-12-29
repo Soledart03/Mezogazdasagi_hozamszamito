@@ -14,10 +14,18 @@ loginsucces:boolean = false;
     this.app.openMenu(type);
   }
   gazdaadat: any[]=[];
-  gazdabetolt(){
-    this.gazdaadat = this.gazdser.getGazdaData();
-    this.loginsucces;
-    console.log(this.loginsucces);
-    console.log(this.gazdaadat);
+   ngOnInit() {
+    this.gazdser.gazda$.subscribe(data => {
+      this.gazdaadat = data;
+      this.loginsucces = !!data;
+
+      console.log('NAVBAR FRISSÜLT:', data);
+    });
+    
+}
+logout() {
+    this.gazdser.clearGazda();
+    window.alert('Sikeresen kijelentkeztél!')
   }
 }
+  

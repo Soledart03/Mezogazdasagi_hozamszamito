@@ -1,6 +1,5 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,7 +30,9 @@ import { Terv } from './terv/terv';
     FormsModule
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    Loginform,
+    Navbar
   ],
   bootstrap: [App]
 })
