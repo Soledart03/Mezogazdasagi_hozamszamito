@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-const GAZDA_KEY = 'bejelentkezettGazda';
+const Gazda_key = 'bejelentkezettGazda';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,17 +16,17 @@ export class Gazdaservice {
 
   setGazdaData(data: any) {
     this.gazdaSubject.next(data);
-    localStorage.setItem(GAZDA_KEY, JSON.stringify(data));
+    localStorage.setItem(Gazda_key, JSON.stringify(data));
   }
   clearGazda() {
     this.gazdaSubject.next(null);
-    localStorage.removeItem(GAZDA_KEY);
+    localStorage.removeItem(Gazda_key);
   }
   private loadFromStorage() {
-    const data = localStorage.getItem(GAZDA_KEY);
+    const data = localStorage.getItem(Gazda_key);
     return data ? JSON.parse(data) : null;
   }
-
+  
   getGazdaData(gazda:any) {
     this.gazdaSubject.next(gazda);
     localStorage.setItem('bejelentkezettGazda', JSON.stringify(gazda));
@@ -34,14 +35,12 @@ export class Gazdaservice {
   isLoggedIn() {
     return this.loggedIn;
   }
-  
+
   constructor(private http:HttpClient){}
   addGazda(gazda:{'nev','email','jelszo'}):Observable<any>{
     return this.http.post(this.api,gazda);
   }
-  addFold(fold:{'terulet','muvelesi_ag','helyrajzi_szam','elozo_evi_hasznositas','gazda_id'}){
-    return this.http.post('http://localhost:3000/api/pfold',fold);
-  }
+  
   logc(gazda:{'nev','email','jelszo'}):Observable<any>{
     return this.http.post(this.apilogin,gazda);
   }
@@ -51,8 +50,6 @@ export class Gazdaservice {
   getOszFold():Observable<any>{
     return this.http.get('http://localhost:3000/api/foldszam');
   }
-  getFoldida(id:number):Observable<any>{
-    return this.http.get('http://localhost:3000/api/gfold'+'/'+id);
-  }
+  
 
 }

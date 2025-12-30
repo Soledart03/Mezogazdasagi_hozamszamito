@@ -1,5 +1,6 @@
 import { Component,EventEmitter, Output,Input, OnInit } from '@angular/core';
 import { Gazdaservice } from '../gazdaservice';
+import { Foldservice } from '../foldservice';
 @Component({
   selector: 'app-foldfelform',
   standalone: false,
@@ -7,7 +8,7 @@ import { Gazdaservice } from '../gazdaservice';
   styleUrl: './foldfelform.css',
 })
 export class Foldfelform implements OnInit {
-  constructor(private gserv:Gazdaservice){}
+  constructor(private gserv:Gazdaservice, private foldser:Foldservice){}
   gazdaId: number;
   ngOnInit() {
     
@@ -20,7 +21,7 @@ export class Foldfelform implements OnInit {
   
   foldHozzaad():void{
     this.ujfold.gazda_id = this.gazdaId;
-    this.gserv.addFold(this.ujfold).subscribe({
+    this.foldser.addFold(this.ujfold).subscribe({
       next:()=>{
         window.alert('Sikeres földhozzáadás!');
         this.ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:0}
