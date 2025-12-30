@@ -211,7 +211,7 @@ app.delete('/api/kiad/:id', (req, res) => {
 //tervezetkezelők
 app.get('/api/terv/:id', async (req,res)=>{
     const id = req.params.id;
-    db.query('SELECT id,fold_id,noveny_id,vetes_idopont,tomeg,osszeg FROM terv WHERE id=?',[id],(err,result)=>{
+    db.query('SELECT id,fold_id,noveny_id,vetes_idopont,tomeg,osszeg FROM terv WHERE fold_id=?',[id],(err,result)=>{
         if(err) throw err;
         if(result.length == 0) throw err;
         console.log(result);

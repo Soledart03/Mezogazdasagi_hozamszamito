@@ -9,7 +9,6 @@ const GAZDA_KEY = 'bejelentkezettGazda';
 export class Gazdaservice {
   private api = 'http://localhost:3000/api/gazda';
   private apilogin = 'http://localhost:3000/api/log';
-  private gazdaData: any = null;
   private loggedIn = false;
   private gazdaSubject = new BehaviorSubject<any>(this.loadFromStorage());
   gazda$ = this.gazdaSubject.asObservable();
@@ -35,6 +34,7 @@ export class Gazdaservice {
   isLoggedIn() {
     return this.loggedIn;
   }
+  
   constructor(private http:HttpClient){}
   addGazda(gazda:{'nev','email','jelszo'}):Observable<any>{
     return this.http.post(this.api,gazda);
