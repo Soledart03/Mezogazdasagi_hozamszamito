@@ -11,6 +11,7 @@ export class Foldservice {
   getFoldida(id:number):Observable<any>{
     return this.http.get('http://localhost:3000/api/gfold'+'/'+id);
   }
+
   addFold(fold:{'terulet','muvelesi_ag','helyrajzi_szam','elozo_evi_hasznositas','gazda_id'}){
       return this.http.post('http://localhost:3000/api/pfold',fold);
     }
@@ -22,7 +23,6 @@ export class Foldservice {
     this.foldSubject.next(fold);
     localStorage.setItem(fold_key, JSON.stringify(fold));
   }
-
   
   clearFold() {
     this.foldSubject.next(null);

@@ -17,6 +17,12 @@ ngOnInit() {
   this.gazdaser.gazda$.subscribe(gazda => {
     this.gazdaId = gazda?.id ?? null;
   });
+  //ez egyenlőre felrobbantja a kódot
+  /*
+  this.foldser.fold$.subscribe(fold=>{
+    this.gazdaId = fold?.id ?? null;
+  })
+    */
   this.foldGetId();
 }
 openMenu(type: any){
