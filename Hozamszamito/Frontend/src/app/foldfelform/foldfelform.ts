@@ -1,6 +1,7 @@
 import { Component,EventEmitter, Output,Input, OnInit } from '@angular/core';
 import { Gazdaservice } from '../gazdaservice';
 import { Foldservice } from '../foldservice';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-foldfelform',
   standalone: false,
@@ -18,7 +19,7 @@ export class Foldfelform implements OnInit {
     
   }
   ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:0}
-  
+  /*
   foldHozzaad():void{
     this.ujfold.gazda_id = this.gazdaId;
     this.foldser.addFold(this.ujfold).subscribe({
@@ -35,6 +36,13 @@ export class Foldfelform implements OnInit {
       }
       
     })
+  }
+    */
+  foldHozzaad(){
+    this.ujfold.gazda_id = this.gazdaId;
+    this.foldser.addFold(this.ujfold);
+    this.ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:0}
+    this.closeMenu();
   }
   @Input()IsMenu: boolean = false;
   @Input()show:boolean = true;

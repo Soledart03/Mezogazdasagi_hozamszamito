@@ -8,26 +8,49 @@ const fold_key = 'foldlista';
 })
 export class Foldservice {
   constructor(private http:HttpClient){}
-  getFoldida(id:number):Observable<any>{
-    return this.http.get('http://localhost:3000/api/gfold'+'/'+id);
+  private foldSubject = new BehaviorSubject<any[]>(this.loadFromStorage());
+  fold$ = this.foldSubject.asObservable();Í
+  
+  loadFoldsByGazdaId(gazdaId: number) {
+    this.http.get<any[]>(`http://localhost:3000/api/gfold/${gazdaId}`).subscribe(folds => {
+        console.log('BACKEND FÖLDEK:', folds);
+        this.foldSubject.next(folds); 
+      
+      });
   }
-
+  /*
   addFold(fold:{'terulet','muvelesi_ag','helyrajzi_szam','elozo_evi_hasznositas','gazda_id'}){
       return this.http.post('http://localhost:3000/api/pfold',fold);
     }
-  private foldSubject = new BehaviorSubject<any>(this.loadFromStorage());
-  fold$ = this.foldSubject.asObservable();
+getFoldida(id:number):Observable<any>{
+    return this.http.get('http://localhost:3000/api/gfold'+'/'+id);
+  }
+  */
 
   
-  setFold(fold: any) {
-    this.foldSubject.next(fold);
-    localStorage.setItem(fold_key, JSON.stringify(fold));
+  addFold(fold: any) {
+    this.http.post<any>('/api/fold', fold)
+      .subscribe({
+        next: newFold => {
+          const current = this.foldSubject.value;
+          this.foldSubject.next([...current, newFold]);
+          window.alert("Föld hozzáadva!")
+        },
+        error: err => console.error(err)
+      });
   }
-  
-  clearFold() {
-    this.foldSubject.next(null);
-    localStorage.removeItem(fold_key);
+
+  deleteFold(id: number) {
+    this.http.delete(`/api/fold/${id}`)
+      .subscribe({
+        next: () => {
+          const updated = this.foldSubject.value.filter(f => f.id !== id);
+          this.foldSubject.next(updated);
+        },
+        error: err => console.error(err)
+      });
   }
+
   getFold() {
     return this.foldSubject.value;
   }

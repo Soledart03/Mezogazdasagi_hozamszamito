@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { App } from '../app';
 import { Gazdaservice } from '../gazdaservice';
 import { Foldservice } from '../foldservice';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-foldek',
   standalone: false,
@@ -10,26 +11,27 @@ import { Foldservice } from '../foldservice';
 })
 export class Foldek implements OnInit {
 constructor(private app:App,private gazdaser:Gazdaservice,private foldser:Foldservice){}
-foldek:any[]=[];
-gazdaId: number;
+folds$!: Observable<any[]>;
+gazdaId: number = 0;
 ngOnInit() {
-  
+  this.folds$ = this.foldser.fold$;
   this.gazdaser.gazda$.subscribe(gazda => {
     this.gazdaId = gazda?.id ?? null;
   });
-  //ez egyenlőre felrobbantja a kódot
-  /*
+  if (this.gazdaId != 0) {
+      this.foldser.loadFoldsByGazdaId(this.gazdaId);
+    } 
+  
   this.foldser.fold$.subscribe(fold=>{
-    this.gazdaId = fold?.id ?? null;
+    this.gazdaId = fold?.[0]?.id ?? null;
   })
-    */
-  this.foldGetId();
+    
+  
 }
+
 openMenu(type: any){
     this.app.openMenu(type);
   }
-foldGetId(){
-  this.foldser.getFoldida(this.gazdaId).subscribe(data=>this.foldek=data)
-}
+
   
 }
