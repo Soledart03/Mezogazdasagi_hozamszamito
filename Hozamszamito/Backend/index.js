@@ -3,7 +3,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const app = exp();
 app.use(cors());
 app.use(bodyParser.json());
@@ -34,9 +33,7 @@ app.post('/api/log', async (req,res)=>{
     const {id, nev, email, jelszo} = req.body;
     
     db.query('SELECT id,nev,jelszo FROM gazda_fiok WHERE nev = ? AND email = ?',[nev,email],(err,results)=>{
-        
         if(err) throw err;
-        
         bcrypt.compare(jelszo,results[0].jelszo,(err,result)=>{
             if(err) throw err;
             if(!result){
@@ -71,7 +68,7 @@ app.post(apiurl, async (req, res) => {
     );
    });
 
-   //Postman needed
+   
    app.get('/api/foldszam',(req,res)=>{
     db.query('SELECT COUNT(*) FROM fold;',(err,result)=>{
         if(err) throw err;
@@ -105,7 +102,7 @@ app.post(apiurl, async (req, res) => {
  }
  );
 });
-//offos
+
 app.put('/api/gazdaup/:id', (req, res) => {
  const id = req.params.id;
  const {nev,email,jelszo} = req.body;
