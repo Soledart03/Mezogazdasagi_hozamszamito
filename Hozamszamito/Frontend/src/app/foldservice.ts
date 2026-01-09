@@ -39,8 +39,26 @@ getFoldida(id:number):Observable<any>{
         error: err => console.error(err)
       });
   }
+updateFold(fold: any) {
+  
+  this.http.put<any>(`http://localhost:3000/api/ufold/${fold.id}`, fold)
+    .subscribe({
+      next: updatedFold => {
+        console.log('1');
+        const list = this.foldSubject.value.map(f =>
+          
+          f.id === updatedFold.id ? updatedFold : f
+          
+        );
+        console.log('2');
+        this.foldSubject.next(list);
+        console.log('3');
+      },
+      error: err => console.error(err)
+    });
+}
 
-  deleteFold(id: number) {
+  deleteFold(id: number) {  
     this.http.delete(`/api/fold/${id}`)
       .subscribe({
         next: () => {

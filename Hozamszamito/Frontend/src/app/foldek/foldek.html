@@ -9,17 +9,43 @@
   <div *ngFor="let x of folds$ | async" class="col-md-4 mb-4">
     <div class="card h-100 shadow-sm">
       <div class="card-body d-flex flex-column">
+        <div *ngIf="!editing">
         <h5 class="card-title">
           {{ x.helyrajzi_szam }}
         </h5>
-
         <p class="card-text mb-4">
           <strong>Terület (hektár):</strong> {{ x.terulet }}<br>
           <strong>Művelési ág:</strong> {{ x.muvelesi_ag }}<br>
           <strong>Előző évi hasznosítás:</strong> {{ x.elozo_evi_hasznositas }}
         </p>
+        <button class="btn btn-success mt-auto" (click)="openEdit(x)">Módosítás</button>
+        </div>
+        <div id="editpop" *ngIf="editing">
+          <label>Helyrajzi Szám</label>
+    <input class="form-control mb-2" [(ngModel)]="selectedFold.helyrajzi_szam">
+    <label>Terület (ha)</label>
+    <input class="form-control mb-2"
+           [(ngModel)]="selectedFold.terulet">
 
-        <button class="btn btn-primary mt-auto">Módosítás</button>
+    <label>Művelési ág</label>
+    <input class="form-control mb-2"
+           [(ngModel)]="selectedFold.muvelesi_ag">
+
+    <label>Hasznosítás</label>
+    <input class="form-control mb-3"
+           [(ngModel)]="selectedFold.elozo_evi_hasznositas">
+
+    <div class="d-flex gap-2">
+      <button class="btn btn-success flex-fill"
+              (click)="save()">
+        Mentés
+      </button>
+
+      <button class="btn btn-secondary flex-fill"
+              (click)="cancel()">
+        Mégse
+      </button>
+    </div>
       </div>
     </div>
   </div>

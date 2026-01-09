@@ -94,8 +94,8 @@ app.post(apiurl, async (req, res) => {
  const id = req.params.id;
  const {terulet, muvelesi_ag, helyrajzi_szam,elozo_evi_hasznositas,gazda_id} = req.body;
  db.query(
- 'UPDATE fold SET terulet=?, muvelesi_ag=?, helyrajzi_szam=?,elozo_evi_hasznositas=?,gazda_id=? WHERE id=?',
- [terulet, muvelesi_ag, helyrajzi_szam,elozo_evi_hasznositas,gazda_id,id],
+ 'UPDATE fold SET terulet=?, muvelesi_ag=?, helyrajzi_szam=?,elozo_evi_hasznositas=?WHERE id=?',
+ [terulet, muvelesi_ag, helyrajzi_szam,elozo_evi_hasznositas,id],
  (err) => {
  if (err) throw err;
  res.json({ message: 'Föld frissítve!' });
