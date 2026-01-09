@@ -1,5 +1,5 @@
 2026-01-06:
-delete gomb a cardokra
+delete gomb a cardokra !!!
 tervezetek elrendezése a megbeszéltek alapján
 összes sql lekérdezés megírása (backendben is)
 utánanézés a cookie-k nak meg minden ilyesmi fiszfasznak
