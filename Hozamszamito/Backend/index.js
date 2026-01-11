@@ -9,7 +9,7 @@ const app = exp();
 dotenv.config();
 app.use(cors());
 app.use(bodyParser.json());
-const POLLINATIONS_URL = 'https://enter.pollinations.ai/api/text';
+const POLLINATIONS_URL = 'https://enter.pollinations.ai/text';
 const db = mysql.createConnection({
  host: 'localhost',
  user: 'root',
@@ -32,8 +32,8 @@ app.post('/api/chat', async (req, res) => {
       },
       body: JSON.stringify({
         prompt: message,
-        model: 'openai', // or whichever model they expose
-        max_tokens: 300
+        //model: 'openai', // or whichever model they expose
+        //max_tokens: 300
       })
     });
 

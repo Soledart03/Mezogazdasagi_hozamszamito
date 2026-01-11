@@ -12,13 +12,11 @@ interface ChatResponse {
 export class PolliService {
 
   // Backend endpoint
-  private apiUrl = '/api/chat';
+  private apiUrl = 'http://localhost:3000/api/chat';
 
   constructor(private http: HttpClient) {}
 
-  generateText(prompt: string): Observable<ChatResponse> {
-    return this.http.post<ChatResponse>(this.apiUrl, {
-      message: prompt
-    });
+   generateText(message: string): Observable<{ reply: string }> {
+    return this.http.post<{ reply: string }>(this.apiUrl, { message });
   }
 }
