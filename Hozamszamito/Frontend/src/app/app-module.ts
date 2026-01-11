@@ -12,6 +12,7 @@ import { Foldek } from './foldek/foldek';
 import { Foldfelform } from './foldfelform/foldfelform';
 import { Terv } from './terv/terv';
 import { Tervform } from './tervform/tervform';
+import { Footer } from './footer/footer';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { Tervform } from './tervform/tervform';
     Foldek,
     Foldfelform,
     Terv,
-    Tervform
+    Tervform,
+    Footer
   ],
   imports: [
     BrowserModule,
