@@ -13,6 +13,7 @@ import { Foldfelform } from './foldfelform/foldfelform';
 import { Terv } from './terv/terv';
 import { Tervform } from './tervform/tervform';
 import { Footer } from './footer/footer';
+import { Sugo } from './sugo/sugo';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { Footer } from './footer/footer';
     Foldfelform,
     Terv,
     Tervform,
-    Footer
+    Footer,
+    Sugo
   ],
   imports: [
     BrowserModule,
