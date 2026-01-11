@@ -25,7 +25,7 @@ getFoldida(id:number):Observable<any>{
   }
   */
 addFold(fold: any) {
-    this.http.post<any>('http://localhost:3000/api/fold', fold)
+    this.http.post<any>('http://localhost:3000/api/pfold', fold)
       .subscribe({
         next: newFold => {
           const current = this.foldSubject.value;
@@ -49,6 +49,7 @@ updateFold(fold: any) {
         console.log('2');
         this.foldSubject.next(list);
         console.log('3');
+        this.loadFoldsByGazdaId(fold.gazda_id);
       },
       error: err => console.error(err)
     });

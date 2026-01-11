@@ -40,6 +40,7 @@ export class Foldfelform implements OnInit {
     */
   foldHozzaad(){
     this.ujfold.gazda_id = this.gazdaId;
+    console.log('MENTÉS ELŐTT:', this.ujfold);
     this.foldser.addFold(this.ujfold);
     this.ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:0}
     this.closeMenu();
