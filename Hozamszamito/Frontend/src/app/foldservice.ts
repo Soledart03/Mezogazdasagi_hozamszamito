@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 const fold_key = 'foldlista';
@@ -9,8 +8,7 @@ const fold_key = 'foldlista';
 export class Foldservice {
   constructor(private http:HttpClient){}
   private foldSubject = new BehaviorSubject<any[]>(this.loadFromStorage());
-  fold$ = this.foldSubject.asObservable();Í
-  
+  fold$ = this.foldSubject.asObservable();
   loadFoldsByGazdaId(gazdaId: number) {
     this.http.get<any[]>(`http://localhost:3000/api/gfold/${gazdaId}`).subscribe(folds => {
         console.log('BACKEND FÖLDEK:', folds);
@@ -26,10 +24,8 @@ getFoldida(id:number):Observable<any>{
     return this.http.get('http://localhost:3000/api/gfold'+'/'+id);
   }
   */
-
-  
-  addFold(fold: any) {
-    this.http.post<any>('/api/fold', fold)
+addFold(fold: any) {
+    this.http.post<any>('http://localhost:3000/api/fold', fold)
       .subscribe({
         next: newFold => {
           const current = this.foldSubject.value;
