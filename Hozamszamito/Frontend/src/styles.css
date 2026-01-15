@@ -1,29 +1,5 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css");
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
-#editpop{
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  padding: 2rem;
-  width: 100%;
-  max-width: 380px;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  animation: popupFade 0.3s ease;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
+
 
 .navbut{
 

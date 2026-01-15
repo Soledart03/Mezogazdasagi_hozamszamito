@@ -15,6 +15,7 @@ const routes: Routes = [
   {path:'fold',component:Foldek},
   {path:'terv',component:Terv},
   {path:'sugo',component:Sugo}
+
 ];
 
 @NgModule({
