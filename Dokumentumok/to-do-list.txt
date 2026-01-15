@@ -5,3 +5,4 @@ tervezetek elrendezése a megbeszéltek alapján
 utánanézés a cookie-k nak meg minden ilyesmi fiszfasznak
 footer
 akár hosszabb főoldal, több aloldal ha akarunk
+chat (súgó) formázása

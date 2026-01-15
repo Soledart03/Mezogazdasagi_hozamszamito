@@ -41,10 +41,14 @@ app.post('/api/chat', async (req, res) => {
       },
       body: JSON.stringify({
         messages: [
-    {
-      role: 'user',
-      content: message
-    }
+          {
+            role: 'system',
+            content: "Egy mezőgazdászokat segítő, mezőgazdaságban profi chatbot vagy, illegális dogokat vagy káromkodást nem használhatsz soha"
+          },
+          {
+            role: 'user',
+            content: message
+          }
   ],
         model:'mistral',
         max_tokens: 300
