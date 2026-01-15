@@ -17,8 +17,11 @@
   <div class="input-area">
     <input [(ngModel)]="userInput"
       (keyup.enter)="sendMessage()"
-      placeholder="Type your message..."
+      placeholder="Mit szeretnél tudni?"
     />
-    <button (click)="sendMessage()">Send</button>
+    <button class="btn btn-success mt-auto w-40" (click)="sendMessage()">Küldés</button>
+    
   </div>
+  <br><br>
 </div>
+
