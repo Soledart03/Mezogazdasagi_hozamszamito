@@ -28,18 +28,20 @@ export class Sugo {
 
     // OPTIONAL: include chat history for memory
     const prompt = this.buildPrompt(userMessage);
-
+    console.log("hello hi");
     this.pollinations.generateText(prompt).subscribe({
       next: (res) => {
         this.messages.push({ role: 'bot', text: res.reply });
         this.loading = false;
       },
-      error: () => {
+      error: (err) => {
         this.messages.push({
           role: 'bot',
           text: 'Error contacting AI service.'
         });
         this.loading = false;
+        console.log();
+        console.log(err);
       }
     });
   }

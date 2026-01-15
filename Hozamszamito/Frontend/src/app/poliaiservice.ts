@@ -13,10 +13,9 @@ export class PolliService {
 
   // Backend endpoint
   private apiUrl = 'http://localhost:3000/api/chat';
-
   constructor(private http: HttpClient) {}
 
    generateText(message: string): Observable<{ reply: string }> {
-    return this.http.post<{ reply: string }>(this.apiUrl, { message });
+    return this.http.post<{ reply: string }>(this.apiUrl, { message }); // highly dangerous voodoo -bende
   }
 }

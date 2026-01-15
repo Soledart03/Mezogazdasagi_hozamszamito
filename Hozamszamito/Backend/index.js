@@ -4,12 +4,13 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
-const fetch = require('node-fetch');
+const { model } = require('@angular/core');
+
 const app = exp();
-dotenv.config();
+dotenv.config({path:'./sc.env'});
+
 app.use(cors());
 app.use(bodyParser.json());
-const POLLINATIONS_URL = 'https://enter.pollinations.ai/text';
 const db = mysql.createConnection({
  host: 'localhost',
  user: 'root',
@@ -20,39 +21,71 @@ db.connect(err => {
  if (err) throw err;
  console.log('MySQL kapcsolódva.');
 });
+
 app.post('/api/chat', async (req, res) => {
+  console.log('👉 Request received:', req.body);
+
   try {
     const { message } = req.body;
 
-    const response = await fetch(POLLINATIONS_URL, {
+    if (!message) {
+      console.error('❌ No message in request body');
+      return res.status(400).json({ error: 'No message provided' });
+    }
+
+    console.log('👉 Sending to Pollinations...');
+
+    const response = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.POLLINATIONS_API_KEY}`
       },
       body: JSON.stringify({
-        prompt: message,
-        //model: 'openai', // or whichever model they expose
-        //max_tokens: 300
+        messages: [
+    {
+      role: 'user',
+      content: message
+    }
+  ],
+        model:'mistral',
+        max_tokens: 300
       })
     });
 
+    console.log('👉 Pollinations status:', response.status);
+
+    const text = await response.text();
+    console.log('👉 Raw response:', text);
+
     if (!response.ok) {
-      const errorText = await response.text();
-      return res.status(500).json({ error: errorText });
+      return res.status(500).json({
+        error: 'Pollinations API error',
+        details: text
+      });
     }
 
-    const data = await response.json();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      return res.status(500).json({
+        error: 'Invalid JSON from Pollinations',
+        raw: text
+      });
+    }
 
     res.json({
-      reply: data.text || data.output || data.choices?.[0]?.text
+        //.text || data.output || data.response || 'No reply field'
+      reply: data.choices[0].message.content
     });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'AI service failed' });
+    console.error('🔥 BACKEND CRASH:', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 const apiurl = '/api/gazda';
 app.get(apiurl+'/:id', async (req,res)=>{
     console.log(req.params.id);
