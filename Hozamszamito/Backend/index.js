@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
-const { model } = require('@angular/core');
+
 
 const app = exp();
 dotenv.config({path:'./sc.env'});
@@ -23,17 +23,15 @@ db.connect(err => {
 });
 
 app.post('/api/chat', async (req, res) => {
-  console.log('👉 Request received:', req.body);
 
   try {
     const { message } = req.body;
 
     if (!message) {
-      console.error('❌ No message in request body');
-      return res.status(400).json({ error: 'No message provided' });
+      
+      return res.status(400).json({ error: 'Nem adott meg üzenetet' });
     }
 
-    console.log('👉 Sending to Pollinations...');
 
     const response = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
       method: 'POST',
@@ -53,11 +51,8 @@ app.post('/api/chat', async (req, res) => {
       })
     });
 
-    console.log('👉 Pollinations status:', response.status);
-
     const text = await response.text();
-    console.log('👉 Raw response:', text);
-
+ 
     if (!response.ok) {
       return res.status(500).json({
         error: 'Pollinations API error',
@@ -76,12 +71,12 @@ app.post('/api/chat', async (req, res) => {
     }
 
     res.json({
-        //.text || data.output || data.response || 'No reply field'
+     
       reply: data.choices[0].message.content
     });
 
   } catch (err) {
-    console.error('🔥 BACKEND CRASH:', err);
+
     res.status(500).json({ error: 'Internal server error' });
   }
 });
