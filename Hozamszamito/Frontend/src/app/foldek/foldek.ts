@@ -36,12 +36,13 @@ openEdit(fold: any) {
   this.selectedFold = { ...fold };
   this.editing = true;
 }
-
+delfold(fold: any) {
+  this.foldser.deleteFold(fold.id);
+  this.foldser.loadFoldsByGazdaId(this.gazdaId);
+  window.alert("Föld törölve!")
+}
   save() {
-  console.log('MENTÉS ELŐTT:', this.selectedFold);
-  
   this.foldser.updateFold(this.selectedFold);
-  console.log('MENTÉS Utén::', this.selectedFold);
   this.editing = false;
 }
 cancel() {
