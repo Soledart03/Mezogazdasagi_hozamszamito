@@ -56,7 +56,7 @@ updateFold(fold: any) {
 }
 
   deleteFold(id: number) {  
-    this.http.delete(`/api/fold/${id}`)
+    this.http.delete(`http://localhost:3000/api/dfold/${id}`)
       .subscribe({
         next: () => {
           const updated = this.foldSubject.value.filter(f => f.id !== id);
@@ -64,6 +64,7 @@ updateFold(fold: any) {
         },
         error: err => console.error(err)
       });
+      
   }
 
   getFold() {
