@@ -13,7 +13,6 @@ export class Foldservice {
     this.http.get<any[]>(`http://localhost:3000/api/gfold/${gazdaId}`).subscribe(folds => {
         console.log('BACKEND FÖLDEK:', folds);
         this.foldSubject.next(folds); 
-      
       });
   }
   /*
@@ -36,15 +35,12 @@ addFold(fold: any) {
       });
   }
 updateFold(fold: any) {
-  
   this.http.put<any>(`http://localhost:3000/api/ufold/${fold.id}`, fold)
     .subscribe({
       next: updatedFold => {
         console.log('1');
         const list = this.foldSubject.value.map(f =>
-          
           f.id === updatedFold.id ? updatedFold : f
-          
         );
         console.log('2');
         this.foldSubject.next(list);
@@ -54,7 +50,6 @@ updateFold(fold: any) {
       error: err => console.error(err)
     });
 }
-
   deleteFold(id: number) {  
     this.http.delete(`http://localhost:3000/api/dfold/${id}`)
       .subscribe({
@@ -64,9 +59,7 @@ updateFold(fold: any) {
         },
         error: err => console.error(err)
       });
-      
   }
-
   getFold() {
     return this.foldSubject.value;
   }

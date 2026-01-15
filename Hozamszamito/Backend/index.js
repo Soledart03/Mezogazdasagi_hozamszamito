@@ -21,18 +21,12 @@ db.connect(err => {
  if (err) throw err;
  console.log('MySQL kapcsolódva.');
 });
-
 app.post('/api/chat', async (req, res) => {
-
   try {
     const { message } = req.body;
-
     if (!message) {
-      
       return res.status(400).json({ error: 'Nem adott meg üzenetet' });
     }
-
-
     const response = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
       method: 'POST',
       headers: {
