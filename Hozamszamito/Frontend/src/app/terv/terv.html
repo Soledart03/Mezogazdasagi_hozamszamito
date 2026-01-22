@@ -2,33 +2,33 @@
   <h1 class="mb-4">Terveid</h1>
 </div>
 
-<div  class="col-lg-12">
-
+<div *ngFor="let x of (terv$ | async)"  class="col-lg-12">
+<ng-container>
   <div class="row">
     <div class="col-lg-4">
 
-      <img src="/logo.jpeg">
+      <img [src]="getNoveny(x)?.kep">
     </div>
     <div class="col-lg-4">
 
       <div class="row mb-1">
         <div class="col-6 fw-bold"><h2>Helyrajzi szám:</h2></div>
-        <div class="col-6"><h2>-------</h2></div>
+        <div class="col-6"><h2>{{getFold(x)?.helyrajzi_szam}}</h2></div>
       </div>
 
        <div class="row mb-1">
         <div class="col-6 fw-bold">Növény:</div>
-        <div class="col-6">----</div>
+        <div class="col-6">{{ getNoveny(x)?.nev }}</div>
       </div>
 
       <div class="row mb-1">
         <div class="col-6 fw-bold">Terület (hektár):</div>
-        <div class="col-6">----</div>
+        <div class="col-6">{{x.terulet}}</div>
       </div>
 
       <div class="row mb-1">
         <div class="col-6 fw-bold">Művelési ág:</div>
-        <div class="col-6">----</div>
+        <div class="col-6">{{x.muvelesi_ag}}</div>
       </div>
 
       <div class="row mb-1">
@@ -80,6 +80,7 @@
       <h2>-------</h2>
       </div>
     </div>
+  </ng-container>
   </div>
 
 

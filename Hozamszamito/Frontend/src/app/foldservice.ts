@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 const fold_key = 'foldlista';
 @Injectable({
   providedIn: 'root',
@@ -11,18 +12,19 @@ export class Foldservice {
   fold$ = this.foldSubject.asObservable();
   loadFoldsByGazdaId(gazdaId: number) {
     this.http.get<any[]>(`http://localhost:3000/api/gfold/${gazdaId}`).subscribe(folds => {
-        console.log('BACKEND FÖLDEK:', folds);
         this.foldSubject.next(folds); 
+        
       });
   }
   /*
   addFold(fold:{'terulet','muvelesi_ag','helyrajzi_szam','elozo_evi_hasznositas','gazda_id'}){
       return this.http.post('http://localhost:3000/api/pfold',fold);
     }
+      */
 getFoldida(id:number):Observable<any>{
     return this.http.get('http://localhost:3000/api/gfold'+'/'+id);
   }
-  */
+  
 addFold(fold: any) {
     this.http.post<any>('http://localhost:3000/api/pfold', fold)
       .subscribe({

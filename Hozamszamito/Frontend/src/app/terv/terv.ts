@@ -19,8 +19,11 @@ foldId: number = 0;
 gazdaId: number = 0;
 terv:any = {id:0,fold_id:0,noveny_id:0,vetes_idopont:'',tomeg:0,osszeg:0}
 fold:any = {id:0,terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',g_id:0};
+foldek:any = [];
+novenyek:any = [];
 editing:boolean=false;
 ngOnInit() {
+
   this.folds$ = this.foldser.fold$;
 
   this.gazdaser.gazda$.subscribe(gazda => {
@@ -35,10 +38,34 @@ ngOnInit() {
 
   this.foldser.fold$.subscribe(folds => {
     this.foldId = folds?.[0]?.id ?? 0;
-    console.log('foldId:', this.foldId);
+    
+    
   });
+  this.foldser.getFoldida(this.gazdaId).subscribe(folds => {
+    this.foldek = folds;
+    console.log('folds:', this.foldek);
+    if (this.foldek.length > 0) {
+      const foldId = this.foldek[0].id;
+      this.tervser.loadTervByFold(foldId);
+    }
+  });
+  this.tervser.loadNoveny().subscribe(noveny => {
+    this.novenyek = noveny;
+  });
+  this.terv$ = this.tervser.terv$;
+  
 }
 selectedTerv: any = null;
+getFold(terv: any) {
+  return this.foldek.find(
+    (f: any) => f.id === terv.fold_id
+  );
+}
+getNoveny(terv: any) {
+  return this.novenyek.find(
+    (n: any) => n.id === terv.noveny_id
+  );
+}
 
 openEdit(terv: any) {
   
