@@ -45,7 +45,7 @@ export class Kiadasok implements OnInit{
     if (this.foldek.length > 0) {
       const foldId = this.foldek[0].id;
       this.kiadser.loadKiadasByFold(foldId);
-      console.log(this.foldId);
+      
     }
   });
 
@@ -62,6 +62,11 @@ openEdit(fold: any) {
   
   this.selectedFold = { ...fold };
   this.editing = true;
+}
+
+getHelyrazji(kiad:any){
+  return this.foldek.find((f:any) => f.id === kiad.fold_id)
+
 }
 
 

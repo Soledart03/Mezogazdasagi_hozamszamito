@@ -1,1 +1,9 @@
-<p>kiadasok works!</p>
+<div *ngFor="let x of kiadasoks$ | async">
+
+    <p>Helyrajzi szám: {{ getHelyrazji(x).helyrajzi_szam }}</p>
+    <p>Dátum: {{ x.datum.split('T')[0] }}<p>
+    <p>Összeg: {{ x.osszeg }}</p>
+    <p>Típus: {{ x.tipus }}</p> 
+    <p>Leírás: {{ x.leiras }}</p>
+
+</div>
