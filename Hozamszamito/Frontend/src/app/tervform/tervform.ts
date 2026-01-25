@@ -31,7 +31,14 @@ export class Tervform implements OnInit {
     this.foldserv.fold$.subscribe(folds => {
     this.foldId = folds?.[0]?.id ?? 0;
   });
-    
+    this.foldserv.getFoldida(this.gazdaId).subscribe(folds => {
+    this.foldek = folds;
+    console.log('folds:', this.foldek);
+    if (this.foldek.length > 0) {
+      const foldId = this.foldek[0].id;
+      this.tervserv.loadTervByFold(foldId);
+    }
+  });
   }
   ujterv = {fold_id:0,noveny_id:0,kiv_vetoid:0,kiv_mutrid:0,vetes_idopont:'',tomeg:0,osszeg:0}
   tervHozzaad(){
