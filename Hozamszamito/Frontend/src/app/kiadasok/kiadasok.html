@@ -1,9 +1,27 @@
-<div *ngFor="let x of kiadasoks$ | async">
+<div *ngFor="let x of kiadasoks$ | async" class="kiadas-card">
+  <div class="k row">
+    <span class="kl label">Helyrajzi szám:</span>
+    <span class="kv value">{{ getHelyrazji(x).helyrajzi_szam }}</span>
+  </div>
 
-    <p>Helyrajzi szám: {{ getHelyrazji(x).helyrajzi_szam }}</p>
-    <p>Dátum: {{ x.datum.split('T')[0] }}<p>
-    <p>Összeg: {{ x.osszeg }}</p>
-    <p>Típus: {{ x.tipus }}</p> 
-    <p>Leírás: {{ x.leiras }}</p>
+  <div class="k row">
+    <span class="kl label">Dátum:</span>
+    <span class="kv value">{{ x.datum.split('T')[0] }}</span>
+  </div>
 
+  <div class="k row">
+    <span class="kl label">Összeg:</span>
+    <span class="kv value">{{ x.osszeg }} Ft</span>
+  </div>
+
+  <div class="k row">
+    <span class="kl label">Típus:</span>
+    <span class="kv value">{{ x.tipus }}</span>
+  </div>
+
+  <div class="k row">
+    <span class="kl label">Leírás:</span>
+    <span class="kv value">{{ x.leiras }}</span>
+  </div>
 </div>
+

@@ -145,5 +145,27 @@ img{
   max-height: 100%;
   overflow: hidden;
   
+}
 
+.kiadas-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  background: #fafafa;
+}
+
+.k {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.kl {
+  font-weight: 600;
+  width: 140px;
+  color: #555;
+}
+
+.kv {
+  color: #222;
 }
