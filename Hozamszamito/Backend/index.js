@@ -216,8 +216,18 @@ app.get('/api/noveny_i', async (req,res)=>{
     })
     
 })
-app.get('/api/inp', async (req,res)=>{
-    db.query('SELECT id,inev,ar,fajta FROM input_anyag',(err,result)=>{
+app.get('/api/novinp', async (req,res)=>{
+    db.query('SELECT n.id as id, n.nnev, ni.termes_per_kilo,i.id as iad, i.inev, i.ar, i.fajta FROM noveny as n JOIN noveny_input as ni ON n.id = ni.noveny_id JOIN input_anyag as i ON i.id = ni.inputanyag_id;',(err,result)=>{
+        if(err) throw err;
+        if(result.length == 0) throw err;
+        console.log(result);
+        res.json(result);
+
+    })
+    
+})
+app.get('/api/inp_m', async (req,res)=>{
+    db.query('SELECT id,inev,ar,fajta FROM input_anyag WHERE inev = "Műtrágya"',(err,result)=>{
         if(err) throw err;
         if(result.length == 0) throw err;
         console.log(result);
@@ -272,7 +282,7 @@ app.delete('/api/kiad/:id', (req, res) => {
 //tervezetkezelők
 app.get('/api/terv/:id', async (req,res)=>{
     const id = req.params.id;
-    db.query('SELECT id,fold_id,noveny_id,vetes_idopont,tomeg,osszeg FROM terv WHERE fold_id=?',[id],(err,result)=>{
+    db.query('SELECT id,fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg FROM terv WHERE fold_id=?',[id],(err,result)=>{
         if(err) throw err;
         if(result.length == 0) throw err;
         console.log(result);

@@ -17,10 +17,13 @@ terv$!: Observable<any[]>;
 folds$!: Observable<any[]>;
 foldId: number = 0;
 gazdaId: number = 0;
-terv:any = {id:0,fold_id:0,noveny_id:0,vetes_idopont:'',tomeg:0,osszeg:0}
+terv:any = {id:0,fold_id:0,noveny_id:0,kiv_vetoid:0,kiv_mutrid:0,vetes_idopont:'',tomeg:0,osszeg:0}
 fold:any = {id:0,terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',g_id:0};
 foldek:any = [];
 novenyek:any = [];
+vetomagok:any = [];
+mutragyak:any = [];
+flood:any = [];
 editing:boolean=false;
 ngOnInit() {
 
@@ -52,6 +55,15 @@ ngOnInit() {
   this.tervser.loadNoveny().subscribe(noveny => {
     this.novenyek = noveny;
   });
+  this.tervser.loadConnNovinp().subscribe(vetomag => {
+    this.vetomagok = vetomag;
+    console.log('vetomag:',this.vetomagok);
+  });
+  this.tervser.loadMutragya().subscribe(mutragya => {
+    this.mutragyak = mutragya;
+    console.log('mutragya:',this.mutragyak);
+  });
+  
   this.terv$ = this.tervser.terv$;
   
 }
@@ -61,12 +73,34 @@ getFold(terv: any) {
     (f: any) => f.id === terv.fold_id
   );
 }
+getKivVetomag(terv: any) {
+  return this.vetomagok.find(
+    (f: any) => f.iad === terv.kiv_vetoid
+  );
+}
+getVetomag(terv: any) {
+  return this.vetomagok.find(
+    (f: any) => f.id === terv.fold_id
+  );
+}
+getKivMutragya(terv: any) {
+  return this.mutragyak.find(
+    (f: any) => f.id === terv.kiv_mutrid
+  );
+}
+
 getNoveny(terv: any) {
   return this.novenyek.find(
     (n: any) => n.id === terv.noveny_id
   );
 }
-
+/*
+getFirstnovinp(terv:any){
+  return this.vetomagok.find(
+    (n: any) => n.id === terv.noveny_id
+  );
+}
+  */
 openEdit(terv: any) {
   
   this.selectedTerv = { ...terv };

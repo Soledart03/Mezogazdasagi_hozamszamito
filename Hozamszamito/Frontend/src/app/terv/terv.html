@@ -18,48 +18,50 @@
 
        <div class="row mb-1">
         <div class="col-6 fw-bold">Növény:</div>
-        <div class="col-6">{{ getNoveny(x)?.nev }}</div>
+        <div class="col-6">{{ getNoveny(x)?.nnev }}</div>
       </div>
 
       <div class="row mb-1">
         <div class="col-6 fw-bold">Terület (hektár):</div>
-        <div class="col-6">{{x.terulet}}</div>
+        <div class="col-6">{{getFold(x)?.terulet}}</div>
       </div>
 
       <div class="row mb-1">
         <div class="col-6 fw-bold">Művelési ág:</div>
-        <div class="col-6">{{x.muvelesi_ag}}</div>
+        <div class="col-6">{{getFold(x)?.muvelesi_ag}}</div>
       </div>
-
-      <div class="row mb-1">
+      
+      <div  class="row mb-1">
         <div class="col-6 fw-bold">Vetőmag:</div>
-        <div class="col-6">----</div>
+        <div class="col-6">{{getKivVetomag(x)?.fajta}}</div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6 fw-bold">Vetési tömeg:</div>
+        <div class="col-6">{{x.tomeg}}</div>
       </div>
 
       <div class="row mb-1">
         <div class="col-6 fw-bold">Vetőmag ára:</div>
-        <div class="col-6">----</div>
+        <div class="col-6">{{getKivVetomag(x)?.ar}} Ft/kg</div>
       </div>
 
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Vetési tömeg:</div>
-        <div class="col-6">----</div>
-      </div>
-
+      
       <div class="row mb-1">
         <div class="col-6 fw-bold">Műtrágya:</div>
-        <div class="col-6">----</div>
+        <div class="col-6">{{getKivMutragya(x)?.fajta}}</div>
       </div>
+
+    <div class="row mb-1">
+            <div class="col-6 fw-bold">Műtrágya tömege:</div>
+            <div class="col-6">----</div>
+          </div>
 
       <div class="row mb-1">
         <div class="col-6 fw-bold">Műtrágya ára:</div>
-        <div class="col-6">----</div>
+        <div class="col-6">{{getKivMutragya(x)?.ar}} Ft/kg</div>
       </div>
 
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Műtrágya tömege:</div>
-        <div class="col-6">----</div>
-      </div>
+      
     </div>
       
       

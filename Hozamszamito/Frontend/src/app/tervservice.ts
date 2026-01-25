@@ -13,14 +13,24 @@
     loadTervByFold(foldID: number) {
       this.http.get<any[]>(`http://localhost:3000/api/terv/${foldID}`).subscribe(tervs => {
           this.tervSubject.next(tervs); 
+          console.log('terv:',tervs);
         });
     }
         
     getTerv() {
       return this.tervSubject.value;
     }
+    loadConnNovinp(){
+      return this.http.get<any[]>(`http://localhost:3000/api/novinp`);
+    }
     loadNoveny(){
       return this.http.get<any[]>(`http://localhost:3000/api/noveny`);
+    }
+    loadVetomag(){
+      return this.http.get<any[]>(`http://localhost:3000/api/inp_v`);
+    }
+    loadMutragya(){
+      return this.http.get<any[]>(`http://localhost:3000/api/inp_m`);
     }
     private loadFromStorage() {
       const data = localStorage.getItem(terv);
