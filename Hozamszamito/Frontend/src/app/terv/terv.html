@@ -1,5 +1,8 @@
 <div class="text-center mb-4">
   <h1 class="mb-4">Terveid</h1>
+
+    <button class="btn btn-success px-4" (click)="openMenu('tervfelvisz')">Új föld hozzáadása</button>
+
 </div>
 
 <div *ngFor="let x of (terv$ | async)"  class="col-lg-12">
@@ -44,23 +47,23 @@
         <div class="col-6 fw-bold">Vetőmag ára:</div>
         <div class="col-6">{{getKivVetomag(x)?.ar}} Ft/kg</div>
       </div>
-
-      
+      <ng-container>{{vanegMutragya(x)}}</ng-container>
+      <ng-container *ngIf="mutrvane">
       <div class="row mb-1">
         <div class="col-6 fw-bold">Műtrágya:</div>
-        <div class="col-6">{{getKivMutragya(x)?.fajta}}</div>
+        <div class="col-6">{{getKivMutragya(x)?.fajta.split(" ").slice(0,2).join(" ")}}</div>
       </div>
 
     <div class="row mb-1">
             <div class="col-6 fw-bold">Műtrágya tömege:</div>
-            <div class="col-6">----</div>
+            <div class="col-6">{{getKivMutragya(x)?.fajta.split(" ").slice(-1)}}</div>
           </div>
 
       <div class="row mb-1">
         <div class="col-6 fw-bold">Műtrágya ára:</div>
         <div class="col-6">{{getKivMutragya(x)?.ar}} Ft/kg</div>
       </div>
-
+</ng-container>
       
     </div>
       

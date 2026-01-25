@@ -15,4 +15,9 @@
   [isMenu] = "true"
   (close)="closeMenu()">
 </app-foldfelform>
+<app-tervform 
+*ngIf="menu === 'tervfelvisz'"
+[isMenu] = "true"
+(close)="closeMenu()"
+></app-tervform>
 <app-footer></app-footer>

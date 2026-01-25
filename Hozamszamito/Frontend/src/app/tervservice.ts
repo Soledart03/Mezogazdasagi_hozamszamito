@@ -32,6 +32,17 @@
     loadMutragya(){
       return this.http.get<any[]>(`http://localhost:3000/api/inp_m`);
     }
+    addTerv(terv: any) {
+    this.http.post<any>('http://localhost:3000/api/terv', terv)
+      .subscribe({
+        next: ujterv => {
+          const current = this.tervSubject.value;
+          this.tervSubject.next([...current, ujterv]);
+          window.alert("Terv hozzáadva!")
+        },
+        error: err => console.error(err)
+      });
+  }
     private loadFromStorage() {
       const data = localStorage.getItem(terv);
       return data ? JSON.parse(data) : null;

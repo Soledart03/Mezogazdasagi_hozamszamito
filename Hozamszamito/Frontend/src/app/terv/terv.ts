@@ -23,6 +23,7 @@ foldek:any = [];
 novenyek:any = [];
 vetomagok:any = [];
 mutragyak:any = [];
+mutrvane = false;
 flood:any = [];
 editing:boolean=false;
 ngOnInit() {
@@ -83,6 +84,14 @@ getVetomag(terv: any) {
     (f: any) => f.id === terv.fold_id
   );
 }
+vanegMutragya(terv: any) {
+  let kivmutr = this.mutragyak.find(
+    (f: any) => f.id === terv.kiv_mutrid
+  );
+  if(kivmutr != null){
+    this.mutrvane = true;
+  }
+} 
 getKivMutragya(terv: any) {
   return this.mutragyak.find(
     (f: any) => f.id === terv.kiv_mutrid
@@ -94,6 +103,9 @@ getNoveny(terv: any) {
     (n: any) => n.id === terv.noveny_id
   );
 }
+Vegosszeg(terv:any){
+  
+}
 /*
 getFirstnovinp(terv:any){
   return this.vetomagok.find(
@@ -101,6 +113,7 @@ getFirstnovinp(terv:any){
   );
 }
   */
+ 
 openEdit(terv: any) {
   
   this.selectedTerv = { ...terv };
