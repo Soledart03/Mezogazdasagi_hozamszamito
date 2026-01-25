@@ -2,15 +2,22 @@
   <div class="popup">
     <h2 class="popup-title">Föld felvitel</h2>
 
-    <form (ngSubmit)="foldHozzaad()" class="popup-form">
-      <input [(ngModel)]="ujfold.terulet" name="terulet" placeholder="Terület (ha)" required/>
-
-      <input [(ngModel)]="ujfold.muvelesi_ag" name="muvelesi_ag" placeholder="Művelési ág" required/>
-
-      <input [(ngModel)]="ujfold.helyrajzi_szam" name="helyrajzi_szam" placeholder="Helyrajzi szám" required/>
-
-      <input [(ngModel)]="ujfold.elozo_evi_hasznositas" name="elozo_evi_hasznositas" placeholder="Előző évi hasznosítás" required/>
-
+    <form (ngSubmit)="tervHozzaad()" class="popup-form">
+        <div class="mb-3">
+    <label class="form-label">Válassz egy opciót</label>
+    <select
+      class="form-select"
+      [(ngModel)]="selectedOptionId"
+      name="selectedOption"
+      required
+    >
+      <option [ngValue]="null">-- válassz --</option>
+      <option *ngFor="let option of foldek" [ngValue]="option.id">
+        {{ option.helyrajzi_szam }}
+      </option>
+    </select>
+  </div>
+      
       <button type="submit" class="btn-primary">Felvitel</button>
     </form>
 
