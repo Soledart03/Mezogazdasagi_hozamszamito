@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Poliaiservice } from './poliaiservice';
+import { PolliService } from './poliaiservice';
 
 describe('Poliaiservice', () => {
-  let service: Poliaiservice;
+  let service: PolliService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Poliaiservice);
+    service = TestBed.inject(PolliService);
   });
 
   it('should be created', () => {
