@@ -3,6 +3,30 @@ delete gomb a cardokra !!!
 tervezetek elrendezése a megbeszéltek alapján
 összes sql lekérdezés megírása (backendben is)
 utánanézés a cookie-k nak meg minden ilyesmi fiszfasznak
-footer
 akár hosszabb főoldal, több aloldal ha akarunk
 chat (súgó) formázása
+
+PPT:
+GitHub
+bootstrap, trello, discord???
+kiadás?
+kötelező
+
+tesztelés:
+validációs teszt - min 3 unit teszt
+backend - 3 unit teszt
+2 integrációs teszt
+unit teszt - kötelező
+
+pdf!
+
+beszéd:
+MI azon belül milye fajta
+pollination mit tud
+adatb
+
+főoldal átlagszámítás
+
+NEM RESZPONZÍV AZ OLDAL!!!!44!!négy!!!
+
+további fejlesztések - kivételkezelés
