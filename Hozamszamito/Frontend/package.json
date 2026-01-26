@@ -39,7 +39,11 @@
     "@angular/cli": "^20.3.5",
     "@angular/compiler-cli": "^20.3.0",
     "@types/jasmine": "~5.1.0",
+<<<<<<< HEAD
     "baseline-browser-mapping": "^2.9.18",
+=======
+    "jasmine": "^6.0.0",
+>>>>>>> ca18a7b1dfecdd4708563ab997758e620097135a
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
