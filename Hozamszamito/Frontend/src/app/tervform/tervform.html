@@ -1,19 +1,57 @@
 <div class="popup-overlay">
   <div class="popup">
-    <h2 class="popup-title">Föld felvitel</h2>
+    <h2 class="popup-title">Tervezés</h2>
 
-    <form (ngSubmit)="tervHozzaad()" class="popup-form">
+    <form (ngSubmit)="tervHozzaad()" class="popup-form text-center">
         <div class="mb-3">
-    <label class="form-label">Válassz egy opciót</label>
+    <label class="form-label">Válassza ki a földet</label><br>
     <select
       class="form-select"
-      [(ngModel)]="selectedOptionId"
+      [(ngModel)]="ujterv.fold_id"
       name="selectedOption"
-      required
-    >
-      <option [ngValue]="null">-- válassz --</option>
+      required>
+      <option [ngValue]="null">-- választás --</option>
       <option *ngFor="let option of foldek" [ngValue]="option.id">
         {{ option.helyrajzi_szam }}
+      </option>
+    </select>
+  </div>
+   <div class="mb-3">
+    <label class="form-label">Válassza ki a növényt </label><br>
+    <select (ngModelChange)="vetoszures($event)"
+      class="form-select"
+      [(ngModel)]="ujterv.noveny_id"
+      name="selectedOption"
+      required>
+      <option [ngValue]="null">-- választás --</option>
+      <option *ngFor="let option of novenyek" [ngValue]="option">
+        {{ option.nnev }}
+      </option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Válassza ki a vetni kívánt magot </label><br>
+    <select 
+      class="form-select"
+      [(ngModel)]="ujterv.kiv_vetoid"
+      name="selectedOption"
+      required>
+      <option [ngValue]="null">-- választás --</option>
+      <option *ngFor="let option of szurtmagok" [ngValue]="option.id">
+        {{ option.fajta }}
+      </option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Válassza ki a műtrágya fajtáját </label><br>
+    <select
+      class="form-select"
+      [(ngModel)]="ujterv.kiv_mutrid"
+      name="selectedOption"
+      required>
+      <option [ngValue]="null">-- választás --</option>
+      <option *ngFor="let option of mutragyak" [ngValue]="option.id">
+        {{ option.fajta }}
       </option>
     </select>
   </div>
