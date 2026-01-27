@@ -42,7 +42,21 @@
       </option>
     </select>
   </div>
-  <div class="mb-3">
+  <div >Szeretne műtágyázni ebben a tervben?</div>
+<div class="form-check form-check-inline ">
+  <label class="form-check-label radio-option m2" for="flexRadioDefault2">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" [(ngModel)]="mutragyavane" value="igen">
+  
+    <span>Igen</span>
+  </label>
+  
+  <label class="form-check-label radio-option m-2" for="flexRadioDefault2">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" [(ngModel)]="mutragyavane" value="nem">
+
+    <span>Nem</span>
+  </label>
+</div>
+  <div *ngIf="mutragyavane === 'igen'" class="mb-3">
     <label class="form-label">Válassza ki a műtrágya fajtáját </label><br>
     <select
       class="form-select"
@@ -54,6 +68,10 @@
         {{ option.fajta }}
       </option>
     </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Válassza ki a vetési időpontot </label><br>
+    <input [(ngModel)]="ujterv.vetes_idopont" type="date" name="vetes_idopont" required>
   </div>
       
       <button type="submit" class="btn-primary">Felvitel</button>

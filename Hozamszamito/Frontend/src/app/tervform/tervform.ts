@@ -21,6 +21,7 @@ export class Tervform implements OnInit {
   szurtmagok:any = [];
   vetomagok:any = [];
   mutragyak:any = [];
+  mutragyavane:string = "";
   ngOnInit() {
       this.gazdaser.gazda$.subscribe(gazda => {
     this.gazdaId = gazda?.id ?? 0;
