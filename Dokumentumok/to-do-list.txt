@@ -7,6 +7,13 @@ akár hosszabb főoldal, több aloldal ha akarunk
 chat (súgó) formázása
 PDF gomb formázás
 
+mobil:
+https://oss.callstack.com/react-native-paper/docs/components/ActivityIndicator
+npx create-expo-app 'app neve'
+npm run web
+npx expo install react-native-paper
+npx expo install react-native-vector-icons
+
 PPT:
 GitHub
 bootstrap, trello, discord???
