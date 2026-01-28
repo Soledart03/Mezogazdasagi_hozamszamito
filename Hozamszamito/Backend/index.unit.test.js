@@ -15,6 +15,24 @@ describe('NUnit UNIT tesztek', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
+test('DELETE /api/terv/:id működik', async () => {
+    mockQuery.mockImplementationOnce((sql, params, cb) => {
+      cb(null); 
+    });
+
+    const res = await request(app).delete('/api/terv/2');
+
+    expect(mockQuery).toHaveBeenCalledWith(
+      'DELETE FROM terv WHERE id=?',
+      ['2'],
+      expect.any(Function)
+    );
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual({
+      message: 'Tervezet törölve!'
+    });
+  });
 
   test('GET /api/noveny működik', async () => {
     mockQuery.mockImplementationOnce((sql, cb) => {
@@ -26,8 +44,6 @@ describe('NUnit UNIT tesztek', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body).toEqual([{ id: 1, nnev: 'Búza', kep: 'buza.jpg' }]);
   });
-
- 
 
   test('GET /api/kiadasok_szam működik', async () => {
     mockQuery.mockImplementationOnce((sql, params, cb) => {
