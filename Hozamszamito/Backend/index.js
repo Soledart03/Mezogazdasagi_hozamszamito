@@ -17,10 +17,14 @@ const db = mysql.createConnection({
  password: '',
  database: 'mezogazda'
 });
-db.connect(err => {
- if (err) throw err;
- console.log('MySQL kapcsolódva.');
-});
+
+if (process.env.NODE_ENV !== 'test') {
+  db.connect(err => {
+    if (err) throw err;
+    console.log('MySQL kapcsolódva.');
+  });
+}
+
 app.post('/api/chat', async (req, res) => {
   try {
     const { message } = req.body;
@@ -350,7 +354,11 @@ app.get('/api/kiadasok_osszege/:id',(req,res)=>{
   
 })
 
-const PORT = 3000;
-app.listen(PORT, () => {
- console.log(`Server running on http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  const PORT = 3000;
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

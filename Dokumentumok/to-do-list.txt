@@ -25,6 +25,9 @@ validációs teszt - min 3 unit teszt
 backend - 3 unit teszt
 2 integrációs teszt
 unit teszt - kötelező
+backend - npm install --save-dev jest jest-junit supertest
+
+
 
 pdf!
 

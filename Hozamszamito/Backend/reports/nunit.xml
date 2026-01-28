@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="0.719">
+  <testsuite name="NUnit UNIT tesztek" errors="0" failures="0" skipped="0" timestamp="2026-01-28T11:45:43" time="0.535" tests="2">
+    <testcase classname="NUnit UNIT tesztek GET /api/noveny működik" name="NUnit UNIT tesztek GET /api/noveny működik" time="0.036">
+    </testcase>
+    <testcase classname="NUnit UNIT tesztek GET /api/kiadasok_szam működik" name="NUnit UNIT tesztek GET /api/kiadasok_szam működik" time="0.01">
+    </testcase>
+  </testsuite>
+  <testsuite name="Integrációs teszt" errors="0" failures="0" skipped="0" timestamp="2026-01-28T11:45:44" time="0.094" tests="1">
+    <testcase classname="Integrációs teszt GET /api/foldszam válaszol" name="Integrációs teszt GET /api/foldszam válaszol" time="0.011">
+    </testcase>
+  </testsuite>
+</testsuites>
