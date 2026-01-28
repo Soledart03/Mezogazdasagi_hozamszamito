@@ -292,7 +292,7 @@ app.get('/api/terv/:id', async (req,res)=>{
     
 })
 app.post('/api/terv', async (req, res) => {
-    const {fold_id,noveny_id,vetes_idopont,tomeg,osszeg} = req.body;
+    const {fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg} = req.body;
     
     db.query(
     'INSERT INTO terv(fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg) VALUES(?,?,?,?,?,?,?)',
