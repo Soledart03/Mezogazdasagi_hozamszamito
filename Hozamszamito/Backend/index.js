@@ -11,12 +11,8 @@ dotenv.config({path:'./sc.env'});
 
 app.use(cors());
 app.use(bodyParser.json());
-const db = mysql.createConnection({
- host: 'localhost',
- user: 'root',
- password: '',
- database: 'mezogazda'
-});
+const db = require('./db');
+
 
 if (process.env.NODE_ENV !== 'test') {
   db.connect(err => {
@@ -360,4 +356,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = app;
+module.exports =  app ;

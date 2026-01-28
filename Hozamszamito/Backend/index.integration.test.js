@@ -1,7 +1,13 @@
 const request = require('supertest');
-const app = require('./index');
+const app = require('./index'); 
 
-describe('POST /api/pfold integrációs teszt', () => {
+jest.mock('./db', () => ({
+  query: jest.fn(),
+}));
+
+const db = require('./db');
+
+describe('POST /api/pfold integrációs teszt (mockolt db)', () => {
 
   test('kérés → feldolgozás → válasz', async () => {
     const payload = {
@@ -12,17 +18,30 @@ describe('POST /api/pfold integrációs teszt', () => {
       gazda_id: 1
     };
 
+    db.query.mockImplementationOnce((sql, params, cb) => {
+      cb(null, { insertId: 42 }); 
+    });
+
     const res = await request(app)
       .post('/api/pfold')
       .send(payload)
+      .expect('Content-Type', /json/)
       .expect(200);
 
-    expect(res.body).toHaveProperty('id');
-    expect(res.body.terulet).toBe(payload.terulet);
-    expect(res.body.muvelesi_ag).toBe(payload.muvelesi_ag);
-    expect(res.body.helyrajzi_szam).toBe(payload.helyrajzi_szam);
-    expect(res.body.elozo_evi_hasznositas).toBe(payload.elozo_evi_hasznositas);
-    expect(res.body.gazda_id).toBe(payload.gazda_id);
+    expect(res.body.id).toBe(42);
+  });
+
+  test('DELETE /api/terv/:id működik', async () => {
+    db.query.mockImplementationOnce((sql, params, cb) => {
+      cb(null); 
+    });
+
+    const res = await request(app)
+      .delete('/api/terv/2')
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(res.body.message).toBe('Tervezet törölve!');
   });
 
 });

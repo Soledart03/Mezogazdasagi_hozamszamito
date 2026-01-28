@@ -3,7 +3,7 @@ jest.mock('bcrypt', () => ({
   hash: jest.fn().mockResolvedValue('hashed')
 }));
 
-jest.mock('mysql2'); // mock mysql2 modul
+jest.mock('mysql2'); 
 const mysql = require('mysql2');
 const request = require('supertest');
 const app = require('./index');

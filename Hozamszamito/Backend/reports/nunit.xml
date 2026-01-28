@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="4" failures="1" errors="0" time="5.758">
-  <testsuite name="POST /api/pfold integrációs teszt" errors="0" failures="1" skipped="0" timestamp="2026-01-28T12:30:53" time="5.53" tests="1">
-    <testcase classname="POST /api/pfold integrációs teszt kérés → feldolgozás → válasz" name="POST /api/pfold integrációs teszt kérés → feldolgozás → válasz" time="5.006">
-      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a test.
-Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
-    at test (C:\Users\T11G\Documents\GitHub\Mezogazdasagi_hozamszamito\Hozamszamito\Backend\index.integration.test.js:6:3)
-    at _dispatchDescribe (C:\Users\T11G\Documents\github\Mezogazdasagi_hozamszamito\Hozamszamito\Backend\node_modules\jest-circus\build\jestAdapterInit.js:604:26)
-    at describe (C:\Users\T11G\Documents\github\Mezogazdasagi_hozamszamito\Hozamszamito\Backend\node_modules\jest-circus\build\jestAdapterInit.js:572:44)
-    at Object.describe (C:\Users\T11G\Documents\GitHub\Mezogazdasagi_hozamszamito\Hozamszamito\Backend\index.integration.test.js:4:1)
-    at Runtime._execModule (C:\Users\T11G\Documents\github\Mezogazdasagi_hozamszamito\Hozamszamito\Backend\node_modules\jest-runtime\build\index.js:1268:24)
-    at Runtime._loadModule (C:\Users\T11G\Documents\github\Mezogazdasagi_hozamszamito\Hozamszamito\Backend\node_modules\jest-runtime\build\index.js:944:12)
-    at Runtime.requireModule (C:\Users\T11G\Documents\github\Mezogazdasagi_hozamszamito\Hozamszamito\Backend\node_modules\jest-runtime\build\index.js:832:12)
-    at jestAdapter (C:\Users\T11G\Documents\github\Mezogazdasagi_hozamszamito\Hozamszamito\Backend\node_modules\jest-circus\build\runner.js:95:13)
-    at runTestInternal (C:\Users\T11G\Documents\github\Mezogazdasagi_hozamszamito\Hozamszamito\Backend\node_modules\jest-runner\build\index.js:275:16)
-    at runTest (C:\Users\T11G\Documents\github\Mezogazdasagi_hozamszamito\Hozamszamito\Backend\node_modules\jest-runner\build\index.js:343:7)</failure>
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="1.094">
+  <testsuite name="POST /api/pfold integrációs teszt (mockolt db)" errors="0" failures="0" skipped="0" timestamp="2026-01-28T12:49:42" time="0.813" tests="2">
+    <testcase classname="POST /api/pfold integrációs teszt (mockolt db) kérés → feldolgozás → válasz" name="POST /api/pfold integrációs teszt (mockolt db) kérés → feldolgozás → válasz" time="0.071">
+    </testcase>
+    <testcase classname="POST /api/pfold integrációs teszt (mockolt db) DELETE /api/terv/:id működik" name="POST /api/pfold integrációs teszt (mockolt db) DELETE /api/terv/:id működik" time="0.012">
     </testcase>
   </testsuite>
-  <testsuite name="NUnit UNIT tesztek" errors="0" failures="0" skipped="0" timestamp="2026-01-28T12:30:59" time="0.126" tests="3">
-    <testcase classname="NUnit UNIT tesztek DELETE /api/terv/:id működik" name="NUnit UNIT tesztek DELETE /api/terv/:id működik" time="0.026">
+  <testsuite name="NUnit UNIT tesztek" errors="0" failures="0" skipped="0" timestamp="2026-01-28T12:49:43" time="0.163" tests="3">
+    <testcase classname="NUnit UNIT tesztek DELETE /api/terv/:id működik" name="NUnit UNIT tesztek DELETE /api/terv/:id működik" time="0.018">
     </testcase>
-    <testcase classname="NUnit UNIT tesztek GET /api/noveny működik" name="NUnit UNIT tesztek GET /api/noveny működik" time="0.009">
+    <testcase classname="NUnit UNIT tesztek GET /api/noveny működik" name="NUnit UNIT tesztek GET /api/noveny működik" time="0.011">
     </testcase>
-    <testcase classname="NUnit UNIT tesztek GET /api/kiadasok_szam működik" name="NUnit UNIT tesztek GET /api/kiadasok_szam működik" time="0.009">
+    <testcase classname="NUnit UNIT tesztek GET /api/kiadasok_szam működik" name="NUnit UNIT tesztek GET /api/kiadasok_szam működik" time="0.011">
     </testcase>
   </testsuite>
 </testsuites>
