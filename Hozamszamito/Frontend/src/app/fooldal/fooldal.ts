@@ -15,10 +15,12 @@ export class Fooldal implements OnInit{
 
   ngOnInit():void{
     this.loadFold();
+    
   }
 
   loadFold(){
     this.gazdservice.getOszFold().subscribe(data => this.szamolo = data);
+    
   }
   
 } 

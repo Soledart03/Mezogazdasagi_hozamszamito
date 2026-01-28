@@ -1,6 +1,6 @@
   import { Injectable } from '@angular/core';
   import { HttpClient } from '@angular/common/http';
-  import { BehaviorSubject } from 'rxjs';
+  import { BehaviorSubject, Observable } from 'rxjs';
   const terv = 'foldlista';
   @Injectable({
     providedIn: 'root',
@@ -24,10 +24,10 @@
       return this.http.get<any[]>(`http://localhost:3000/api/novinp`);
     }
     //!!!
-    loadKiadCount(foldID: number) {
+    loadKiadCount(foldID: number):Observable<any> {
       return this.http.get<any[]>(`http://localhost:3000/api/kiadasok_szam/${foldID}`);
     }
-    loadKiadSum(foldID: number) {
+    loadKiadSum(foldID: number):Observable<any> {
       return this.http.get<any[]>(`http://localhost:3000/api/kiadasok_osszege/${foldID}`);
     }
     loadNoveny(){

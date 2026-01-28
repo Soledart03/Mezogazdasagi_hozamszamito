@@ -74,19 +74,30 @@ ngOnInit() {
 selectedTerv: any = null;
 kiadottcount: number = 0;
 kiadottosszeg: number = 0;
+szurtfoldek:any = [];
 getFold(terv: any) {
   return this.foldek.find(
     (f: any) => f.id === terv.fold_id
   );
 }
+getkiadottcount: any[] =  [];
+getkiadottsum: any[] =  [];
 getkiacount(terv: any) {
-  console.log(terv.fold_id);
-  return this.tervser.loadKiadCount(terv.fold_id);
+  this.tervser.loadKiadCount(terv.fold_id).subscribe(s => {
+    this.getkiadottcount = s;
+    console.log(this.getkiadottcount);
+  });
+  
 }
 getkiadossz(terv: any) {
-   let viszadat = this.tervser.loadKiadSum(terv.fold_id);
-   
-  return viszadat;
+   this.tervser.loadKiadSum(terv.fold_id).subscribe(s => {
+    this.getkiadottsum = s;
+    console.log(this.getkiadottsum);
+  });
+}
+osszevon(terv:any){
+  this.getkiacount(terv);
+  this.getkiadossz(terv);
 }
 getKivVetomag(terv: any) {
   return this.vetomagok.find(
