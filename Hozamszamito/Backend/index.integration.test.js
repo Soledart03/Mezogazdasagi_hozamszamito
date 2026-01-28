@@ -31,17 +31,4 @@ describe('POST /api/pfold integrációs teszt (mockolt db)', () => {
     expect(res.body.id).toBe(42);
   });
 
-  test('DELETE /api/terv/:id működik', async () => {
-    db.query.mockImplementationOnce((sql, params, cb) => {
-      cb(null); 
-    });
-
-    const res = await request(app)
-      .delete('/api/terv/2')
-      .expect('Content-Type', /json/)
-      .expect(200);
-
-    expect(res.body.message).toBe('Tervezet törölve!');
-  });
-
 });

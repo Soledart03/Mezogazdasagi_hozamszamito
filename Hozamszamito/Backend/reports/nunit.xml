@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="5" failures="0" errors="0" time="1.094">
-  <testsuite name="POST /api/pfold integrációs teszt (mockolt db)" errors="0" failures="0" skipped="0" timestamp="2026-01-28T12:49:42" time="0.813" tests="2">
-    <testcase classname="POST /api/pfold integrációs teszt (mockolt db) kérés → feldolgozás → válasz" name="POST /api/pfold integrációs teszt (mockolt db) kérés → feldolgozás → válasz" time="0.071">
-    </testcase>
-    <testcase classname="POST /api/pfold integrációs teszt (mockolt db) DELETE /api/terv/:id működik" name="POST /api/pfold integrációs teszt (mockolt db) DELETE /api/terv/:id működik" time="0.012">
+<testsuites name="jest tests" tests="4" failures="0" errors="0" time="1.176">
+  <testsuite name="POST /api/pfold integrációs teszt (mockolt db)" errors="0" failures="0" skipped="0" timestamp="2026-01-28T12:56:02" time="0.874" tests="1">
+    <testcase classname="POST /api/pfold integrációs teszt (mockolt db) kérés → feldolgozás → válasz" name="POST /api/pfold integrációs teszt (mockolt db) kérés → feldolgozás → válasz" time="0.077">
     </testcase>
   </testsuite>
-  <testsuite name="NUnit UNIT tesztek" errors="0" failures="0" skipped="0" timestamp="2026-01-28T12:49:43" time="0.163" tests="3">
-    <testcase classname="NUnit UNIT tesztek DELETE /api/terv/:id működik" name="NUnit UNIT tesztek DELETE /api/terv/:id működik" time="0.018">
+  <testsuite name="NUnit UNIT tesztek" errors="0" failures="0" skipped="0" timestamp="2026-01-28T12:56:03" time="0.174" tests="3">
+    <testcase classname="NUnit UNIT tesztek DELETE /api/terv/:id működik" name="NUnit UNIT tesztek DELETE /api/terv/:id működik" time="0.016">
     </testcase>
-    <testcase classname="NUnit UNIT tesztek GET /api/noveny működik" name="NUnit UNIT tesztek GET /api/noveny működik" time="0.011">
+    <testcase classname="NUnit UNIT tesztek GET /api/noveny működik" name="NUnit UNIT tesztek GET /api/noveny működik" time="0.013">
     </testcase>
-    <testcase classname="NUnit UNIT tesztek GET /api/kiadasok_szam működik" name="NUnit UNIT tesztek GET /api/kiadasok_szam működik" time="0.011">
+    <testcase classname="NUnit UNIT tesztek GET /api/kiadasok_szam működik" name="NUnit UNIT tesztek GET /api/kiadasok_szam működik" time="0.015">
     </testcase>
   </testsuite>
 </testsuites>
