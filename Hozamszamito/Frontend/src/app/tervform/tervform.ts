@@ -75,6 +75,7 @@ export class Tervform implements OnInit {
     this.ujterv.fold_id = this.foldId;
     console.log('MENTÉS ELŐTT:', this.ujterv);
     this.tervserv.addTerv(this.ujterv);
+    console.log(this.ujterv);
     this.ujterv = {fold_id:0,noveny_id:0,kiv_vetoid:0,kiv_mutrid:0,vetes_idopont:'',tomeg:0,osszeg:0}
     this.closeMenu();
   }

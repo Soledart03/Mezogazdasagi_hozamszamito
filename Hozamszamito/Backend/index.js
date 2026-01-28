@@ -295,11 +295,11 @@ app.post('/api/terv', async (req, res) => {
     const {fold_id,noveny_id,vetes_idopont,tomeg,osszeg} = req.body;
     
     db.query(
-    'INSERT INTO terv(fold_id,noveny_id,vetes_idopont,tomeg,osszeg) VALUES(?,?,?,?,?)',
-    [fold_id,noveny_id,vetes_idopont,tomeg,osszeg],
+    'INSERT INTO terv(fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg) VALUES(?,?,?,?,?,?,?)',
+    [fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg],
     (err, results) => {
     if (err) throw err;
-    res.json({ id: results.insertId, fold_id,noveny_id,vetes_idopont,tomeg,osszeg});
+    res.json({ id: results.insertId, fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg});
     }
     );
    });
