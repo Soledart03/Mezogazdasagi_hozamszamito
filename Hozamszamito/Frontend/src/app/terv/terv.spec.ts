@@ -46,13 +46,13 @@ describe('Terv', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-   it('openEdit should enable editing and clone selected terv', () => {
+   it('openEdit megnyitja-e az editinget es lemasolja-e a tervet', () => {
     const mockTerv = { id: 5, fold_id: 2 };
 
     component.openEdit(mockTerv);
 
     expect(component.editing).toBeTrue();
     expect(component.selectedTerv).toEqual(mockTerv);
-    expect(component.selectedTerv).not.toBe(mockTerv); // nem referencia
+    expect(component.selectedTerv).not.toBe(mockTerv);
   });
 });
