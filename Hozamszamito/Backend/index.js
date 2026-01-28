@@ -322,6 +322,34 @@ app.delete('/api/terv/:id', (req, res) => {
     res.json({ message: 'Tervezet törölve!'});
     });
     });
+//kiadasok szama
+
+app.get('/api/kiadasok_szam/:id',(req,res)=>{
+  const id = req.params.id;
+  db.query('SELECT f.id AS fold_id, COUNT(k.id) AS kiadas_db FROM fold f LEFT JOIN kiadas k ON k.fold_id = f.id GROUP BY f.id;',[id],(err,result)=>{
+      if(err) throw err;
+      if(result.length == 0) throw err;
+      console.log(result);
+      res.json(result);
+
+  })
+  
+})
+
+//kiadasok osszege
+
+app.get('/api/kiadasok_osszege/:id',(req,res)=>{
+  const id = req.params.id;
+  db.query('SELECT f.id AS fold_id, SUM(k.osszeg) AS kiadas_osszeg FROM fold f JOIN kiadas k ON k.fold_id = f.id GROUP BY f.id;',[id],(err,result)=>{
+      if(err) throw err;
+      if(result.length == 0) throw err;
+      console.log(result);
+      res.json(result);
+
+  })
+  
+})
+
 const PORT = 3000;
 app.listen(PORT, () => {
  console.log(`Server running on http://localhost:${PORT}`);
