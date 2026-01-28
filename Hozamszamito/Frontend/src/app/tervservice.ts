@@ -23,6 +23,13 @@
     loadConnNovinp(){
       return this.http.get<any[]>(`http://localhost:3000/api/novinp`);
     }
+    //!!!
+    loadKiadCount(foldID: number) {
+      return this.http.get<any[]>(`http://localhost:3000/api/kiadasok_szam/${foldID}`);
+    }
+    loadKiadSum(foldID: number) {
+      return this.http.get<any[]>(`http://localhost:3000/api/kiadasok_osszege/${foldID}`);
+    }
     loadNoveny(){
       return this.http.get<any[]>(`http://localhost:3000/api/noveny`);
     }

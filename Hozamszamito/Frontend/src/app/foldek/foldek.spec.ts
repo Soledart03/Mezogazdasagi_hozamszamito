@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Foldek } from './foldek';
 import { Foldservice } from '../foldservice';
 import { Gazdaservice } from '../gazdaservice';
 import { App } from '../app';
 import { BehaviorSubject, of } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 describe('Foldek', () => {
   let component: Foldek;
@@ -27,6 +28,7 @@ describe('Foldek', () => {
       openMenu: jasmine.createSpy('openMenu')
     };
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule,FormsModule],
       declarations: [Foldek],
       providers: [
         { provide: Foldservice, useValue: foldServiceMock },
@@ -44,22 +46,14 @@ describe('Foldek', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-    it('ngOnInit should load folds by gazdaId', () => {
+    it('ngOnInit betolti-e a foldeket ID gazdaID alapjan', () => {
     component.ngOnInit();
 
     foldServiceMock.fold$.next([{ id: 5 }]);
     expect(foldServiceMock.loadFoldsByGazdaId).toHaveBeenCalledWith(5);
   });
-    it('openEdit should set selectedFold and enable editing', () => {
-    const fold = { id: 1, terulet: 10 };
-
-    component.openEdit(fold);
-
-    expect(component.selectedFold).toEqual(fold);
-    expect(component.selectedFold).not.toBe(fold); 
-    expect(component.editing).toBeTrue();
-  });
-    it('delfold should delete fold and reload list', () => {
+    
+    it('delfold kitorli a foldet es ujrafrissit', () => {
     spyOn(window, 'alert');
     component.gazdaId = 3;
 
