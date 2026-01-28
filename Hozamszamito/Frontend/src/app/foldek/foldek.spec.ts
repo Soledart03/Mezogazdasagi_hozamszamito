@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Foldek } from './foldek';
 import { Foldservice } from '../foldservice';
 import { Gazdaservice } from '../gazdaservice';
 import { App } from '../app';
 import { BehaviorSubject, of } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 describe('Foldek', () => {
   let component: Foldek;
@@ -27,6 +28,7 @@ describe('Foldek', () => {
       openMenu: jasmine.createSpy('openMenu')
     };
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule,FormsModule],
       declarations: [Foldek],
       providers: [
         { provide: Foldservice, useValue: foldServiceMock },

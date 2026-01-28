@@ -326,10 +326,9 @@ app.delete('/api/terv/:id', (req, res) => {
 
 app.get('/api/kiadasok_szam/:id',(req,res)=>{
   const id = req.params.id;
-  db.query('SELECT f.id AS fold_id, COUNT(k.id) AS kiadas_db FROM fold f LEFT JOIN kiadas k ON k.fold_id = f.id GROUP BY f.id;',[id],(err,result)=>{
+  db.query('SELECT COUNT(k.id) AS kiadas_db FROM kiadas k JOIN fold as f ON k.fold_id = f.id WHERE k.fold_id = ?;',[id],(err,result)=>{
       if(err) throw err;
       if(result.length == 0) throw err;
-      console.log(result);
       res.json(result);
 
   })
@@ -343,7 +342,7 @@ app.get('/api/kiadasok_osszege/:id',(req,res)=>{
   db.query('SELECT f.id AS fold_id, SUM(k.osszeg) AS kiadas_osszeg FROM fold f JOIN kiadas k ON k.fold_id = f.id GROUP BY f.id;',[id],(err,result)=>{
       if(err) throw err;
       if(result.length == 0) throw err;
-      console.log(result);
+      console.log("lefut");
       res.json(result);
 
   })

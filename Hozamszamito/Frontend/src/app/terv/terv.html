@@ -76,12 +76,12 @@
     <div class="col-lg-4">
       <div class="row mb-1">
         <div class="col-6 fw-bold">Kiadások:</div>
-        <div class="col-6">----</div>
+        <div class="col-6">{{getkiacount(x)?.kiadas_db}} db</div>
       </div>
       
       <div class="row mb-1">
         <div class="col-6 fw-bold">Összes kiadás:</div>
-        <div class="col-6">----</div>
+        <div class="col-6">{{getkiadossz(x).kiadas_osszeg}}</div>
       </div>
       <div class="row mb-1">
         <div class="col-6 fw-bold">Letöltés PDF-ként:</div>

@@ -1,14 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Tervform } from './tervform';
-
+import { FormsModule } from '@angular/forms';
+import { App } from '../app';
 describe('Tervform', () => {
   let component: Tervform;
   let fixture: ComponentFixture<Tervform>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Tervform]
+      declarations: [Tervform],
+      imports: [HttpClientTestingModule,FormsModule],
+      providers: [
+  { provide: App, useValue: jasmine.createSpyObj('App', ['openMenu']) }
+]
     })
     .compileComponents();
 
