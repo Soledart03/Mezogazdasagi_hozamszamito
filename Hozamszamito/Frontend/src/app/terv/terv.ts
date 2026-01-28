@@ -82,8 +82,6 @@ getFold(terv: any) {
 getkiacount(terv: any) {
   console.log(terv.fold_id);
   return this.tervser.loadKiadCount(terv.fold_id);
-  
-  
 }
 getkiadossz(terv: any) {
    let viszadat = this.tervser.loadKiadSum(terv.fold_id);
