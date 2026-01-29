@@ -143,10 +143,11 @@ osszeg:number = 0;
 Vegosszeg(terv:any){
   console.log(this.tpk)
   let tpk = parseInt((this.getnovinp(terv)))
-  let vetomagar = parseInt(terv.tomeg)*tpk  *this.getNoveny(terv).termar;
+  let vetomagar = parseInt(terv.tomeg)* tpk *this.getNoveny(terv).termar;
   let vetomagkiad = parseInt(terv.tomeg) * vetomagar;
   vetomagar - vetomagkiad;
   this.osszeg = vetomagar;
+  //this.tervser.updateOsszeg(terv.id,vetomagar);
   console.log(terv)
   console.log(vetomagar);
  
