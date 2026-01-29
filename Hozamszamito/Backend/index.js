@@ -197,7 +197,7 @@ app.put('/api/gazdaup/:id', (req, res) => {
 
 
     app.get('/api/noveny', async (req,res)=>{
-    db.query('SELECT id,nnev,kep FROM noveny',(err,result)=>{
+    db.query('SELECT id,nnev,termar,kep FROM noveny',(err,result)=>{
         if(err) throw err;
         if(result.length == 0) throw err;
         console.log(result);

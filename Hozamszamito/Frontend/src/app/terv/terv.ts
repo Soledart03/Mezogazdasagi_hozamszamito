@@ -129,7 +129,12 @@ getNoveny(terv: any) {
   );
 }
 Vegosszeg(terv:any){
-  
+  let vetomagar = parseInt(terv.tomeg)*  * this.getNoveny(terv).termar;
+  let vetomagkiad = parseInt(terv.tomeg) * vetomagar;
+  vetomagar - vetomagkiad;
+  console.log(terv)
+  console.log(vetomagar);
+  //console.log(Vegosszeg);
 }
 
 addLabelValue(doc: jsPDF, label: string, value: string, x: number, y: number) {
