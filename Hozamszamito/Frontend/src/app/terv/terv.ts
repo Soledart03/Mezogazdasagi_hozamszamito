@@ -34,7 +34,6 @@ tpk:any[] = [];
 tervek: any[] = [];
 editing:boolean=false;
 ngOnInit() {
-
   this.folds$ = this.foldser.fold$;
 
   this.gazdaser.gazda$.subscribe(gazda => {

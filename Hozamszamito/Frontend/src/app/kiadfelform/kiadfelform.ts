@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { Gazdaservice } from '../gazdaservice';
 import { Kiadasservice } from '../kiadasservice';
-
+import { Foldservice } from '../foldservice';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-kiadfelform',
   standalone: false,
@@ -12,15 +13,18 @@ export class Kiadasfelform implements OnInit {
 
   constructor(
     private gserv: Gazdaservice,
-    private kiadasser: Kiadasservice
+    private kiadasser: Kiadasservice,
+    private foldserv: Foldservice
   ) {}
-
+  fold$!: Observable<any[]>;
+  
   gazdaId: number;
 
   ngOnInit() {
     this.gserv.gazda$.subscribe(gazda => {
       this.gazdaId = gazda?.id ?? null;
     });
+    this.fold$ = this.foldserv.fold$;
   }
 
   ujKiadas = {

@@ -39,7 +39,7 @@
         required
       >
         <option value="" disabled selected>Válassz földet</option>
-        <option *ngFor="let f of folds$ | async" [value]="f.id">
+        <option *ngFor="let f of fold$ | async" [value]="f.id">
           {{ f.helyrajzi_szam }}
         </option>
       </select>
