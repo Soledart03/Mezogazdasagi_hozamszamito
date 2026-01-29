@@ -15,6 +15,7 @@ import { Tervform } from './tervform/tervform';
 import { Footer } from './footer/footer';
 import { Sugo } from './sugo/sugo';
 import { Kiadasok } from './kiadasok/kiadasok';
+import { Kiadfelform } from './kiadfelform/kiadfelform';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { Kiadasok } from './kiadasok/kiadasok';
     Tervform,
     Footer,
     Sugo,
-    Kiadasok
+    Kiadasok,
+    Kiadfelform
   ],
   imports: [
     BrowserModule,
