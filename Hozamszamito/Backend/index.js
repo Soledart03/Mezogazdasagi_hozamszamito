@@ -304,6 +304,14 @@ app.post('/api/terv', async (req, res) => {
     );
    });
    //????????
+   app.put('/api/tervosz/:id', async (req, res) => {
+     const id = req.params.id;
+     const { osszeg } = req.body;
+     db.query('UPDATE terv SET osszeg=? WHERE id=?', [osszeg, id], (err) => {
+       if (err) throw err;
+       res.json({ message: 'Tervezet frissült!' });
+     });
+   });
    app.put('/api/terv/:id', (req, res) => {
  const id = req.params.id;
  const {fold_id,noveny_id,vetes_idopont,tomeg,osszeg} = req.body;

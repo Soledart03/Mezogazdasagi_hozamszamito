@@ -23,6 +23,9 @@
     loadConnNovinp(){
       return this.http.get<any[]>(`http://localhost:3000/api/novinp`);
     }
+    updateOsszeg(id: number, osszeg: number) {
+      return this.http.put(`http://localhost:3000/api/terv/${id}/osszeg`, { osszeg });
+    }
     //!!!
     loadKiadCount(foldID: number):Observable<any> {
       return this.http.get<any[]>(`http://localhost:3000/api/kiadasok_szam/${foldID}`);
