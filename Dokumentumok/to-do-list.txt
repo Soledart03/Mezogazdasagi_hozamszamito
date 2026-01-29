@@ -41,3 +41,9 @@ főoldal átlagszámítás
 NEM RESZPONZÍV AZ OLDAL!!!!44!!négy!!!
 
 további fejlesztések - kivételkezelés
+
+próbáld ki <3
+SELECT
+    COALESCE((SELECT SUM(t.osszeg) FROM terv t), 0)
+  - COALESCE((SELECT SUM(k.osszeg) FROM kiadas k), 0)
+    AS eredmeny;
