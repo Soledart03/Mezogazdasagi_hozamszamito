@@ -24,7 +24,7 @@
       return this.http.get<any[]>(`http://localhost:3000/api/novinp`);
     }
     updateOsszeg(id: number, osszeg: number) {
-      return this.http.put(`http://localhost:3000/api/terv/${id}/osszeg`, { osszeg });
+      return this.http.put(`http://localhost:3000/api/tervosz/${id}`, { osszeg });
     }
     //!!!
     loadKiadCount(foldID: number):Observable<any> {

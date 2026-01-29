@@ -110,10 +110,10 @@ getKivVetomag(terv: any) {
   );
 }
 getnovinp(terv: any) {
-   const result = this.tpk.find(f => f.id == terv.kiv_vetoid, console.log(terv.kiv_vetoid)) ;
+   const result = this.tpk.find(f => f.id === terv.kiv_vetoid, console.log(terv.kiv_vetoid)) ;
    
-  console.log('találat:', result.termes_per_kilo);
-  return result.termes_per_kilo;
+  console.log('találat:', result.tpk);
+  return result.tpk;
 }
 getVetomag(terv: any) {
   return this.vetomagok.find(
@@ -147,7 +147,9 @@ Vegosszeg(terv:any){
   let vetomagkiad = parseInt(terv.tomeg) * vetomagar;
   vetomagar - vetomagkiad;
   this.osszeg = vetomagar;
-  //this.tervser.updateOsszeg(terv.id,vetomagar);
+  this.tervser.updateOsszeg(terv.id,vetomagar).subscribe(s=>{
+    console.log(s);
+  });
   console.log(terv)
   console.log(vetomagar);
  
