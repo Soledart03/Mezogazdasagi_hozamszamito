@@ -217,7 +217,7 @@ app.get('/api/noveny_i', async (req,res)=>{
     
 })
 app.get('/api/novinp', async (req,res)=>{
-    db.query('SELECT n.id as id, n.nnev, ni.termes_per_kilo,i.id as iad, i.inev, i.ar, i.fajta FROM noveny as n JOIN noveny_input as ni ON n.id = ni.noveny_id JOIN input_anyag as i ON i.id = ni.inputanyag_id;',(err,result)=>{
+    db.query('SELECT n.id as id, n.nnev, ni.termes_per_kilo as tpk,i.id as iad, i.inev, i.ar, i.fajta FROM noveny as n JOIN noveny_input as ni ON n.id = ni.noveny_id JOIN input_anyag as i ON i.id = ni.inputanyag_id;',(err,result)=>{
         if(err) throw err;
         if(result.length == 0) throw err;
         console.log(result);
