@@ -1,1 +1,68 @@
-<p>kiadfelform works!</p>
+<div class="popup-overlay">
+  <div class="popup">
+    <h2 class="popup-title">Kiadás felvitel</h2>
+
+    <form (ngSubmit)="kiadasHozzaad()" class="popup-form">
+
+      <input
+        type="date"
+        [(ngModel)]="ujKiadas.datum"
+        name="datum"
+        required
+      />
+
+      <input
+        type="number"
+        [(ngModel)]="ujKiadas.osszeg"
+        name="osszeg"
+        placeholder="Összeg (Ft)"
+        required
+      />
+
+      <input
+        [(ngModel)]="ujKiadas.tipus"
+        name="tipus"
+        placeholder="Típus (pl. munka, anyag)"
+        required
+      />
+
+      <textarea
+        [(ngModel)]="ujKiadas.leiras"
+        name="leiras"
+        placeholder="Leírás"
+        rows="3"
+      ></textarea>
+
+      <select
+        [(ngModel)]="ujKiadas.fold_id"
+        name="fold_id"
+        required
+      >
+        <option value="" disabled selected>Válassz földet</option>
+        <option *ngFor="let f of folds$ | async" [value]="f.id">
+          {{ f.helyrajzi_szam }}
+        </option>
+      </select>
+
+      <!-- opcionálisak -->
+      <!--
+      <select [(ngModel)]="ujKiadas.noveny_id" name="noveny_id">
+        <option value="">Növény (opcionális)</option>
+      </select>
+
+      <select [(ngModel)]="ujKiadas.inputanyag_id" name="inputanyag_id">
+        <option value="">Inputanyag (opcionális)</option>
+      </select>
+      -->
+
+      <button type="submit" class="btn-primary">
+        Felvitel
+      </button>
+    </form>
+
+    <button class="btn-danger" (click)="closeMenu()">
+      Mégse
+    </button>
+  </div>
+</div>
+

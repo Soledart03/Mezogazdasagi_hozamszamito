@@ -5,16 +5,97 @@
 
 </div>
 
+<<<<<<< Updated upstream
 <div *ngFor="let x of (terv$ | async)"  class="col-lg-12">
 <ng-container>
   
   <div class="row">
     <div class="col-lg-4">
+=======
+<div *ngFor="let x of (terv$ | async)" class="card shadow-sm mb-4">
+  <div class="card-body">
+    <div class="row align-items-center">
+>>>>>>> Stashed changes
 
-      <img [src]="getNoveny(x)?.kep">
+      <div class="col-lg-3 text-center">
+      <img
+      [src]="getNoveny(x)?.kep"
+      class="img-fluid rounded"
+      style="max-height:180px; object-fit:contain">
+      <h5 class="mt-2">{{ getNoveny(x)?.nnev }}</h5>
+      </div>
+
+      <div class="col-lg-5">
+  <h5 class="fw-bold mb-3">
+    Helyrajzi szám: {{ getFold(x)?.helyrajzi_szam }}
+  </h5>
+
+  <ul class="list-group list-group-flush small">
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Vetési időpont</span>
+      <span>{{ x.vetes_idopont.split('T')[0] }}</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Terület</span>
+      <span>{{ getFold(x)?.terulet }} ha</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Művelési ág</span>
+      <span>{{ getFold(x)?.muvelesi_ag }}</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Vetőmag</span>
+      <span>{{ getKivVetomag(x)?.fajta }}</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Vetési tömeg</span>
+      <span>{{ x.tomeg }} kg</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Műtrágya:</span>
+      <span>{{getKivMutragya(x)?.fajta.split(" ").slice(0,2).join(" ")}}</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Műtrágya:</span>
+      <span>{{getKivMutragya(x)?.fajta.split(" ").slice(0,2).join(" ")}}</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Műtrágya tömege:</span>
+      <span>{{getKivMutragya(x)?.fajta.split(" ").slice(-1)}}</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Műtrágya tömege:</span>
+      <span>{{getKivMutragya(x)?.ar}} Ft/kg</span>
+    </li>
+
+  </ul>
+</div>
+
+
+<div class="col-lg-4">
+  <div class="border rounded p-3 bg-light">
+
+    <button class="btn btn-outline-secondary btn-sm w-100 mb-2"
+      (click)="osszevon(x)">
+      Kiadások számítása
+    </button>
+
+    <div class="d-flex justify-content-between small">
+      <span>Kiadások:</span>
+      <span *ngFor="let y of getkiadottcount">
+        {{ y['COUNT(k.id)'] }} db
+      </span>
     </div>
-    <div class="col-lg-4">
 
+<<<<<<< Updated upstream
       <div class="row mb-1">
         <div class="col-6 fw-bold"><h2>Helyrajzi szám:</h2></div>
         <div class="col-6"><h2>{{getFold(x)?.helyrajzi_szam}}</h2></div>
@@ -71,27 +152,16 @@
       </div>
 </ng-container>
       
+=======
+    <div class="d-flex justify-content-between small mb-2">
+      <span>Összes kiadás:</span>
+      <span *ngFor="let y of getkiadottsum">
+        {{ y['SUM(k.osszeg)'] }} Ft
+      </span>
+>>>>>>> Stashed changes
     </div>
-      
-    
-    <div class="col-lg-4">
-      <div class="row mb-1"><button (click)="osszevon(x)">Katt</button></div>
-      <div class="row mb-1" >
-        
-        <div class="col-6 fw-bold" >Kiadások:</div>
-        
-        <div class="col-6" *ngFor="let y of getkiadottcount">{{y['COUNT(k.id)']}} db</div>
-      </div>
-      
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Összes kiadás:</div>
-        <div class="col-6" *ngFor="let y of getkiadottsum">{{y['SUM(k.osszeg)']}} Ft</div>
-      </div>
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Letöltés PDF-ként:</div>
-        <div class="col-6"><button (click)="PDFgen(x)">Letöltés</button></div>
-      </div>
 
+<<<<<<< Updated upstream
       <br><br>
       <ng-container *ngIf="!beavszuk">
          <button type="submit" class="btn-primary" >Bevétel számítás</button>
@@ -106,9 +176,31 @@
       </div>
     </div>
   </ng-container>
+=======
+    <hr>
+
+    <button class="btn btn-success w-100 mb-2"
+      (click)="Vegosszeg(x)">
+      Bevétel számítás
+    </button>
+
+    <h4 class="text-center fw-bold text-success">
+      {{ osszeg || 0 }} Ft
+    </h4>
+
+    <hr>
+
+    <button class="btn btn-outline-primary btn-sm w-100"
+      (click)="PDFgen(x)">
+      PDF letöltése
+    </button>
+
+>>>>>>> Stashed changes
   </div>
+</div>
 
 
 
-
-
+          </div>
+  </div>
+</div>

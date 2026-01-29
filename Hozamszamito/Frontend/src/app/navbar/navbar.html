@@ -1,42 +1,49 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white px-4 shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-4 shadow-sm border-bottom sticky-top">
   
-    <a class="navbar-brand fw-bold text-success" href="#">MEHOSZ</a>
-  
-   
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"data-bs-target="#mainNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    
-    <div class="collapse navbar-collapse" id="mainNavbar">
-      
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/fold">Föld hozzáadása</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/kiad">Kiadások</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/terv">Tervek megtekintése</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/sugo">Súgó</a>
-        </li>
-        
-      </ul>
-  
-     <div *ngIf="loginsucces">
-      <span>Üdv, {{ gazdaadat.nev }} </span>
-          <button class="btn btn-sm btn-outline-danger ms-2" (click)="logout()"> Kijelentkezés </button>
-        </div>
-      <div class="d-flex align-items-center gap-3" *ngIf="!loginsucces">
-        
-          <button class="btn btn-link text-dark text-decoration-none" (click)="openMenu('login')">Bejelentkezés</button>
-        
-        <button class="btn btn-success px-4" (click)="openMenu('register')">Regisztráció</button>
-          
-      </div>
+  <a class="navbar-brand fw-bold text-success d-flex align-items-center gap-2" href="#">
+    🌱 MEHOSZ
+  </a>
 
+  <button class="navbar-toggler" type="button"
+    data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="mainNavbar">
+
+    <ul class="navbar-nav mx-auto gap-lg-3">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/fold" routerLinkActive="active">Föld hozzáadása</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/kiad" routerLinkActive="active">Kiadások</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/terv" routerLinkActive="active">Tervek</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/sugo" routerLinkActive="active">Súgó</a>
+      </li>
+    </ul>
+
+    <div *ngIf="loginsucces" class="d-flex align-items-center gap-3">
+      <span class="text-muted small" style="margin-right: 50px;">
+        Üdv, <strong>{{ gazdaadat.nev }}</strong>
+      </span>
+
+      <button class="btn btn-sm btn-outline-danger" (click)="logout()">
+        Kijelentkezés
+      </button>
     </div>
-  </nav>
+
+    <div *ngIf="!loginsucces" class="d-flex align-items-center gap-2">
+      <button class="btn btn-link text-dark" (click)="openMenu('login')">
+        Bejelentkezés
+      </button>
+      <button class="btn btn-success px-3" (click)="openMenu('register')">
+        Regisztráció
+      </button>
+    </div>
+
+  </div>
+</nav>

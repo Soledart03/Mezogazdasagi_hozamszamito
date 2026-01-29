@@ -28,6 +28,31 @@ export class Kiadasservice {
     return data ? JSON.parse(data) : null;
   }
 
+  setKiadások(list: any[]) {
+    this.kiadasSubject.next(list);
+  }
+
+  
+  addKiadas(kiadas: {
+    datum: string;
+    osszeg: number;
+    tipus: string;
+    leiras: string;
+    fold_id: number;
+    noveny_id?: number | null;
+    inputanyag_id?: number | null;
+  }) {
+    this.http.post<any>('http://localhost:3000/api/kiad', kiadas)
+      .subscribe({
+        next: newKiadas => {
+          const current = this.kiadasSubject.value;
+          this.kiadasSubject.next([...current, newKiadas]);
+          window.alert('Kiadás hozzáadva!');
+        },
+        error: err => console.error(err)
+      });
+  }
+
 
   
 }

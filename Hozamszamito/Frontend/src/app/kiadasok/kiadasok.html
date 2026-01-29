@@ -1,28 +1,28 @@
-<div *ngFor="let x of kiadasoks$ | async" class="kiadas-card">
-  <div class="k row">
-    <span class="kl label">Helyrajzi szám:</span>
-    <span class="kv value">{{ getHelyrazji(x).helyrajzi_szam }}</span>
-  </div>
+<div *ngFor="let x of kiadasoks$ | async" class="card shadow-sm mb-4 kiadas-card">
+  <div class="card-body text-center">
 
-  <div class="k row">
-    <span class="kl label">Dátum:</span>
-    <span class="kv value">{{ x.datum.split('T')[0] }}</span>
-  </div>
+    <!-- Helyrajzi szám -->
+    <h5 class="fw-bold mb-2">
+      Helyrajzi szám: {{ getHelyrazji(x).helyrajzi_szam }}
+    </h5>
 
-  <div class="k row">
-    <span class="kl label">Összeg:</span>
-    <span class="kv value">{{ x.osszeg }} Ft</span>
-  </div>
+    <!-- Típus + dátum -->
+    <div class="text-muted mb-3">
+      {{ x.tipus }} · 📅 {{ x.datum.split('T')[0] }}
+    </div>
 
-  <div class="k row">
-    <span class="kl label">Típus:</span>
-    <span class="kv value">{{ x.tipus }}</span>
-  </div>
+    <!-- Leírás -->
+    <p class="kiadas-leiras mb-3">
+      {{ x.leiras }}
+    </p>
 
-  <div class="k row">
-    <span class="kl label">Leírás:</span>
-    <span class="kv value">{{ x.leiras }}</span>
+    <!-- Összeg -->
+    <div class="osszeg">
+      {{ x.osszeg }} Ft
+    </div>
+
   </div>
 </div>
-<button class="btn btn-primary">Új kiadás</button>
 
+
+<div class="text-center mt-4"> <button class="btn btn-success px-4" (click)="kiadasHozzaad()"> ➕ Új kiadás </button> </div> <br><br><br>

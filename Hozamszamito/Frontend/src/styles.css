@@ -169,3 +169,45 @@ img{
 .kv {
   color: #222;
 }
+
+.kiadas-card {
+  border-radius: 14px;
+  border: 1px solid #e9ecef;
+}
+
+.kiadas-leiras {
+  font-size: 1.05rem;
+  color: #444;
+}
+
+.osszeg {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #198754;
+}
+
+.navbar-brand {
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  color: #555 !important;
+}
+
+.nav-link.active {
+  color: #198754 !important;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #198754;
+  border-radius: 2px;
+}
