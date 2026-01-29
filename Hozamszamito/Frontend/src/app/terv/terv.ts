@@ -28,6 +28,7 @@ vetomagok:any = [];
 mutragyak:any = [];
 mutrvane = false;
 flood:any = [];
+tpk:any[] = [];
 editing:boolean=false;
 ngOnInit() {
 
@@ -59,6 +60,9 @@ ngOnInit() {
   this.tervser.loadNoveny().subscribe(noveny => {
     this.novenyek = noveny;
   });
+  this.tervser.loadnovinp().subscribe(tpk => {
+    this.tpk = tpk;
+  });
   this.tervser.loadConnNovinp().subscribe(vetomag => {
     this.vetomagok = vetomag;
     console.log('vetomag:',this.vetomagok);
@@ -75,6 +79,7 @@ selectedTerv: any = null;
 kiadottcount: number = 0;
 kiadottosszeg: number = 0;
 szurtfoldek:any = [];
+tpksel:number = 0;
 getFold(terv: any) {
   return this.foldek.find(
     (f: any) => f.id === terv.fold_id
@@ -104,6 +109,12 @@ getKivVetomag(terv: any) {
     (f: any) => f.iad === terv.kiv_vetoid
   );
 }
+getnovinp(terv: any) {
+   const result = this.tpk.find(f => f.id == terv.kiv_vetoid, console.log(terv.kiv_vetoid)) ;
+   
+  console.log('találat:', result.termes_per_kilo);
+  return result.termes_per_kilo;
+}
 getVetomag(terv: any) {
   return this.vetomagok.find(
     (f: any) => f.id === terv.fold_id
@@ -128,13 +139,17 @@ getNoveny(terv: any) {
     (n: any) => n.id === terv.noveny_id
   );
 }
+osszeg:number = 0;
 Vegosszeg(terv:any){
-  let vetomagar = parseInt(terv.tomeg)*  * this.getNoveny(terv).termar;
+  console.log(this.tpk)
+  let tpk = parseInt((this.getnovinp(terv)))
+  let vetomagar = parseInt(terv.tomeg)*tpk  *this.getNoveny(terv).termar;
   let vetomagkiad = parseInt(terv.tomeg) * vetomagar;
   vetomagar - vetomagkiad;
+  this.osszeg = vetomagar;
   console.log(terv)
   console.log(vetomagar);
-  //console.log(Vegosszeg);
+ 
 }
 
 addLabelValue(doc: jsPDF, label: string, value: string, x: number, y: number) {
