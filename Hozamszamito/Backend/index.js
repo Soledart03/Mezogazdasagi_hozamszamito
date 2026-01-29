@@ -303,12 +303,13 @@ app.post('/api/terv', async (req, res) => {
     }
     );
    });
+   //????????
    app.put('/api/terv/:id', (req, res) => {
  const id = req.params.id;
  const {fold_id,noveny_id,vetes_idopont,tomeg,osszeg} = req.body;
  db.query(
- 'UPDATE terv SET fold_id,noveny_id,vetes_idopont,tomeg,osszeg WHERE id=?',
- [fold_id,noveny_id,vetes_idopont,tomeg,osszeg,id],
+ 'UPDATE terv SET fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg WHERE id=?',
+ [fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg,id],
  (err) => {
  if (err) throw err;
  res.json({ message: 'Tervezet frissült!' });
