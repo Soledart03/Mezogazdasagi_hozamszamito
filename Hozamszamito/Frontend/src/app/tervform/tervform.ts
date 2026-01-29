@@ -42,6 +42,7 @@ export class Tervform implements OnInit {
     if (this.foldek.length > 0) {
       const foldId = this.foldek[0].id;
       this.tervserv.loadTervByFold(foldId);
+      console.log(foldId);
     }
   });
   this.tervserv.loadNoveny().subscribe(noveny => {
@@ -64,6 +65,7 @@ export class Tervform implements OnInit {
     return;
   }
   console.log('VETOSZURES MENTÉS ELŐTT:',noveny);
+  console.log(this.ujterv)
   console.log('VETOSZURES MENTÉS ELŐTT:',this.vetomagok);
     this.szurtmagok = this.vetomagok.filter(
     (vm: any) => vm.nnev === noveny.nnev
@@ -74,7 +76,7 @@ export class Tervform implements OnInit {
 
   ujterv = {fold_id:0,noveny_id:0,kiv_vetoid:0,kiv_mutrid:0,vetes_idopont:'',tomeg:0,osszeg:0}
   tervHozzaad(){
-    this.ujterv.fold_id = this.foldId;
+    
     this.ujterv.noveny_id = this.novi;
     console.log('MENTÉS ELŐTT:', this.ujterv);
     this.tervserv.addTerv(this.ujterv);
