@@ -9,12 +9,16 @@
     constructor(private http:HttpClient){}
     private tervSubject = new BehaviorSubject<any[]>(this.loadFromStorage());
     terv$ = this.tervSubject.asObservable();
-    
+    tervek: any[] = [];
     loadTervByFold(foldID: number) {
       this.http.get<any[]>(`http://localhost:3000/api/terv/${foldID}`).subscribe(tervs => {
           this.tervSubject.next(tervs); 
+          this.tervek.push(tervs);
           console.log('terv:',tervs);
         });
+    }
+    loadterv(fold_id: number) {
+      return this.http.get<any[]>(`http://localhost:3000/api/terv/${fold_id}`);
     }
         
     getTerv() {

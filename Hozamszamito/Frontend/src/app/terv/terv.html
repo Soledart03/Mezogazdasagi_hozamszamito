@@ -7,6 +7,7 @@
 
 <div *ngFor="let x of (terv$ | async)"  class="col-lg-12">
 <ng-container>
+  
   <div class="row">
     <div class="col-lg-4">
 
@@ -53,7 +54,7 @@
         <div class="col-6">{{getKivVetomag(x)?.ar}} Ft/kg</div>
       </div>
       <ng-container>{{vanegMutragya(x)}}</ng-container>
-      <ng-container *ngIf="mutrvane">
+      <ng-container *ngIf="mutrMap[x.id]">
       <div class="row mb-1">
         <div class="col-6 fw-bold">Műtrágya:</div>
         <div class="col-6">{{getKivMutragya(x)?.fajta.split(" ").slice(0,2).join(" ")}}</div>
@@ -92,9 +93,16 @@
       </div>
 
       <br><br>
-      
-      <button type="submit" class="btn-primary" (click)="Vegosszeg(x)">Bevétel számítás</button>
-      <h2>{{osszeg}} Ft</h2>
+      <ng-container *ngIf="!beavszuk">
+         <button type="submit" class="btn-primary" >Bevétel számítás</button>
+        <h2>{{getossz(x)}} Ft</h2>
+    
+      </ng-container>
+     <ng-container *ngIf="beavszuk">
+         <button type="submit" class="btn-primary" (click)="Vegosszeg(x)" [disabled]="getossz(x) !== 0">Bevétel számítás</button>
+        <h2>{{osszeg}} Ft</h2>
+    
+      </ng-container>
       </div>
     </div>
   </ng-container>

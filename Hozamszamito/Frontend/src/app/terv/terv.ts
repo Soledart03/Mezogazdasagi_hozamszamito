@@ -26,9 +26,12 @@ foldek:any = [];
 novenyek:any = [];
 vetomagok:any = [];
 mutragyak:any = [];
+osszegMap: { [tervId: number]: number } = {};
+mutrMap: { [tervId: number]: boolean } = {};
 mutrvane = false;
 flood:any = [];
 tpk:any[] = [];
+tervek: any[] = [];
 editing:boolean=false;
 ngOnInit() {
 
@@ -55,8 +58,15 @@ ngOnInit() {
     if (this.foldek.length > 0) {
       const foldId = this.foldek[0].id;
       this.tervser.loadTervByFold(foldId);
+      this.tervek.push(this.tervser.tervek);
+      this.tervmasol = this.tervek.map(x => ({
+        ...x,
+        aktiv:false
+      }));
+      console.log('tervek:',this.tervek);
     }
   });
+ 
   this.tervser.loadNoveny().subscribe(noveny => {
     this.novenyek = noveny;
   });
@@ -73,6 +83,13 @@ ngOnInit() {
   });
   
   this.terv$ = this.tervser.terv$;
+  this.terv$.subscribe(tervek => {
+  tervek.forEach(terv => {
+    if (this.mutrMap[terv.id] === undefined) {
+      this.mutrMap[terv.id] = terv.kiv_mutrid != null && terv.kiv_mutrid !== 0;
+    }
+  });
+});
   
 }
 selectedTerv: any = null;
@@ -84,6 +101,37 @@ getFold(terv: any) {
   return this.foldek.find(
     (f: any) => f.id === terv.fold_id
   );
+}
+tervmasol: any[] = [];
+
+getossz(terv: any) {
+  if (this.osszegMap[terv.id] !== undefined) {
+    return this.osszegMap[terv.id];
+  }
+
+  if (terv.osszeg && terv.osszeg !== 0) {
+    this.osszegMap[terv.id] = terv.osszeg;
+    return terv.osszeg;
+  }
+  for(let i = 0; i < this.tervek.length; i++){
+    console.log(this.tervek[i]);
+    for(let j = 0; j < this.tervek[i].length; j++){
+      for (let k = 0; k < this.tervek[i][j].length; k++) {
+      console.log(this.tervek[i][j][k]);
+      if(this.tervek[i][j][k].id === terv.id){
+        console.log("haaaaaaaaa" + this.tervek[i][j][k].osszeg);
+        
+            this.osszeg = this.tervek[i][j][k].osszeg;
+            this.beavszuk = true;
+            return this.osszeg;
+          }
+          
+    }
+    
+  }
+}
+this.osszegMap[terv.id] = 0;
+  return 0;
 }
 getkiadottcount: any[] =  [];
 getkiadottsum: any[] =  [];
@@ -109,6 +157,7 @@ getKivVetomag(terv: any) {
     (f: any) => f.iad === terv.kiv_vetoid
   );
 }
+beavszuk:boolean = false;
 getnovinp(terv: any) {
    const result = this.tpk.find(f => f.id === terv.kiv_vetoid, console.log(terv.kiv_vetoid)) ;
    
@@ -141,17 +190,26 @@ getNoveny(terv: any) {
 }
 osszeg:number = 0;
 Vegosszeg(terv:any){
-  console.log(this.tpk)
-  let tpk = parseInt((this.getnovinp(terv)))
-  let vetomagar = parseInt(terv.tomeg)* tpk *this.getNoveny(terv).termar;
-  let vetomagkiad = parseInt(terv.tomeg) * vetomagar;
-  vetomagar - vetomagkiad;
-  this.osszeg = vetomagar;
-  this.tervser.updateOsszeg(terv.id,vetomagar).subscribe(s=>{
+  if (this.osszegMap[terv.id] && this.osszegMap[terv.id] !== 0) {
+    return;
+  }
+
+  const tpk = parseInt(this.getnovinp(terv));
+  const vetomagar =
+    parseInt(terv.tomeg) *
+    tpk *
+    this.getNoveny(terv).termar;
+
+  this.osszegMap[terv.id] = vetomagar;
+    this.tervser.updateOsszeg(terv.id,vetomagar).subscribe(s=>{
     console.log(s);
-  });
+    
   console.log(terv)
   console.log(vetomagar);
+  });
+  
+
+  
  
 }
 
