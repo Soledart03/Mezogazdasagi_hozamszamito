@@ -53,10 +53,6 @@
       <span>{{getKivMutragya(x)?.fajta.split(" ").slice(0,2).join(" ")}}</span>
     </li>
 
-    <li class="list-group-item d-flex justify-content-between">
-      <span>Műtrágya:</span>
-      <span>{{getKivMutragya(x)?.fajta.split(" ").slice(0,2).join(" ")}}</span>
-    </li>
 
     <li class="list-group-item d-flex justify-content-between">
       <span>Műtrágya tömege:</span>
@@ -64,7 +60,7 @@
     </li>
 
     <li class="list-group-item d-flex justify-content-between">
-      <span>Műtrágya tömege:</span>
+      <span>Műtrágya ára:</span>
       <span>{{getKivMutragya(x)?.ar}} Ft/kg</span>
     </li>
 
@@ -92,16 +88,16 @@
     </div>
 
       <br><br>
-      <ng-container *ngIf="!beavszuk">
+      
          <button type="submit" class="btn-primary" >Bevétel számítás</button>
         <h2>{{getossz(x)}} Ft</h2>
     
-      </ng-container>
-     <ng-container *ngIf="beavszuk">
-         <button type="submit" class="btn-primary" (click)="Vegosszeg(x)" [disabled]="getossz(x) !== 0">Bevétel számítás</button>
-        <h2>{{osszeg}} Ft</h2>
+      
     
-      </ng-container>
+         <button type="submit" class="btn-primary" (click)="Vegosszeg(x)" >Bevétel számítás</button>
+        <h2>{{x.osszeg}} Ft</h2>
+    
+      
       </div>
     </div>
   </div>

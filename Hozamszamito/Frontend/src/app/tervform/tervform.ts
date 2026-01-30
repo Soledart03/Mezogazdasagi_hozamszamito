@@ -59,6 +59,7 @@ export class Tervform implements OnInit {
   }
   novnev = "";
   novi = 0;
+  szurtmag:any[] = [];
   vetoszures(noveny:any){
     if (!this.vetomagok || this.vetomagok.length === 0) {
     console.warn('Vetőmagok még nincsenek betöltve');
@@ -71,7 +72,8 @@ export class Tervform implements OnInit {
     (vm: any) => vm.nnev === noveny.nnev
   );
   this.novi = noveny.id;
-    console.log('MENTÉS ELŐTT:', this.szurtmagok);
+  
+    console.log('MENTÉS ELŐTT szurtmag:', this.szurtmagok);
   }
 
   ujterv = {fold_id:0,noveny_id:0,kiv_vetoid:0,kiv_mutrid:0,vetes_idopont:'',tomeg:0,osszeg:0}

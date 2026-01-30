@@ -13,7 +13,7 @@ export class Regcomp {
   gazdaHozzaad():void{
     this.gserv.addGazda(this.ujgazd).subscribe({
       next:()=>{
-        window.alert('Sikeres Bejelentkezés');
+        window.alert('Sikeres Regisztráció!');
         this.ujgazd = {nev:'',email:'',jelszo:''};
         this.closeMenu();
       },

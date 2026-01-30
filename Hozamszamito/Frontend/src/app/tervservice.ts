@@ -11,7 +11,7 @@
     terv$ = this.tervSubject.asObservable();
     tervek: any[] = [];
     loadTervByFold(foldID: number) {
-      this.http.get<any[]>(`http://localhost:3000/api/terv/${foldID}`).subscribe(tervs => {
+      this.http.get<any[]>(`http://localhost:3000/api/tervs`).subscribe(tervs => {
           this.tervSubject.next(tervs); 
           this.tervek.push(tervs);
           console.log('terv:',tervs);
@@ -50,7 +50,7 @@
       return this.http.get<any[]>(`http://localhost:3000/api/inp_m`);
     }
     addTerv(terv: any) {
-    this.http.post<any>('http://localhost:3000/api/terv', terv)
+    this.http.post<any>(`http://localhost:3000/api/terv`,terv)
       .subscribe({
         next: ujterv => {
           const current = this.tervSubject.value;

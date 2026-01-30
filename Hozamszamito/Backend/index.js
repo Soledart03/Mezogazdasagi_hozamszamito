@@ -226,6 +226,16 @@ app.get('/api/novinp', async (req,res)=>{
     })
     
 })
+app.get('/api/inp_v', async (req,res)=>{
+    db.query('SELECT id,inev,ar,fajta FROM input_anyag WHERE inev = "Vetőmag"',(err,result)=>{
+        if(err) throw err;
+        if(result.length == 0) throw err;
+        console.log(result);
+        res.json(result);
+
+    })
+    
+})
 app.get('/api/inp_m', async (req,res)=>{
     db.query('SELECT id,inev,ar,fajta FROM input_anyag WHERE inev = "Műtrágya"',(err,result)=>{
         if(err) throw err;
@@ -291,6 +301,17 @@ app.get('/api/terv/:id', async (req,res)=>{
     })
     
 })
+app.get('/api/tervs', async (req,res)=>{
+    const id = req.params.id;
+    db.query('SELECT id,fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg FROM terv',[id],(err,result)=>{
+        if(err) throw err;
+        //if(result.length == 0) throw err;
+        console.log(result);
+        res.json(result);
+
+    })
+    
+})
 app.post('/api/terv', async (req, res) => {
     const {fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg} = req.body;
     
@@ -299,6 +320,7 @@ app.post('/api/terv', async (req, res) => {
     [fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg],
     (err, results) => {
     if (err) throw err;
+    console.log(results.insertId);
     res.json({ id: results.insertId, fold_id,noveny_id,kiv_vetoid,kiv_mutrid,vetes_idopont,tomeg,osszeg});
     }
     );

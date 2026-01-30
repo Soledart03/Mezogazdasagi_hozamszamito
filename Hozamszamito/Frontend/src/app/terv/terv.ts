@@ -5,6 +5,8 @@ import { Tervservice } from '../tervservice';
 import { Observable } from 'rxjs';
 import { Foldservice } from '../foldservice';
 import { DEJAVU_BASE64 } from '../../assets/fonts/dejavu';
+import { filter, switchMap, map } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 @Component({
@@ -57,6 +59,7 @@ ngOnInit() {
     if (this.foldek.length > 0) {
       const foldId = this.foldek[0].id;
       this.tervser.loadTervByFold(foldId);
+      
       this.tervek.push(this.tervser.tervek);
       this.tervmasol = this.tervek.map(x => ({
         ...x,
@@ -80,15 +83,36 @@ ngOnInit() {
     this.mutragyak = mutragya;
     console.log('mutragya:',this.mutragyak);
   });
+  this.tervser.loadVetomag().subscribe(vetomag => {
+    this.vetomagok = vetomag;
+    console.log('vetomag:',this.vetomagok);
+  });
+  this.terv$ = this.gazdaser.gazda$.pipe(
+    filter(g => !!g),
+    switchMap(g =>
+      this.foldser.getFoldida(g.id).pipe(
+        switchMap(folds => {
+          const calls = folds.map(f =>
+            this.tervser.loadterv(f.id)
+          );
+          return forkJoin(calls);
+        }),
+        map((tervekTombje: any[][]) => tervekTombje.flat())
+      )
+    )
+  );
   
-  this.terv$ = this.tervser.terv$;
+  /*
   this.terv$.subscribe(tervek => {
   tervek.forEach(terv => {
     if (this.mutrMap[terv.id] === undefined) {
       this.mutrMap[terv.id] = terv.kiv_mutrid != null && terv.kiv_mutrid !== 0;
-    }
+    } 
   });
+  
+  
 });
+*/
   
 }
 selectedTerv: any = null;
@@ -102,6 +126,7 @@ getFold(terv: any) {
   );
 }
 tervmasol: any[] = [];
+szurtterv:any[] = [];
 
 getossz(terv: any) {
   if (this.osszegMap[terv.id] !== undefined) {
@@ -158,8 +183,8 @@ getKivVetomag(terv: any) {
 }
 beavszuk:boolean = false;
 getnovinp(terv: any) {
-   const result = this.tpk.find(f => f.id === terv.kiv_vetoid, console.log(terv.kiv_vetoid)) ;
-   
+  const result = this.tpk.find(f => f.iad === terv.kiv_vetoid);
+  
   console.log('találat:', result.tpk);
   return result.tpk;
 }
@@ -189,17 +214,18 @@ getNoveny(terv: any) {
 }
 osszeg:number = 0;
 Vegosszeg(terv:any){
+  /*
   if (this.osszegMap[terv.id] && this.osszegMap[terv.id] !== 0) {
     return;
   }
-
+  */
   const tpk = parseInt(this.getnovinp(terv));
   const vetomagar =
     parseInt(terv.tomeg) *
-    tpk *
+    tpk * 
     this.getNoveny(terv).termar;
 
-  this.osszegMap[terv.id] = vetomagar;
+  //this.osszegMap[terv.id] = vetomagar;
     this.tervser.updateOsszeg(terv.id,vetomagar).subscribe(s=>{
     console.log(s);
     

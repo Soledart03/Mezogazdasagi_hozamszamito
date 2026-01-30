@@ -37,7 +37,7 @@
       name="selectedOption"
       required>
       <option [ngValue]="null">-- választás --</option>
-      <option *ngFor="let option of szurtmagok" [ngValue]="option.id">
+      <option *ngFor="let option of szurtmagok" [ngValue]="option.iad">
         {{ option.fajta }}
       </option>
     </select>
