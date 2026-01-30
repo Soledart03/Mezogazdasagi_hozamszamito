@@ -10,6 +10,11 @@
   [isMenu] = "true"
   (close)="closeMenu()">
 </app-loginform>
+<app-kiadasfelform
+  *ngIf="menu === 'kiadas'"
+  [isMenu] = "true"
+  (close)="closeMenu()">
+</app-kiadasfelform>
 <app-foldfelform
   *ngIf="menu === 'foldfelvisz'"
   [isMenu] = "true"

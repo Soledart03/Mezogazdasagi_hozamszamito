@@ -8,7 +8,7 @@ import { Component, signal } from '@angular/core';
 })
 export class App {
   protected readonly title = signal('Frontend');
-  menu: 'none'|'login'|'register'|'foldfelvisz'|'tervfelvisz' = 'none';
+  menu: 'none'|'login'|'register'|'foldfelvisz'|'tervfelvisz'|'kiadas' = 'none';
   openMenu(type:'login'|'register'|'foldfelvisz'){
     this.menu = type;
   }

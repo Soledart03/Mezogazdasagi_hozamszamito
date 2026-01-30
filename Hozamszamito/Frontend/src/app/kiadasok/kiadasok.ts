@@ -63,7 +63,9 @@ openEdit(fold: any) {
   this.selectedFold = { ...fold };
   this.editing = true;
 }
-
+openMenu(type: any){
+    this.app.openMenu(type);
+  }
 getHelyrazji(kiad:any){
   return this.foldek.find((f:any) => f.id === kiad.fold_id)
 
