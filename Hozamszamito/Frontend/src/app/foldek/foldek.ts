@@ -30,24 +30,32 @@ ngOnInit() {
   }) 
 }
 selectedFold: any = null;
+selectedFoldId: number | null = null;
+alertMessage: string | null = null;
+
+  showAlert(uzenet:string) {
+    this.alertMessage = uzenet;
+    setTimeout(() => this.alertMessage = null, 5000);
+  }
 
 openEdit(fold: any) {
-  
+  this.selectedFoldId = fold.id; 
   this.selectedFold = { ...fold };
-  this.editing = true;
 }
 delfold(fold: any) {
   this.foldser.deleteFold(fold.id);
-  this.foldser.loadFoldsByGazdaId(this.gazdaId);
-  window.alert("Föld törölve!")
+  this.showAlert('Föld törölve!');
 }
   save() {
-  this.foldser.updateFold(this.selectedFold);
-  this.editing = false;
+ if (this.selectedFold) {
+    this.foldser.updateFold(this.selectedFold);
+  }
+  this.selectedFoldId = null;
+  this.selectedFold = null;
 }
 cancel() {
-  this.editing = false;
-  this.foldser.loadFoldsByGazdaId(this.gazdaId);
+  this.selectedFoldId = null;
+  this.selectedFold = null;
 }
 openMenu(type: any){
     this.app.openMenu(type);
