@@ -224,3 +224,106 @@ img{
   background: #198754;
   border-radius: 2px;
 }
+
+.chat-container {
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  background: #fafafa;
+}
+
+
+.messages {
+  flex: 1;
+  padding: 16px 0 16px 16px; 
+  overflow-y: auto;
+  
+}
+
+.message.user {
+  max-width: none;
+  width: 100%;
+}
+
+.message.bot {
+  max-width: none;
+  width: 100%;
+}
+
+
+
+.messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+}
+
+.messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.message {
+  max-width: 75%;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  border-radius: 16px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.message.user {
+  margin-left: auto;
+  background: #d1f5d3;
+  border-bottom-right-radius: 4px;
+}
+
+.message.bot {
+  margin-right: auto;
+  background: #e9ecef;
+  border-bottom-left-radius: 4px;
+}
+
+.message.thinking {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+
+.input-area {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border-top: 1px solid #ddd;
+  background: white;
+}
+
+.input-area textarea {
+  flex: 1;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.input-area textarea:focus {
+  outline: none;
+  border-color: #28a745;
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.15);
+}
+
+.send-btn {
+  align-self: flex-end;
+  height: 42px;
+  padding: 0 20px;
+}

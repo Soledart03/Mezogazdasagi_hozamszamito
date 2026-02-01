@@ -58,4 +58,13 @@ export class Sugo {
     history += `User: ${latestUserMessage}\nAssistant:`;
     return history;
   }
+
+  handleEnter(event: KeyboardEvent) {
+  if (event.ctrlKey) {
+    this.sendMessage();
+    event.preventDefault();
+  }
 }
+
+}
+

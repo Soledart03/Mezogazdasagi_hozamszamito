@@ -1,27 +1,36 @@
-<h2 class="text-center">Kérj segítséget az AI súgórendszerünktől!</h2>
+<h2 class="text-center mb-3">
+  🤖 Kérj segítséget az AI súgórendszerünktől!
+</h2>
+
 <div class="chat-container">
   <div class="messages">
     <div
       *ngFor="let msg of messages"
-      [class.user]="msg.role === 'user'"
-      [class.bot]="msg.role === 'bot'"
+      class="message"
+      [ngClass]="msg.role"
     >
       {{ msg.text }}
     </div>
 
-    <div *ngIf="loading" class="bot">
-      Gondolkodom...
+    <div *ngIf="loading" class="message bot thinking">
+      Gondolkodom…
     </div>
   </div>
 
   <div class="input-area">
-    <input [(ngModel)]="userInput"
-      (keyup.enter)="sendMessage()"
+    <textarea
+      [(ngModel)]="userInput"
+      rows="3"
       placeholder="Mit szeretnél tudni?"
-    />
-    <button class="btn btn-success mt-auto w-40" (click)="sendMessage()">Küldés</button>
-    
+      (keydown.enter)="handleEnter($event)"
+    ></textarea>
+
+    <button
+      class="btn btn-success send-btn"
+      (click)="sendMessage()"
+    >
+      Küldés
+    </button>
   </div>
-  <br><br>
 </div>
 
