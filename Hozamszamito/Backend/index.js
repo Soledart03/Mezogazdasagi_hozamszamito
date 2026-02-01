@@ -37,7 +37,7 @@ app.post('/api/chat', async (req, res) => {
         messages: [
           {
             role: 'system',
-            content: "Egy mezőgazdászokat segítő, mezőgazdaságban profi chatbot vagy, illegális dogokat vagy káromkodást nem használhatsz soha"
+            content: "Egy mezőgazdászokat segítő, mezőgazdaságban profi chatbot vagy, illegális dogokat vagy káromkodást nem használhatsz soha. Mindig kötelezően magyarul beszélhetsz csak"
           },
           {
             role: 'user',
