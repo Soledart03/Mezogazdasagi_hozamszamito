@@ -258,11 +258,21 @@ app.get('/api/kiad/:id', async (req,res)=>{
     })
     
 })
+app.get('/api/kiad', async (req,res)=>{
+  db.query('SELECT id,datum,osszeg,tipus,leiras,fold_id FROM kiadas',(err,result)=>{
+      if(err) throw err;
+      //if(result.length == 0) throw err;
+      console.log(result);
+      res.json(result);
+
+  })
+  
+})
 app.post('/api/kiad', async (req, res) => {
     const {datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id} = req.body;
     
     db.query(
-    'INSERT INTO kiadas(datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id) VALUES(?,?,?,?,?,?,?)',
+    'INSERT INTO kiadas(datum,osszeg,tipus,leiras,fold_id) VALUES(?,?,?,?,?)',
     [datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id],
     (err, results) => {
     if (err) throw err;
@@ -272,10 +282,10 @@ app.post('/api/kiad', async (req, res) => {
    });
    app.put('/api/kiad/:id', (req, res) => {
  const id = req.params.id;
- const {datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id} = req.body;
+ const {datum,osszeg,tipus,leiras,fold_id} = req.body;
  db.query(
- 'UPDATE kiadas SET datum=?,osszeg=?,tipus=?,leiras=?,fold_id=?,noveny_id=?,inputanyag_id=? WHERE id=?',
- [datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id,id],
+ 'UPDATE kiadas SET datum=?,osszeg=?,tipus=?,leiras=?,fold_id=? WHERE id=?',
+ [datum,osszeg,tipus,leiras,fold_id,id],
  (err) => {
  if (err) throw err;
  res.json({ message: 'Kiadás frissült!' });

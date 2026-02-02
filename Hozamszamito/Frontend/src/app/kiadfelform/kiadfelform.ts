@@ -4,7 +4,7 @@ import { Kiadasservice } from '../kiadasservice';
 import { Foldservice } from '../foldservice';
 import { Observable } from 'rxjs';
 @Component({
-  selector: 'app-kiadfelform',
+  selector: 'app-kiadasfelform',
   standalone: false,
   templateUrl: './kiadfelform.html',
   styleUrl: './kiadfelform.css',
@@ -17,14 +17,30 @@ export class Kiadasfelform implements OnInit {
     private foldserv: Foldservice
   ) {}
   fold$!: Observable<any[]>;
-  
+  foldek: any[] = [];
+  kiadasok: any[] = [];
+
   gazdaId: number;
 
   ngOnInit() {
+    console.log('kiadfelform');
     this.gserv.gazda$.subscribe(gazda => {
       this.gazdaId = gazda?.id ?? null;
     });
-    this.fold$ = this.foldserv.fold$;
+    this.foldserv.fold$.subscribe(folds => {
+      this.foldek = folds;
+
+      if (this.foldek.length === 0) return;
+
+      /** 4️⃣ fold ID lista */
+      const foldIds = this.foldek.map(f => f.id);
+
+      /** 5️⃣ backend szűrt kiadások */
+      this.kiadasser.loadKiadasByFoldIds(foldIds);
+    });
+    this.kiadasser.kiadas$.subscribe(list => {
+      this.kiadasok = list;
+    });
   }
 
   ujKiadas = {
@@ -32,26 +48,27 @@ export class Kiadasfelform implements OnInit {
     osszeg: null,
     tipus: '',
     leiras: '',
-    fold_id: null,
-    noveny_id: null,
-    inputanyag_id: null
+    fold_id: null
   };
 
   kiadasHozzaad() {
     console.log('MENTÉS ELŐTT:', this.ujKiadas);
-    this.kiadasser.addKiadas(this.ujKiadas);
+    this.kiadasser.addKiadas(this.ujKiadas).subscribe(() => {
 
-    this.ujKiadas = {
-      datum: '',
-      osszeg: null,
-      tipus: '',
-      leiras: '',
-      fold_id: null,
-      noveny_id: null,
-      inputanyag_id: null
-    };
-
-    this.closeMenu();
+      const foldIds = this.foldserv.getFold().map(f => f.id);
+  
+      this.kiadasser.loadKiadasByFoldIds(foldIds);
+  
+    });
+      
+      this.ujKiadas = {
+        datum: '',
+        osszeg: null,
+        tipus: '',
+        leiras: '',
+        fold_id: null
+      };
+      this.closeMenu();
   }
 
   @Input() IsMenu: boolean = false;

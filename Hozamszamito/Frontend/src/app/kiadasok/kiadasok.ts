@@ -24,7 +24,7 @@ export class Kiadasok implements OnInit{
   ngOnInit(){
     this.kiadasoks$ = this.kiadser.kiadas$;
     
-  this.gazdaser.gazda$.subscribe(gazda => {
+    this.gazdaser.gazda$.subscribe(gazda => {
     this.gazdaId = gazda?.id ?? 0;
 
     if (this.gazdaId !== 0) {
@@ -43,12 +43,12 @@ export class Kiadasok implements OnInit{
     this.foldek = folds;
     console.log('folds:', this.foldek);
     if (this.foldek.length > 0) {
-      const foldId = this.foldek[0].id;
-      this.kiadser.loadKiadasByFold(foldId);
+      //const foldId = this.foldek[0].id;
+      this.kiadser.loadKiadasByFold();
       
     }
   });
-
+  
 
 
   console.log(this.gazdaId);
@@ -56,21 +56,14 @@ export class Kiadasok implements OnInit{
   console.log(this.foldek);
   }
 
-selectedFold: any = null;
 
-openEdit(fold: any) {
-  
-  this.selectedFold = { ...fold };
-  this.editing = true;
-}
-openMenu(type: any){
-    this.app.openMenu(type);
-  }
 getHelyrazji(kiad:any){
   return this.foldek.find((f:any) => f.id === kiad.fold_id)
 
 }
 
-
+openMenu(type: any){
+  this.app.openMenu(type);
+}
 
 }

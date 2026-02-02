@@ -3,13 +3,41 @@
     <h2 class="popup-title">Kiadás felvitel</h2>
 
     <form (ngSubmit)="kiadasHozzaad()" class="popup-form">
-
+      <label class="form-label text-center">Válasszon földet</label>
+      <select
+        [(ngModel)]="ujKiadas.fold_id"
+        name="fold_id"
+        required
+      >
+        
+        <option *ngFor="let f of fold$ | async" [value]="f.id">
+          {{ f.helyrajzi_szam }}
+        </option>
+      </select>
+      <label class="form-label text-center">Válasszon időpontot</label>
       <input
         type="date"
         [(ngModel)]="ujKiadas.datum"
         name="datum"
         required
       />
+      <label class="form-label text-center">Válasszon kiadás típust</label>
+
+      <input
+      [(ngModel)]="ujKiadas.tipus"
+      name="tipus"
+      placeholder="Típus (pl. munka, anyag)"
+      required
+    />
+    <label class="form-label text-center">Írjon rövid leírást a kiadásról</label>
+
+    <textarea
+        [(ngModel)]="ujKiadas.leiras"
+        name="leiras"
+        placeholder="Leírás"
+        rows="3"
+      ></textarea>
+      <label class="form-label text-center">Válasszon adja meg az elköltött összeget</label>
 
       <input
         type="number"
@@ -19,32 +47,6 @@
         required
       />
 
-      <input
-        [(ngModel)]="ujKiadas.tipus"
-        name="tipus"
-        placeholder="Típus (pl. munka, anyag)"
-        required
-      />
-
-      <textarea
-        [(ngModel)]="ujKiadas.leiras"
-        name="leiras"
-        placeholder="Leírás"
-        rows="3"
-      ></textarea>
-
-      <select
-        [(ngModel)]="ujKiadas.fold_id"
-        name="fold_id"
-        required
-      >
-        <option value="" disabled selected>Válassz földet</option>
-        <option *ngFor="let f of fold$ | async" [value]="f.id">
-          {{ f.helyrajzi_szam }}
-        </option>
-      </select>
-
-      
 
       <button type="submit" class="btn-primary">
         Felvitel

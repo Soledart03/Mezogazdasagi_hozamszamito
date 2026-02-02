@@ -2,56 +2,64 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
-const kiadas_key = 'kiadaslista';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class Kiadasservice {
-
+  private readonly kiadas_key = 'kiadaslista';
   constructor(private http:HttpClient){}
   private kiadasSubject = new BehaviorSubject<any[]>(this.loadFromStorage());
   kiadas$ = this.kiadasSubject.asObservable();
-  loadKiadasByFold(foldID: number) {
-      this.http.get<any[]>(`http://localhost:3000/api/kiad/${foldID}`).subscribe(kiadass => {
-          this.kiadasSubject.next(kiadass); 
-          console.log('kiadás:',kiadass);
-        });
-      }
+  loadKiadasByFold() {
+    this.http
+      .get<any[]>(`http://localhost:3000/api/kiad`)
+      .subscribe(kiadass => {
+        this.kiadasSubject.next(kiadass);
+        localStorage.setItem(this.kiadas_key, JSON.stringify(kiadass));
+        console.log('kiadás (GET):', kiadass);
+      });
+  }
+  loadKiadasByFoldIds(foldIds: number[]) {
+    this.http
+      .post<any[]>('http://localhost:3000/api/kiad/foldlist', { foldIds })
+      .subscribe(kiadasok => {
+        this.kiadasSubject.next(kiadasok);
+        localStorage.setItem(this.kiadas_key, JSON.stringify(kiadasok));
+      });
+  }
 
     
 
 
 
-  private loadFromStorage() {
-    const data = localStorage.getItem(kiadas_key);
-    return data ? JSON.parse(data) : null;
-  }
+      private loadFromStorage(): any[] {
+        const data = localStorage.getItem(this.kiadas_key);
+        return data ? JSON.parse(data) : [];
+      }
+      
 
   setKiadások(list: any[]) {
     this.kiadasSubject.next(list);
   }
-
+  /*
   
-  addKiadas(kiadas: {
-    datum: string;
-    osszeg: number;
-    tipus: string;
-    leiras: string;
-    fold_id: number;
-    noveny_id?: number | null;
-    inputanyag_id?: number | null;
-  }) {
-    this.http.post<any>('http://localhost:3000/api/kiad', kiadas)
+  addKiad(kiad: any) {
+    this.http.post<any>('http://localhost:3000/api/kiad', kiad)
       .subscribe({
         next: newKiadas => {
           const current = this.kiadasSubject.value;
           this.kiadasSubject.next([...current, newKiadas]);
-          window.alert('Kiadás hozzáadva!');
         },
         error: err => console.error(err)
       });
   }
+*/
+addKiadas(kiadas: any) {
+  return this.http.post('http://localhost:3000/api/kiad', kiadas);
+}
+ 
 
 
   

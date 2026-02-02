@@ -62,7 +62,7 @@ updateFold(fold: any) {
         error: err => console.error(err)
       });
   }
-  getFold() {
+  getFold(): any[] {
     return this.foldSubject.value;
   }
 
