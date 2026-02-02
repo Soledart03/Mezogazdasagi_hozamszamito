@@ -249,7 +249,7 @@ app.get('/api/inp_m', async (req,res)=>{
 //kiadás kezelők
 app.get('/api/kiad/:id', async (req,res)=>{
     const id = req.params.id;
-    db.query('SELECT id,datum,osszeg,tipus,leiras,fold_id,noveny_id,inputanyag_id FROM kiadas WHERE fold_id=?',[id],(err,result)=>{
+    db.query('SELECT id,datum,osszeg,tipus,leiras,fold_id FROM kiadas WHERE fold_id=?',[id],(err,result)=>{
         if(err) throw err;
         //if(result.length == 0) throw err;
         console.log(result);
