@@ -9,7 +9,7 @@ import { Component, signal } from '@angular/core';
 export class App {
   protected readonly title = signal('Frontend');
   menu: 'none'|'login'|'register'|'foldfelvisz'|'tervfelvisz'|'kiadas' = 'none';
-  openMenu(type:'login'|'register'|'foldfelvisz'){
+  openMenu(type:'login'|'register'|'foldfelvisz'|'kiadas'){
     this.menu = type;
   }
   closeMenu(){
