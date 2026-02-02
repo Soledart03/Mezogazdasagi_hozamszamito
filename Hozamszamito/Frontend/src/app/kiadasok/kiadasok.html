@@ -1,22 +1,21 @@
 <div *ngFor="let x of kiadasoks$ | async" class="card shadow-sm mb-4 kiadas-card">
   <div class="card-body text-center">
 
-    <!-- Helyrajzi szám -->
+   
     <h5 class="fw-bold mb-2">
       Helyrajzi szám: {{ getHelyrazji(x).helyrajzi_szam }}
     </h5>
 
-    <!-- Típus + dátum -->
     <div class="text-muted mb-3">
       {{ x.tipus }} · 📅 {{ x.datum.split('T')[0] }}
     </div>
 
-    <!-- Leírás -->
+    
     <p class="kiadas-leiras mb-3">
       {{ x.leiras }}
     </p>
 
-    <!-- Összeg -->
+    
     <div class="osszeg">
       {{ x.osszeg }} Ft
     </div>
