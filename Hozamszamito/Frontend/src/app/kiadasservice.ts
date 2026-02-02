@@ -21,13 +21,23 @@ export class Kiadasservice {
         console.log('kiadás (GET):', kiadass);
       });
   }
+  
   loadKiadasByFoldIds(foldIds: number[]) {
-    this.http
-      .post<any[]>('http://localhost:3000/api/kiad/foldlist', { foldIds })
-      .subscribe(kiadasok => {
-        this.kiadasSubject.next(kiadasok);
-        localStorage.setItem(this.kiadas_key, JSON.stringify(kiadasok));
-      });
+    if (!foldIds.length) return;
+
+  // Betöltjük az összes kiadást
+  this.http.get<any[]>('http://localhost:3000/api/kiad').subscribe({
+    next: (data) => {
+      // Frontenden szűrjük csak a kívánt fold_id-ket
+      const szurt = data.filter(k => foldIds.includes(Number(k.fold_id)));
+      console.log('szűrt123 kiadások:', szurt);
+      this.kiadasSubject.next(szurt ?? []);
+    },
+    error: (err) => {
+      console.error('Kiadások betöltése hiba:', err);
+      this.kiadasSubject.next([]);
+    }
+  });
   }
 
     

@@ -28,15 +28,15 @@ export class Kiadasfelform implements OnInit {
       this.gazdaId = gazda?.id ?? null;
     });
     this.foldserv.fold$.subscribe(folds => {
+      this.fold$ = this.foldserv.fold$;
       this.foldek = folds;
 
       if (this.foldek.length === 0) return;
-
-      /** 4️⃣ fold ID lista */
+      /*
       const foldIds = this.foldek.map(f => f.id);
 
-      /** 5️⃣ backend szűrt kiadások */
       this.kiadasser.loadKiadasByFoldIds(foldIds);
+      */
     });
     this.kiadasser.kiadas$.subscribe(list => {
       this.kiadasok = list;
@@ -56,12 +56,10 @@ export class Kiadasfelform implements OnInit {
     this.kiadasser.addKiadas(this.ujKiadas).subscribe(() => {
 
       const foldIds = this.foldserv.getFold().map(f => f.id);
-  
+      /*
       this.kiadasser.loadKiadasByFoldIds(foldIds);
-  
-    });
-      
-      this.ujKiadas = {
+      */
+       this.ujKiadas = {
         datum: '',
         osszeg: null,
         tipus: '',
@@ -69,6 +67,9 @@ export class Kiadasfelform implements OnInit {
         fold_id: null
       };
       this.closeMenu();
+    }); 
+      
+     
   }
 
   @Input() IsMenu: boolean = false;
