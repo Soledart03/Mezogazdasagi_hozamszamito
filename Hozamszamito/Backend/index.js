@@ -106,11 +106,9 @@ app.post('/api/log', async (req,res)=>{
             
             res.json({success:true,id:results[0].id});
         });
-    
-        
     })
-    
 });
+
 app.get('/api/gfold/:id',(req,res)=>{
     db.query('SELECT * FROM fold WHERE fold.gazda_id = ?;',[req.params.id],(err,result)=>{
         if(err) throw err;

@@ -4,13 +4,7 @@
 
 <div class="chat-container">
   <div class="messages">
-    <div
-      *ngFor="let msg of messages"
-      class="message"
-      [ngClass]="msg.role"
-    >
-      {{ msg.text }}
-    </div>
+    <div *ngFor="let msg of messages" class="message" [ngClass]="msg.role">{{ msg.text }}</div>
 
     <div *ngIf="loading" class="message bot thinking">
       Gondolkodom…
@@ -18,17 +12,9 @@
   </div>
 
   <div class="input-area">
-    <textarea
-      [(ngModel)]="userInput"
-      rows="3"
-      placeholder="Mit szeretnél tudni?"
-      (keydown.enter)="handleEnter($event)"
-    ></textarea>
+    <textarea [(ngModel)]="userInput" rows="3" placeholder="Mit szeretnél tudni?" (keydown.enter)="handleEnter($event)"></textarea>
 
-    <button
-      class="btn btn-success send-btn"
-      (click)="sendMessage()"
-    >
+    <button class="btn btn-success send-btn" (click)="sendMessage()">
       Küldés
     </button>
   </div>
