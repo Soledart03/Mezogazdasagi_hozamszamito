@@ -39,7 +39,7 @@ test('DELETE /api/terv/:id működik', async () => {
       cb(null, [{ id: 1, nnev: 'Búza', kep: 'buza.jpg' }]);
     });
 
-    const res = await request(app).get('/api/noveny');
+    const res = await request(app).get('/api/noveny');  
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toEqual([{ id: 1, nnev: 'Búza', kep: 'buza.jpg' }]);
