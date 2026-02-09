@@ -38,14 +38,14 @@ export class Kiadasok implements OnInit{
     this.foldek = folds ?? [];
     console.log('folds:', this.foldek);
 
-    // Ha vannak földek, hívjuk a service metódust a kiadások szűrésére
+  
     if (this.foldek.length > 0) {
       const foldIds = this.foldek.map(f => Number(f.id));
-      this.kiadser.loadKiadasByFoldIds(foldIds); // 🔹 Itt hívjuk a metódust
+      this.kiadser.loadKiadasByFoldIds(foldIds); 
     }
   });
 
-  // 3️⃣ Feliratkozunk a kiadásokra
+ 
   this.kiadser.kiadas$.subscribe(list => {
     this.kiadasok = list ?? [];
     console.log('szűrt kiadások:', this.kiadasok);
@@ -63,7 +63,10 @@ getHelyrazji(kiad:any){
   return this.foldek.find((f:any) => f.id === kiad.fold_id)
 
 }
-
+delKiadas(kiadas: any) {
+  this.kiadser.deleteKiadas(kiadas.id);
+  window.alert("Kiadás törölve!")
+}
 openMenu(type: any){
   this.app.openMenu(type);
 }
