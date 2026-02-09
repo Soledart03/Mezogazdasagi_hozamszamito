@@ -10,7 +10,7 @@
     private tervSubject = new BehaviorSubject<any[]>(this.loadFromStorage());
     terv$ = this.tervSubject.asObservable();
     tervek: any[] = [];
-    loadTervByFold(foldID: number) {
+    loadTervByFold() {
       this.http.get<any[]>(`http://localhost:3000/api/tervs`).subscribe(tervs => {
           this.tervSubject.next(tervs); 
           this.tervek.push(tervs);
@@ -56,6 +56,16 @@
           const current = this.tervSubject.value;
           this.tervSubject.next([...current, ujterv]);
           window.alert("Terv hozzáadva!")
+        },
+        error: err => console.error(err)
+      });
+  }
+  deleteFold(id: number) {  
+    this.http.delete(`http://localhost:3000/api/terv/${id}`)
+      .subscribe({
+        next: () => {
+          const updated = this.tervSubject.value.filter(f => f.id !== id);
+          this.tervSubject.next(updated);
         },
         error: err => console.error(err)
       });

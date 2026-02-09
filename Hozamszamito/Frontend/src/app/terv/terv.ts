@@ -58,7 +58,7 @@ ngOnInit() {
     console.log('folds:', this.foldek);
     if (this.foldek.length > 0) {
       const foldId = this.foldek[0].id;
-      this.tervser.loadTervByFold(foldId);
+      this.tervser.loadTervByFold();
       
       this.tervek.push(this.tervser.tervek);
       this.tervmasol = this.tervek.map(x => ({
@@ -101,6 +101,7 @@ ngOnInit() {
       )
     )
   );
+  this.tervser.terv$ = this.terv$;
   
   /*
   this.terv$.subscribe(tervek => {
@@ -288,7 +289,9 @@ doc.setFont('DejaVu');
   }
 
   
-    
+  var mutrtomeg = mutragya?.fajta.split(" ").slice(-1)[0].slice(0,2);
+  
+  console.log(mutrtomeg);
   autoTable(doc, {
     startY: y + 5,
     head: [['Tétel', 'Mennyiség', 'Egységár (Ft)', 'Összeg (Ft)']],
@@ -301,9 +304,10 @@ doc.setFont('DejaVu');
       ],
       mutragya ? [
         'Műtrágya',
-        mutragya?.fajta.split(" ").slice(-1),
+        //mutragya?.fajta.split(" ").slice(-1),
+        mutrtomeg + 'kg',
         mutragya.ar,
-        (mutragya.tomeg * mutragya.ar).toLocaleString()
+        (mutrtomeg * mutragya.ar).toLocaleString()
       ] : []
     ].filter(r => r.length),
     styles: {
@@ -321,7 +325,7 @@ doc.setFont('DejaVu');
   doc.setFontSize(12);
   doc.setFont(undefined, 'bold');
   doc.text(
-    `Összes költség: ${terv.osszeg?.toLocaleString() ?? '---'} Ft`,
+    `Összes költség: ${terv.osszeg.toLocaleString()} Ft`,
     10,
     finalY
   );
@@ -338,7 +342,7 @@ fetch(kepUrl)
       reader.readAsDataURL(blob);
     }))
     .then(base64 => {
-      doc.addImage(base64, 'PNG', 110, 7, 100, 100);
+      doc.addImage(base64, 'PNG', 125, 15, 75, 75);
       doc.save(fileName); 
     })
 }
@@ -348,13 +352,12 @@ openEdit(terv: any) {
   this.selectedTerv = { ...terv };
   this.editing = true;
 }
-/*
+
 delTerv(terv: any) {
-  this.tervser.deleteTerv(terv.id);
-  this.tervser.loadTervByFold(this.gazdaId);
+  this.tervser.deleteFold(terv.id);
   window.alert("Tervezet törölve!")
 }
-
+/*
   save() {
   this.tervser.updateTerv(this.selectedTerv);
   this.editing = false;

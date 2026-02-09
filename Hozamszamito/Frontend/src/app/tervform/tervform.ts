@@ -41,7 +41,7 @@ export class Tervform implements OnInit {
     console.log('folds:', this.foldek);
     if (this.foldek.length > 0) {
       const foldId = this.foldek[0].id;
-      this.tervserv.loadTervByFold(foldId);
+      this.tervserv.loadTervByFold();
       console.log(foldId);
     }
   });

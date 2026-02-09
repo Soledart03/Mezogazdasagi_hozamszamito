@@ -40,7 +40,16 @@ export class Kiadasservice {
   });
   }
 
-    
+    deleteKiadas(id: number) {  
+      this.http.delete(`http://localhost:3000/api/kiad/${id}`)
+        .subscribe({
+          next: () => {
+            const updated = this.kiadasSubject.value.filter(f => f.id !== id);
+            this.kiadasSubject.next(updated);
+          },
+          error: err => console.error(err)
+        });
+    }
 
 
 
