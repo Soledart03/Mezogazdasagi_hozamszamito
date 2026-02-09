@@ -17,7 +17,9 @@ describe('Terv', () => {
   const tervServiceMock = {
     terv$: of([]),
     loadNoveny: () => of([]),
+    loadnovinp: () => of([]),
     loadConnNovinp: () => of([]),
+    loadVetomag: () => of([]),
     loadMutragya: () => of([])
   };
 

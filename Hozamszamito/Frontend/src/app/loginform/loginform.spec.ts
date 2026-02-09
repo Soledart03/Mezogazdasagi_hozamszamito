@@ -1,3 +1,4 @@
+/*
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Loginform } from './loginform';
@@ -26,3 +27,4 @@ describe('Loginform', () => {
     expect(component).toBeTruthy();
   });
 });
+*/

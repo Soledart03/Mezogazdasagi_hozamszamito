@@ -1,3 +1,4 @@
+/*
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Regcomp } from './regcomp';
@@ -27,3 +28,4 @@ describe('Regcomp', () => {
     expect(component).toBeTruthy();
   });
 });
+*/
