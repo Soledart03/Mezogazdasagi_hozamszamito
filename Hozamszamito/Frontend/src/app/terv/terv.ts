@@ -288,7 +288,9 @@ doc.setFont('DejaVu');
   }
 
   
-    
+  var mutrtomeg = mutragya?.fajta.split(" ").slice(-1)[0].slice(0,2);
+  
+  console.log(mutrtomeg);
   autoTable(doc, {
     startY: y + 5,
     head: [['Tétel', 'Mennyiség', 'Egységár (Ft)', 'Összeg (Ft)']],
@@ -301,9 +303,10 @@ doc.setFont('DejaVu');
       ],
       mutragya ? [
         'Műtrágya',
-        mutragya?.fajta.split(" ").slice(-1),
+        //mutragya?.fajta.split(" ").slice(-1),
+        mutrtomeg + 'kg',
         mutragya.ar,
-        (mutragya.tomeg * mutragya.ar).toLocaleString()
+        (mutrtomeg * mutragya.ar).toLocaleString()
       ] : []
     ].filter(r => r.length),
     styles: {
@@ -321,7 +324,7 @@ doc.setFont('DejaVu');
   doc.setFontSize(12);
   doc.setFont(undefined, 'bold');
   doc.text(
-    `Összes költség: ${terv.osszeg?.toLocaleString() ?? '---'} Ft`,
+    `Összes költség: ${terv.osszeg.toLocaleString()} Ft`,
     10,
     finalY
   );
@@ -338,7 +341,7 @@ fetch(kepUrl)
       reader.readAsDataURL(blob);
     }))
     .then(base64 => {
-      doc.addImage(base64, 'PNG', 110, 7, 100, 100);
+      doc.addImage(base64, 'PNG', 125, 15, 75, 75);
       doc.save(fileName); 
     })
 }
