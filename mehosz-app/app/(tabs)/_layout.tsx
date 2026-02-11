@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-
+import AntDesign from '@expo/vector-icons/AntDesign';
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
@@ -27,7 +27,21 @@ export default function TabLayout() {
         name="fold"
         options={{
           title: 'Földek',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          tabBarIcon: ({ color }) => <AntDesign size={28} name="table" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="kiad"
+        options={{
+          title: 'Kiadás',
+          tabBarIcon: ({ color }) => <AntDesign size={28} name="dollar" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="terv"
+        options={{
+          title: 'Tervek',
+          tabBarIcon: ({ color }) => <AntDesign size={28} name="schedule" color={color} />,
         }}
       />
     </Tabs>
