@@ -1,98 +1,160 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { Image as ExpoImage } from 'expo-image';
+import React from "react";
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.content}>
+        
+        
+        <Text style={styles.title}>MEHOSZ</Text>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+       
+        <Text style={styles.title2}>
+          Kezelje növényeit,{"\n"}
+          maximalizálja nyereségét
+        </Text>
+
+       
+        <Text style={styles.description}>
+          A MEHOSZ segít kiszámítani a következő év nyereségét az összes
+          birtokodban lévő földön, figyelembe véve a rá fordított költségeket.
+          Segítséget nyújt a hazai gazdáknak a megfelelő terv létrehozásával.
+          Minden, amire szüksége van az adatalapú döntésekhez.
+        </Text>
+
+        <View style={styles.statsContainer}>
+          <View>
+            <Text style={styles.statNumber}>10</Text>
+            <Text style={styles.statLabel}>Termőföld</Text>
+          </View>
+
+          <View>
+            <Text style={styles.statNumber}>25%+</Text>
+            <Text style={styles.statLabel}>Átl. nyereségnövekedés</Text>
+          </View>
+        </View>
+
+       
+        
+          <ExpoImage
+           source={require('../../assets/images/logo.jpeg')}
+           style={{ width: 350, height: 350, alignSelf: "center", marginBottom: 20 }}
+    
+           />
+        
+          
+          
+
+           
+        
+
+        
+
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#E8F1EC",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  content: {
+    padding: 20,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  badge: {
+    alignSelf: "flex-start",
+    backgroundColor: "#D8EADF",
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 20,
+    marginBottom: 20,
+  },
+  badgeText: {
+    color: "#1E6B45",
+    fontSize: 13,
+    fontWeight: "500",
+  },
+  title: {
+    fontSize: 30,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#1F1F1F",
+    marginBottom: 16,
+    marginTop: 25
+  },
+  title2: {
+    fontSize: 30,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#1F1F1F",
+    marginBottom: 16,
+  },
+  description: {
+    fontSize: 15,
+    color: "#555",
+    lineHeight: 22,
+    marginBottom: 24,
+  },
+  statsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 30,
+  },
+  statNumber: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#1E6B45",
+  },
+  statLabel: {
+    fontSize: 14,
+    color: "#555",
+    marginTop: 4,
+  },
+  card: {
+    backgroundColor: "#F3F5F4",
+    borderRadius: 20,
+    padding: 30,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 4,
+  },
+   image: {
+    flex: 1,
+    width: '100%'
+    
+  },
+  circle: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: "#2F8F4E",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  circleIcon: {
+    fontSize: 50,
+  },
+  cardTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#2F8F4E",
+  },
+  cardSubtitle: {
+    fontSize: 16,
+    color: "#333",
+    marginTop: 6,
   },
 });
