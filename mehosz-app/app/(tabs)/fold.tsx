@@ -33,11 +33,10 @@ export default function GazdaFoldPage() {
         const userId = await AsyncStorage.getItem("userId");
         if (!userId) throw new Error("Nincs userId");
 
-        // Gazda adatok lekérése
         const gazdaRes = await api.get(`/api/gazda/${userId}`);
-        setGazda(gazdaRes.data[0]); // feltételezve, hogy 1 elem
+        setGazda(gazdaRes.data[0]); 
 
-        // Fold adatok lekérése
+        
         const foldRes = await api.get(`/api/gfold/${userId}`);
         setFoldek(foldRes.data);
 
