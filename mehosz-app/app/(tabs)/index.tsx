@@ -1,28 +1,84 @@
 import { Image as ExpoImage } from 'expo-image';
-import React from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
+import { TouchableOpacity } from "react-native";
+
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
+  ActivityIndicator,
 } from "react-native";
+import { api } from "../../services/api";
+
+type Gazda = {
+  id: number;
+  nev: string;
+  email: string;
+};
 
 export default function HomeScreen() {
+  const router = useRouter();
+  const [gazda, setGazda] = useState<Gazda | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const logout = async () => {
+    await AsyncStorage.removeItem("gazda_id");
+    router.replace("/login");
+  };
+
+  useEffect(() => {
+    const fetchGazda = async () => {
+      try {
+        const userId = await AsyncStorage.getItem("gazda_id");
+        if (!userId) throw new Error("Nincs gazda_id");
+
+        const res = await api.get(`/api/gazda/${userId}`);
+        setGazda(res.data[0]); // feltételezzük, hogy a backend tömböt ad vissza
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+        setLoading(false);
+      }
+    };
+
+    fetchGazda();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color="#2F8F4E" />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         
+      <TouchableOpacity onPress={logout} style={styles.logoutButton}>
+          <Text style={styles.logoutText}>Kijelentkezés</Text>
+        </TouchableOpacity>
+        {gazda && (
+          <View style={[styles.card, { marginBottom: 20 }]}>
+            
+            <Text style={styles.cardSubtitle}>Üdv, {gazda.nev}</Text>
+            
+          </View>
+        )}
         
+
         <Text style={styles.title}>MEHOSZ</Text>
 
-       
         <Text style={styles.title2}>
           Kezelje növényeit,{"\n"}
           maximalizálja nyereségét
         </Text>
 
-       
         <Text style={styles.description}>
           A MEHOSZ segít kiszámítani a következő év nyereségét az összes
           birtokodban lévő földön, figyelembe véve a rá fordított költségeket.
@@ -42,22 +98,10 @@ export default function HomeScreen() {
           </View>
         </View>
 
-       
-        
-          <ExpoImage
-           source={require('../../assets/images/logo.jpeg')}
-           style={{ width: 350, height: 350, alignSelf: "center", marginBottom: 20 }}
-    
-           />
-        
-          
-          
-
-           
-        
-
-        
-
+        <ExpoImage
+          source={require('../../assets/images/logo.jpeg')}
+          style={{ width: 350, height: 350, alignSelf: "center", marginBottom: 20 }}
+        />
       </ScrollView>
     </SafeAreaView>
   );
@@ -71,18 +115,17 @@ const styles = StyleSheet.create({
   content: {
     padding: 20,
   },
-  badge: {
-    alignSelf: "flex-start",
-    backgroundColor: "#D8EADF",
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 20,
+  logoutButton: {
+    backgroundColor: "#c0392b",
+    padding: 10,
+    borderRadius: 8,
+    alignSelf: "flex-end",
     marginBottom: 20,
+    marginTop: 30
   },
-  badgeText: {
-    color: "#1E6B45",
-    fontSize: 13,
-    fontWeight: "500",
+  logoutText: {
+    color: "white",
+    fontWeight: "bold",
   },
   title: {
     fontSize: 30,
@@ -90,7 +133,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#1F1F1F",
     marginBottom: 16,
-    marginTop: 25
+    marginTop: 25,
   },
   title2: {
     fontSize: 30,
@@ -130,23 +173,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 4,
   },
-   image: {
-    flex: 1,
-    width: '100%'
-    
-  },
-  circle: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: "#2F8F4E",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  circleIcon: {
-    fontSize: 50,
-  },
   cardTitle: {
     fontSize: 24,
     fontWeight: "bold",
@@ -156,5 +182,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#333",
     marginTop: 6,
+    
+  },
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

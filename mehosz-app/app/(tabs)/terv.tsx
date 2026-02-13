@@ -1,82 +1,131 @@
 import { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { api } from "@/services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import{api} from "../../services/api";
+
 type Fold = {
   id: number;
   helyrajzi_szam: string;
   terulet: number;
   muvelesi_ag: string;
-  elozo_evi_hasznositas: string;
 };
 
-type Gazda = {
+type NovInp = {
   id: number;
-  nev: string;
-  email: string;
+  nnev: string;
+  tpk: number;
+  iad: number;
+  inev: string;
+  ar: number;
+  fajta: string;
 };
 
-export default function GazdaFoldPage() {
-  const [gazda, setGazda] = useState<Gazda | null>(null);
+type Terv = {
+  id: number;
+  fold_id: number;
+  noveny_id: number;
+  kiv_vetoid: number;
+  kiv_mutrid: number;
+  vetes_idopont: string;
+  tomeg: number;
+  osszeg: number;
+};
+
+export default function Tervek() {
   const [foldek, setFoldek] = useState<Fold[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [novinp, setNovinp] = useState<NovInp[]>([]);
+  const [tervek, setTervek] = useState<Terv[]>([]);
+  const [gazdaId, setGazdaId] = useState<number | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userId = await AsyncStorage.getItem("userId");
-        if (!userId) throw new Error("Nincs userId");
+    const loadData = async () => {
+      const id = await AsyncStorage.getItem("gazda_id");
+      if (!id) return;
 
-        const gazdaRes = await api.get(`/api/gazda/${userId}`);
-        setGazda(gazdaRes.data[0]); 
+      setGazdaId(Number(id));
 
-        
-        const foldRes = await api.get(`/api/gfold/${userId}`);
-        setFoldek(foldRes.data);
+      // Földek betöltése
+      const foldRes = await api.get(`/api/gfold/${id}`);
+      setFoldek(foldRes.data);
 
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-        setLoading(false);
-      }
+      // Növények betöltése
+      const novRes = await api.get("/api/novinp");
+      setNovinp(novRes.data);
+
+      // Tervek betöltése minden földhöz
+      const tervPromises = foldRes.data.map((fold: Fold) =>
+        api.get(`/api/terv/${fold.id}`)
+      );
+      const tervResults = await Promise.all(tervPromises);
+      const mergedTervek: Terv[] = tervResults.flatMap((res) => res.data);
+      setTervek(mergedTervek);
+      console.log("Földek:", foldRes.data);
+console.log("Növények:", novRes.data);
+console.log("Tervek:", mergedTervek);
+
     };
 
-    fetchData();
+    loadData();
   }, []);
 
-  if (loading) {
+  if (!gazdaId) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color="#2F8F4E" />
+        <Text>Nincs bejelentkezve gazda.</Text>
       </View>
     );
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {gazda && (
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Gazda adatok</Text>
-          <Text>Név: {gazda.nev}</Text>
-          <Text>Email: {gazda.email}</Text>
-        </View>
-      )}
+    <ScrollView style={styles.container}>
+      {foldek.map((fold) => {
+        // Csak az adott földhöz tartozó tervsorok
+        const foldTervek = tervek.filter((t) => t.fold_id === fold.id);
 
-      {foldek.map((fold) => (
-        <View key={fold.id} style={styles.card}>
-          <Text style={styles.cardTitle}>Föld adatok</Text>
-          <Text>Helyrajzi szám: {fold.helyrajzi_szam}</Text>
-          <Text>Terület: {fold.terulet}</Text>
-          <Text>Művelési ág: {fold.muvelesi_ag}</Text>
-          <Text>Előző évi hasznosítás: {fold.elozo_evi_hasznositas}</Text>
-        </View>
-      ))}
+        if (foldTervek.length === 0) {
+          // Ha nincs terv, ne jelenítsen meg semmit a növényekből
+          return null;
+        }
+
+        return (
+          <View key={fold.id} style={styles.card}>
+            <Text style={styles.title}>
+              Helyrajzi szám: {fold.helyrajzi_szam}
+            </Text>
+            <Text style={styles.row}>Terület: {fold.terulet} ha</Text>
+            <Text style={styles.row}>Művelési ág: {fold.muvelesi_ag}</Text>
+
+            <View style={styles.divider} />
+
+            {foldTervek.map((t) => {
+  // Növény név keresése novenyt_id alapján
+  const nov = novinp.find(n => Number(n.id) === Number(t.noveny_id));
+
+  return (
+    <View key={t.id} style={{ marginBottom: 10 }}>
+      <Text style={styles.subTitle}>
+        Növény: {nov ? nov.nnev : "Név nem elérhető"}
+      </Text>
+      {nov && (
+        <>
+          <Text>Input anyag: {nov.inev}</Text>
+          <Text>Fajta: {nov.fajta}</Text>
+          <Text>Ár: {nov.ar} Ft</Text>
+          <Text>Termés/kg: {nov.tpk}</Text>
+        </>
+      )}
+      
+      <Text>Vetés időpont: {new Date(t.vetes_idopont).toLocaleDateString()}</Text>
+      
+      <Text>Tömeg: {t.tomeg}</Text>
+      <Text>Összeg: {t.osszeg} Ft</Text>
+    </View>
+  );
+})}
+
+          </View>
+        );
+      })}
     </ScrollView>
   );
 }
@@ -94,16 +143,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 16,
     borderRadius: 12,
-    marginBottom: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
+    marginBottom: 16,
+    elevation: 4,
   },
-  cardTitle: {
-    fontSize: 16,
+  title: {
+    fontSize: 18,
     fontWeight: "bold",
     marginBottom: 8,
+  },
+  subTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginTop: 8,
+  },
+  row: {
+    marginBottom: 4,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "#ddd",
+    marginVertical: 10,
   },
 });

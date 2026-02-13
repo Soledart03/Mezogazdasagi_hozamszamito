@@ -19,16 +19,17 @@ export default function Login() {
   const [jelszo, setJelszo] = useState("");
 
   const handleLogin = async () => {
+    
     try {
       const response = await api.post("/api/log", {
         nev,
         email,
         jelszo,
       });
-
+      
       if (response.data.success) {
         await AsyncStorage.setItem(
-          "userId",
+          "gazda_id",
           String(response.data.id)
         );
 
@@ -78,6 +79,7 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#E8F1EC",
     justifyContent: "center",
     padding: 20,
   },
@@ -89,7 +91,6 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#ccc",
     borderRadius: 8,
     padding: 12,
     marginBottom: 12,

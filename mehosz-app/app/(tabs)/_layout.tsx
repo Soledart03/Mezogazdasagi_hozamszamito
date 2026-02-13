@@ -31,13 +31,6 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="kiad"
-        options={{
-          title: 'Kiadás',
-          tabBarIcon: ({ color }) => <AntDesign size={28} name="dollar" color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="terv"
         options={{
           title: 'Tervek',

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import{api} from "../../services/api";
+import { Redirect } from "expo-router";
 type Fold = {
   id: number;
   helyrajzi_szam: string;
@@ -30,8 +31,9 @@ export default function GazdaFoldPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userId = await AsyncStorage.getItem("userId");
-        if (!userId) throw new Error("Nincs userId");
+        const userId = await AsyncStorage.getItem("gazda_id");
+        
+        if (!userId) throw new Error("Nincs gazda_id");
 
         const gazdaRes = await api.get(`/api/gazda/${userId}`);
         setGazda(gazdaRes.data[0]); 
@@ -41,15 +43,17 @@ export default function GazdaFoldPage() {
         setFoldek(foldRes.data);
 
         setLoading(false);
+        
       } catch (err) {
         console.log(err);
         setLoading(false);
       }
+
     };
 
     fetchData();
   }, []);
-
+  
   if (loading) {
     return (
       <View style={styles.center}>
@@ -60,13 +64,7 @@ export default function GazdaFoldPage() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {gazda && (
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Gazda adatok</Text>
-          <Text>Név: {gazda.nev}</Text>
-          <Text>Email: {gazda.email}</Text>
-        </View>
-      )}
+      
 
       {foldek.map((fold) => (
         <View key={fold.id} style={styles.card}>
@@ -84,6 +82,7 @@ export default function GazdaFoldPage() {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    marginTop: 20
   },
   center: {
     flex: 1,
