@@ -1,12 +1,8 @@
 2026-01-06:
-delete gomb a cardokra !!!
-tervezetek elrendezése a megbeszéltek alapján
-összes sql lekérdezés megírása (backendben is)
 utánanézés a cookie-k nak meg minden ilyesmi fiszfasznak
-akár hosszabb főoldal, több aloldal ha akarunk
-chat (súgó) formázása
-PDF gomb formázás
-
+Reszponzív oldal !!!
+kalkulációk átdolgozása, mert most nem jól számol
+főoldal átlag növekedés SQL lekérdezés, nem számol
 mobil:
 https://oss.callstack.com/react-native-paper/docs/components/ActivityIndicator
 npx create-expo-app 'app neve'
@@ -42,67 +38,6 @@ NEM RESZPONZÍV AZ OLDAL!!!!44!!négy!!!
 
 további fejlesztések - kivételkezelés
 
-próbáld ki <3
-SELECT
-    COALESCE((SELECT SUM(t.osszeg) FROM terv t), 0)
-  - COALESCE((SELECT SUM(k.osszeg) FROM kiadas k), 0)
-    AS eredmeny;
 
 
 
-nemtom honnan van:
-<div class="row mb-1">
-        <div class="col-6 fw-bold"><h2>Helyrajzi szám:</h2></div>
-        <div class="col-6"><h2>{{getFold(x)?.helyrajzi_szam}}</h2></div>
-      </div>
-
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Vetési időpont:</div>
-        <div class="col-6">{{ x.vetes_idopont.split('T')[0] }}</div>
-      </div>
-
-       <div class="row mb-1">
-        <div class="col-6 fw-bold">Növény:</div>
-        <div class="col-6">{{ getNoveny(x)?.nnev }}</div>
-      </div>
-
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Terület (hektár):</div>
-        <div class="col-6">{{getFold(x)?.terulet}}</div>
-      </div>
-
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Művelési ág:</div>
-        <div class="col-6">{{getFold(x)?.muvelesi_ag}}</div>
-      </div>
-      
-      <div  class="row mb-1">
-        <div class="col-6 fw-bold">Vetőmag:</div>
-        <div class="col-6">{{getKivVetomag(x)?.fajta}}</div>
-      </div>
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Vetési tömeg:</div>
-        <div class="col-6">{{x.tomeg}}</div>
-      </div>
-
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Vetőmag ára:</div>
-        <div class="col-6">{{getKivVetomag(x)?.ar}} Ft/kg</div>
-      </div>
-      <ng-container>{{vanegMutragya(x)}}</ng-container>
-      <ng-container *ngIf="mutrMap[x.id]">
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Műtrágya:</div>
-        <div class="col-6">{{getKivMutragya(x)?.fajta.split(" ").slice(0,2).join(" ")}}</div>
-      </div>
-
-    <div class="row mb-1">
-            <div class="col-6 fw-bold">Műtrágya tömege:</div>
-            <div class="col-6">{{getKivMutragya(x)?.fajta.split(" ").slice(-1)}}</div>
-          </div>
-
-      <div class="row mb-1">
-        <div class="col-6 fw-bold">Műtrágya ára:</div>
-        <div class="col-6">{{getKivMutragya(x)?.ar}} Ft/kg</div>
-      </div>
-</ng-container>

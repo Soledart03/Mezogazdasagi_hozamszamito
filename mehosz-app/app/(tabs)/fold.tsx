@@ -63,6 +63,7 @@ export default function GazdaFoldPage() {
   }
 
   return (
+    <View style={styles.screen}>
     <ScrollView contentContainerStyle={styles.container}>
       
 
@@ -76,33 +77,58 @@ export default function GazdaFoldPage() {
         </View>
       ))}
     </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+  flex: 1,
+  backgroundColor: "#F4F8F2",
+},
   container: {
-    padding: 16,
-    marginTop: 20
+    padding: 20,
+    paddingBottom: 40,
+    backgroundColor: "#F4F8F2",
   },
   center: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#F4F8F2",
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: "#2E5E2C",
   },
   card: {
-    backgroundColor: "#fff",
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 12,
+    backgroundColor: "#FFFFFF",
+    padding: 18,
+    borderRadius: 20,
+    marginBottom: 16,
+    borderLeftWidth: 6,
+    borderLeftColor: "#4CAF50",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
+    shadowRadius: 8,
+    elevation: 5,
   },
   cardTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 8,
+    marginBottom: 10,
+    color: "#2F6F3E",
+  },
+  row: {
+    fontSize: 15,
+    marginBottom: 6,
+    color: "#444",
+  },
+  highlight: {
+    fontWeight: "bold",
+    color: "#1B5E20",
   },
 });

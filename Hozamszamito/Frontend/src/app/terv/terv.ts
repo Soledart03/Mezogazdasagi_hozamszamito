@@ -101,6 +101,12 @@ ngOnInit() {
       )
     )
   );
+  this.terv$.subscribe(tervek => {
+  tervek.forEach(t => {
+    this.loadKiadatok(t);
+  });
+});
+
   this.tervser.terv$ = this.terv$;
   
   /*
@@ -120,6 +126,9 @@ selectedTerv: any = null;
 kiadottcount: number = 0;
 kiadottosszeg: number = 0;
 szurtfoldek:any = [];
+kiadCountMap: { [tervId: number]: number } = {};
+kiadSumMap: { [tervId: number]: number } = {};
+
 tpksel:number = 0;
 getFold(terv: any) {
   return this.foldek.find(
@@ -167,6 +176,16 @@ getkiacount(terv: any) {
   });
   
 }
+loadKiadatok(terv: any) {
+  this.tervser.loadKiadCount(terv.fold_id).subscribe(res => {
+    this.kiadCountMap[terv.id] = res[0]?.['COUNT(k.id)'] ?? 0;
+  });
+
+  this.tervser.loadKiadSum(terv.fold_id).subscribe(res => {
+    this.kiadSumMap[terv.id] = res[0]?.['SUM(k.osszeg)'] ?? 0;
+  });
+}
+
 getkiadossz(terv: any) {
    this.tervser.loadKiadSum(terv.fold_id).subscribe(s => {
     this.getkiadottsum = s;

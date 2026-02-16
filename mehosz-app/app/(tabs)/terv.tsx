@@ -44,15 +44,12 @@ export default function Tervek() {
 
       setGazdaId(Number(id));
 
-      // Földek betöltése
       const foldRes = await api.get(`/api/gfold/${id}`);
       setFoldek(foldRes.data);
 
-      // Növények betöltése
       const novRes = await api.get("/api/novinp");
       setNovinp(novRes.data);
 
-      // Tervek betöltése minden földhöz
       const tervPromises = foldRes.data.map((fold: Fold) =>
         api.get(`/api/terv/${fold.id}`)
       );
@@ -79,11 +76,9 @@ console.log("Tervek:", mergedTervek);
   return (
     <ScrollView style={styles.container}>
       {foldek.map((fold) => {
-        // Csak az adott földhöz tartozó tervsorok
         const foldTervek = tervek.filter((t) => t.fold_id === fold.id);
 
         if (foldTervek.length === 0) {
-          // Ha nincs terv, ne jelenítsen meg semmit a növényekből
           return null;
         }
 
@@ -98,7 +93,6 @@ console.log("Tervek:", mergedTervek);
             <View style={styles.divider} />
 
             {foldTervek.map((t) => {
-  // Növény név keresése novenyt_id alapján
   const nov = novinp.find(n => Number(n.id) === Number(t.noveny_id));
 
   return (
@@ -132,36 +126,54 @@ console.log("Tervek:", mergedTervek);
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    padding: 20,
+    backgroundColor: "#F4F8F2",
   },
   center: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#F4F8F2",
   },
   card: {
-    backgroundColor: "#fff",
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 16,
-    elevation: 4,
+    backgroundColor: "#FFFFFF",
+    padding: 20,
+    borderRadius: 22,
+    marginBottom: 20,
+    borderLeftWidth: 6,
+    borderLeftColor: "#388E3C",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.12,
+    shadowRadius: 10,
+    elevation: 6,
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
+    color: "#2E5E2C",
     marginBottom: 8,
   },
   subTitle: {
     fontSize: 16,
     fontWeight: "600",
-    marginTop: 8,
+    marginTop: 12,
+    color: "#33691E",
   },
   row: {
+    fontSize: 14,
     marginBottom: 4,
+    color: "#444",
   },
   divider: {
     height: 1,
-    backgroundColor: "#ddd",
-    marginVertical: 10,
+    backgroundColor: "#E0E0E0",
+    marginVertical: 12,
+  },
+  amount: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#1B5E20",
+    marginTop: 4,
   },
 });

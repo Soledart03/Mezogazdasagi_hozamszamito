@@ -23,6 +23,7 @@ type Gazda = {
 export default function HomeScreen() {
   const router = useRouter();
   const [gazda, setGazda] = useState<Gazda | null>(null);
+  const [foldSzam, setFoldSzam] = useState<number>(0);
   const [loading, setLoading] = useState(true);
 
   const logout = async () => {
@@ -35,9 +36,10 @@ export default function HomeScreen() {
       try {
         const userId = await AsyncStorage.getItem("gazda_id");
         if (!userId) throw new Error("Nincs gazda_id");
-
+        const foldRes = await api.get("/api/foldszam");
+        setFoldSzam(foldRes.data[0]?.["COUNT(*)"] ?? 0);
         const res = await api.get(`/api/gazda/${userId}`);
-        setGazda(res.data[0]); // feltételezzük, hogy a backend tömböt ad vissza
+        setGazda(res.data[0]); 
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -88,7 +90,7 @@ export default function HomeScreen() {
 
         <View style={styles.statsContainer}>
           <View>
-            <Text style={styles.statNumber}>10</Text>
+            <Text style={styles.statNumber}>{foldSzam}</Text>
             <Text style={styles.statLabel}>Termőföld</Text>
           </View>
 

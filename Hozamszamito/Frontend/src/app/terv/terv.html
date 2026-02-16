@@ -73,17 +73,21 @@
   
   <div class="border rounded p-3 bg-light">
     
-    <button class="btn btn-outline-secondary btn-sm w-100 mb-2"
-      (click)="osszevon(x)">
-      Kiadások számítása
-    </button>
+    <div class="d-flex justify-content-between small">
+  <span>Kiadások:</span>
+  <span>
+    {{ kiadCountMap[x.id] || 0 }} db
+  </span>
+</div>
+
 
     <div class="d-flex justify-content-between small">
-      <span>Kiadások:</span>
-      <span *ngFor="let y of getkiadottcount">
-        {{ y['COUNT(k.id)'] }} db
-      </span>
-    </div>
+  <span>Kiadások összege:</span>
+  <span>
+    {{ kiadSumMap[x.id] || 0 | number }} Ft
+  </span>
+</div>
+
 
       
       
