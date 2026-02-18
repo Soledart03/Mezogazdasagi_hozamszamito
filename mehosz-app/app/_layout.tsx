@@ -23,7 +23,7 @@ export default function RootLayout() {
     checkLogin();
   }, []);
 
-  if (isLoggedIn === null) return null; // várunk
+  if (isLoggedIn === null) return null; 
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>

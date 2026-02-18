@@ -37,6 +37,14 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <AntDesign size={28} name="schedule" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="kiad"
+        options={{
+          title: 'Kiadások',
+          tabBarIcon: ({ color }) => <AntDesign size={28} name="dollar" color={color} />,
+        }}
+      />
     </Tabs>
+    
   );
 }
