@@ -2,7 +2,7 @@ import { Image as ExpoImage } from 'expo-image';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native";
-
+import AntDesign from '@expo/vector-icons/AntDesign';
 import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
@@ -63,7 +63,7 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.content}>
         
       <TouchableOpacity onPress={logout} style={styles.logoutButton}>
-          <Text style={styles.logoutText}>Kijelentkezés</Text>
+          <Text style={styles.logoutText}><AntDesign size={28} name="logout" /></Text>
         </TouchableOpacity>
         {gazda && (
           <View style={[styles.card, { marginBottom: 20 }]}>
