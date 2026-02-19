@@ -5,7 +5,7 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import SplashScreen from '@/components/SplasScreen';
 export const unstable_settings = {
   anchor: '(tabs)',
 };
@@ -13,6 +13,7 @@ export const unstable_settings = {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -23,7 +24,11 @@ export default function RootLayout() {
     checkLogin();
   }, []);
 
-  if (isLoggedIn === null) return null; 
+  if (!isReady) {
+    return <SplashScreen onFinish={() => setIsReady(true)} />;
+  }
+
+  if (isLoggedIn === null) return null;
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -38,3 +43,5 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
+
+
