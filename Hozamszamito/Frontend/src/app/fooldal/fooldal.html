@@ -36,8 +36,8 @@
             <div style="width: 4rem;"></div> 
 
             <div>
-              <h4>25%+</h4>
-              <span>Átl. nyereségnövekedés</span>
+              <h4 *ngFor="let x of szamolo2">+{{ x.atlag }}%</h4>
+              <span>Átlagos nyereségnövekedés</span>
             </div>
           </div>
 

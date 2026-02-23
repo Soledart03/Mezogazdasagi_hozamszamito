@@ -12,7 +12,7 @@ export class Fooldal implements OnInit{
   constructor(private gazdservice:Gazdaservice, private loggazd:Loginform){}
   
   public szamolo: any[] = [];
-
+  public szamolo2: any[] = [];
   ngOnInit():void{
     this.loadFold();
     
@@ -20,7 +20,7 @@ export class Fooldal implements OnInit{
 
   loadFold(){
     this.gazdservice.getOszFold().subscribe(data => this.szamolo = data);
-    
+    this.gazdservice.getHomket().subscribe(data=> this.szamolo2 = data);
   }
   
 } 

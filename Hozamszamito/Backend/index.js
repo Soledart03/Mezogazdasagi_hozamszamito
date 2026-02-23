@@ -244,6 +244,24 @@ app.get('/api/inp_m', async (req,res)=>{
     })
     
 })
+app.get('/api/hompket', async (req,res)=>{
+    db.query(`SELECT SUBSTRING_INDEX(AVG(kulonbseg)/10000,'.',1) AS atlag
+FROM (
+    SELECT terv.fold_id,
+           terv.osszeg - SUM(kiadas.osszeg) AS kulonbseg
+    FROM terv
+    JOIN fold ON terv.fold_id = fold.id
+    JOIN kiadas ON terv.fold_id = kiadas.fold_id
+    GROUP BY terv.fold_id, terv.osszeg
+) t;`,(err,result)=>{
+        if(err) throw err;
+        if(result.length == 0) throw err;
+        console.log(result);
+        res.json([result[0]]);
+
+    })
+    
+})
 //kiadás kezelők
 app.get('/api/kiad/:id', async (req,res)=>{
     const id = req.params.id;

@@ -24,6 +24,7 @@ export default function HomeScreen() {
   const router = useRouter();
   const [gazda, setGazda] = useState<Gazda | null>(null);
   const [foldSzam, setFoldSzam] = useState<number>(0);
+  const [atlszam, setAtlszam] = useState<number>(0);
   const [loading, setLoading] = useState(true);
 
   const logout = async () => {
@@ -40,6 +41,8 @@ export default function HomeScreen() {
         setFoldSzam(foldRes.data[0]?.["COUNT(*)"] ?? 0);
         const res = await api.get(`/api/gazda/${userId}`);
         setGazda(res.data[0]); 
+        const atl = await api.get('/api/hompket');
+        setAtlszam(atl.data[0]?.atlag ?? 0);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -95,8 +98,8 @@ export default function HomeScreen() {
           </View>
 
           <View>
-            <Text style={styles.statNumber}>25%+</Text>
-            <Text style={styles.statLabel}>Átl. nyereségnövekedés</Text>
+            <Text style={styles.statNumber}>+{atlszam}%</Text>
+            <Text style={styles.statLabel}>Átlagos nyereségnövekedés</Text>
           </View>
         </View>
 

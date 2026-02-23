@@ -50,6 +50,10 @@ export class Gazdaservice {
   getOszFold():Observable<any>{
     return this.http.get('http://localhost:3000/api/foldszam');
   }
+  getHomket():Observable<any>{
+    return this.http.get('http://localhost:3000/api/hompket');
+  }
+
   
 
 }
