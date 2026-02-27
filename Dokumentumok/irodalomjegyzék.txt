@@ -1,0 +1,64 @@
+Webfejlesztés és frontend
+
+Google LLC (2024): Angular Documentation.
+Elérhető: https://angular.io/docs
+
+(Online dokumentáció)
+
+Meta Platforms Inc. (2024): React – Official Documentation.
+Elérhető: https://react.dev
+
+(Online dokumentáció)
+
+Duckett, Jon (2014): HTML and CSS: Design and Build Websites. Wiley Publishing. (E-book)
+
+Duckett, Jon (2014): JavaScript and jQuery: Interactive Front-End Web Development. Wiley Publishing. (E-book)
+
+Bootstrap Team (2024): Bootstrap Documentation.
+Elérhető: https://getbootstrap.com/docs
+
+Backend fejlesztés
+
+OpenJS Foundation (2024): Node.js Documentation.
+Elérhető: https://nodejs.org/en/docs
+
+Tilkov, Stefan – Vinoski, Steve (2010):
+Node.js: Using JavaScript to Build High-Performance Network Programs. IEEE Internet Computing.
+
+Richardson, Leonard – Ruby, Sam (2007):
+RESTful Web Services. O’Reilly Media. (Könyv / E-book)
+
+Adatbázis és modellezés
+
+Elmasri, Ramez – Navathe, Shamkant (2016):
+Fundamentals of Database Systems. Pearson Education.
+
+MySQL AB / Oracle (2024): MySQL Reference Manual.
+Elérhető: https://dev.mysql.com/doc/
+
+phpMyAdmin Development Team (2024):
+phpMyAdmin Documentation.
+https://docs.phpmyadmin.net/
+
+Apache Friends (2024): XAMPP Documentation.
+https://www.apachefriends.org/docs/
+
+Szoftverfejlesztési módszertan
+
+Schwaber, Ken – Sutherland, Jeff (2020):
+The Scrum Guide. Scrum.org (PDF dokumentum).
+
+Pressman, Roger S. (2014):
+Software Engineering: A Practitioner’s Approach. McGraw-Hill.
+
+UML és rendszertervezés
+
+Fowler, Martin (2004): UML Distilled. Addison-Wesley.
+
+Sommerville, Ian (2015): Software Engineering. Pearson.
+
+Verziókezelés
+
+Chacon, Scott – Straub, Ben (2014):
+Pro Git. Apress. (Ingyenes e-book)
+https://git-scm.com/book/en/v2
