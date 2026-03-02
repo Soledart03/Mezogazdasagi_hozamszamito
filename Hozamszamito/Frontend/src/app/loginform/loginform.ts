@@ -18,7 +18,7 @@ export class Loginform {
         //console.log(res);
         
         this.gserv.getGazda(res.id).subscribe(data=>{
-        
+          
           const gazda = data[0];
           this.gserv.setGazdaData(gazda);
           
@@ -29,7 +29,7 @@ export class Loginform {
         this.closeMenu();
       },
       error:(err)=>{
-        window.alert(err.error.error);
+        window.alert("Hiba a bejelentkezéskor"+ err.error.error);
       }
     })
     
