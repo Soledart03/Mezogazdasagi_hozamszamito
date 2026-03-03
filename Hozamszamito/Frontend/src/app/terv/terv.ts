@@ -7,6 +7,7 @@ import { Foldservice } from '../foldservice';
 import { DEJAVU_BASE64 } from '../../assets/fonts/dejavu';
 import { filter, switchMap, map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
+import { AlertService } from '../alert-service';
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 @Component({
@@ -17,7 +18,7 @@ import autoTable from "jspdf-autotable";
 })
 
 export class Terv implements OnInit {
-constructor(private app:App,private gazdaser:Gazdaservice,private tervser:Tervservice,private foldser:Foldservice){}
+constructor(private app:App,private alertSer: AlertService,private gazdaser:Gazdaservice,private tervser:Tervservice,private foldser:Foldservice){}
 terv$!: Observable<any[]>;
 folds$!: Observable<any[]>;
 foldId: number = 0;
@@ -390,7 +391,7 @@ openEdit(terv: any) {
 
 delTerv(terv: any) {
   this.tervser.deleteFold(terv.id);
-  window.alert("Tervezet törölve!")
+  this.alertSer.show('Terv törölve!', 'danger');
 }
 /*
   save() {

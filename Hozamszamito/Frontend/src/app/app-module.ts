@@ -16,7 +16,7 @@ import { Footer } from './footer/footer';
 import { Sugo } from './sugo/sugo';
 import { Kiadasok } from './kiadasok/kiadasok';
 import { Kiadasfelform } from './kiadfelform/kiadfelform';
-import { AlertComponent } from "./alert-component/alert-component";
+import { AlertComponent } from './alert-component/alert-component';
 
 @NgModule({
   declarations: [
@@ -34,20 +34,17 @@ import { AlertComponent } from "./alert-component/alert-component";
     Kiadasok,
     Kiadasfelform,
     AlertComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    AlertComponent
-] HttpClientModule,
     FormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     Loginform,
     Navbar,
-    
   ],
   bootstrap: [App]
 })

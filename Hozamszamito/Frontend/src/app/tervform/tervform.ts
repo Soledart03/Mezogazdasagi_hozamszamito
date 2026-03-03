@@ -3,6 +3,7 @@ import { Gazdaservice } from '../gazdaservice';
 import { Foldservice } from '../foldservice';
 import { EventEmitter, Input, Output } from '@angular/core';
 import { Tervservice } from '../tervservice';
+import { AlertService } from '../alert-service';
 @Component({
   selector: 'app-tervform',
   standalone: false,
@@ -12,7 +13,7 @@ import { Tervservice } from '../tervservice';
 export class Tervform implements OnInit {
 
 
-  constructor( private tervserv:Tervservice,private foldserv:Foldservice, private gazdaser:Gazdaservice){}
+  constructor(private alertSer: AlertService ,private tervserv:Tervservice,private foldserv:Foldservice, private gazdaser:Gazdaservice){}
   foldId: number;
   gazdaId: number;
   selectedOptionId: number | null = null;
@@ -83,6 +84,7 @@ export class Tervform implements OnInit {
     console.log('MENTÉS ELŐTT:', this.ujterv);
     this.tervserv.addTerv(this.ujterv);
     console.log(this.ujterv);
+    this.alertSer.show('Terv hozzáadva!', 'success');
     this.ujterv = {fold_id:0,noveny_id:0,kiv_vetoid:0,kiv_mutrid:0,vetes_idopont:'',tomeg:0,osszeg:0}
     this.closeMenu();
   }

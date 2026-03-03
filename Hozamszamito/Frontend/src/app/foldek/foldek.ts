@@ -3,6 +3,7 @@ import { App } from '../app';
 import { Gazdaservice } from '../gazdaservice';
 import { Foldservice } from '../foldservice';
 import { Observable } from 'rxjs';
+import { AlertService } from '../alert-service';
 @Component({
   selector: 'app-foldek',
   standalone: false,
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
   styleUrl: './foldek.css',
 })
 export class Foldek implements OnInit {
-constructor(private app:App,private gazdaser:Gazdaservice,private foldser:Foldservice){}
+constructor(private app:App,private gazdaser:Gazdaservice,private foldser:Foldservice,private alertSer: AlertService){}
 folds$!: Observable<any[]>;
 gazdaId: number = 0;
 fold:any = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',id:0};
@@ -33,10 +34,6 @@ selectedFold: any = null;
 selectedFoldId: number | null = null;
 alertMessage: string | null = null;
 
-  showAlert(uzenet:string) {
-    this.alertMessage = uzenet;
-    setTimeout(() => this.alertMessage = null, 5000);
-  }
 
 openEdit(fold: any) {
   this.selectedFoldId = fold.id; 
@@ -44,7 +41,7 @@ openEdit(fold: any) {
 }
 delfold(fold: any) {
   this.foldser.deleteFold(fold.id);
-  this.showAlert('Föld törölve!');
+  this.alertSer.show('Föld törölve!', 'danger');
 }
   save() {
  if (this.selectedFold) {

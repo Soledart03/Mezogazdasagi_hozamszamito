@@ -1,9 +1,9 @@
-// alert.component.ts
 import { Component } from '@angular/core';
 import { AlertService } from '../alert-service';
 
 @Component({
   selector: 'app-alert',
+  standalone:false,
   template: `
     <div *ngIf="alertSer.alert$ | async as alert"
          class="alert-toast"

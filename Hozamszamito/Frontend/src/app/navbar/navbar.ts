@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { App } from '../app';
+import { AlertService } from '../alert-service';
 import { Gazdaservice } from '../gazdaservice';
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,7 @@ import { Gazdaservice } from '../gazdaservice';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-constructor(private app:App,private gazdser:Gazdaservice){}
+constructor(private app:App,private gazdser:Gazdaservice,private alertSer: AlertService){}
 loginsucces:boolean = false;
   openMenu(type: any){
     this.app.openMenu(type);
@@ -25,7 +26,8 @@ loginsucces:boolean = false;
 }
 logout() {
     this.gazdser.clearGazda();
-    window.alert('Sikeresen kijelentkeztél!')
+    this.alertSer.show('Sikeresen kijelentkeztél!', 'info');
+    
   }
 }
   

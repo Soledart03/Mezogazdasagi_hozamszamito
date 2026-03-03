@@ -31,7 +31,7 @@ addFold(fold: any) {
         next: newFold => {
           const current = this.foldSubject.value;
           this.foldSubject.next([...current, newFold]);
-          window.alert("Föld hozzáadva!")
+          
         },
         error: err => console.error(err)
       });

@@ -55,7 +55,7 @@
         next: ujterv => {
           const current = this.tervSubject.value;
           this.tervSubject.next([...current, ujterv]);
-          window.alert("Terv hozzáadva!")
+          
         },
         error: err => console.error(err)
       });

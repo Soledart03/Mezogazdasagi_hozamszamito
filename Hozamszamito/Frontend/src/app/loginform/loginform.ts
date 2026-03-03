@@ -1,6 +1,7 @@
 import { Component,EventEmitter, Output,Input  } from '@angular/core';
 import { Gazdaservice } from '../gazdaservice';
 import { Navbar } from '../navbar/navbar';
+import { AlertService } from '../alert-service';
 @Component({
   selector: 'app-loginform',
   standalone: false,
@@ -11,7 +12,7 @@ export class Loginform {
   public gazdak:any;
   
   ujgazd = {nev:'',email:'',jelszo:''}
-  constructor(private gserv:Gazdaservice){}
+  constructor(private gserv:Gazdaservice,private alertSer: AlertService){}
   logcheck():void{
     this.gserv.logc(this.ujgazd).subscribe({
       next:(res)=>{
@@ -21,15 +22,15 @@ export class Loginform {
           
           const gazda = data[0];
           this.gserv.setGazdaData(gazda);
-          
-          window.alert('Sikeres Bejelentkezés');
+          this.alertSer.show('Sikeres Bejelentkezés', 'success');
         })
         //console.log(res.id);
         
         this.closeMenu();
       },
       error:(err)=>{
-        window.alert("Hiba a bejelentkezéskor"+ err.error.error);
+        this.alertSer.show("Hiba a bejelentkezéskor"+ err.error.error, 'danger');
+        window.alert();
       }
     })
     

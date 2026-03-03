@@ -5,7 +5,7 @@ import {combineLatest, Observable } from 'rxjs';
 import { Kiadasservice } from '../kiadasservice';
 import { Gazdaservice } from '../gazdaservice';
 import { filter } from 'rxjs/operators';
-
+import { AlertService } from '../alert-service';
 @Component({
   selector: 'app-kiadasok',
   standalone: false,
@@ -13,7 +13,7 @@ import { filter } from 'rxjs/operators';
   styleUrl: './kiadasok.css',
 })
 export class Kiadasok implements OnInit{
-  constructor(private app:App,private kiadser:Kiadasservice, private foldser:Foldservice, private gazdaser:Gazdaservice){}
+  constructor(private app:App,private kiadser:Kiadasservice, private foldser:Foldservice, private gazdaser:Gazdaservice,private alertSer: AlertService){}
   kiadasoks$!: Observable<any[]>;
   fold:any = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',id:0};
   editing:boolean=false;
@@ -65,7 +65,7 @@ getHelyrazji(kiad:any){
 }
 delKiadas(kiadas: any) {
   this.kiadser.deleteKiadas(kiadas.id);
-  window.alert("Kiadás törölve!")
+  this.alertSer.show('Kiadás törölve!', 'danger');
 }
 openMenu(type: any){
   this.app.openMenu(type);

@@ -3,6 +3,7 @@ import { Gazdaservice } from '../gazdaservice';
 import { Kiadasservice } from '../kiadasservice';
 import { Foldservice } from '../foldservice';
 import { Observable } from 'rxjs';
+import { AlertService } from '../alert-service';
 @Component({
   selector: 'app-kiadasfelform',
   standalone: false,
@@ -14,7 +15,8 @@ export class Kiadasfelform implements OnInit {
   constructor(
     private gserv: Gazdaservice,
     private kiadasser: Kiadasservice,
-    private foldserv: Foldservice
+    private foldserv: Foldservice,
+    private alertSer: AlertService
   ) {}
   fold$!: Observable<any[]>;
   foldek: any[] = [];
@@ -54,7 +56,7 @@ export class Kiadasfelform implements OnInit {
   kiadasHozzaad() {
     console.log('MENTÉS ELŐTT:', this.ujKiadas);
     this.kiadasser.addKiadas(this.ujKiadas).subscribe(() => {
-
+      
       const foldIds = this.foldserv.getFold().map(f => f.id);
       /*
       this.kiadasser.loadKiadasByFoldIds(foldIds);
@@ -68,7 +70,8 @@ export class Kiadasfelform implements OnInit {
       };
       this.closeMenu();
     }); 
-      
+          this.alertSer.show('Kiadás hozzáadva!', 'success');
+
      
   }
 

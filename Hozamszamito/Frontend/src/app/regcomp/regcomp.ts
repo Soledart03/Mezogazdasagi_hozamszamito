@@ -1,5 +1,6 @@
 import { Component,EventEmitter, Output,Input } from '@angular/core';
 import { Gazdaservice } from '../gazdaservice';
+import { AlertService } from '../alert-service';
 @Component({
   selector: 'app-regcomp',
   standalone: false,
@@ -9,17 +10,18 @@ import { Gazdaservice } from '../gazdaservice';
 export class Regcomp {
   
   ujgazd = {nev:'',email:'',jelszo:''}
-  constructor(private gserv:Gazdaservice){}
+  constructor(private gserv:Gazdaservice,private alertSer: AlertService){}
   gazdaHozzaad():void{
     this.gserv.addGazda(this.ujgazd).subscribe({
       next:()=>{
-        window.alert('Sikeres Regisztráció!');
+        this.alertSer.show('Sikeres Regisztráció!', 'success');
+        
         this.ujgazd = {nev:'',email:'',jelszo:''};
         this.closeMenu();
       },
       error:(err)=>{
-        console.log('Nem megy',this.ujgazd.nev)
-        window.alert(err.error.error);
+        this.alertSer.show('Sikertelen regisztráció!' + err.error.error, 'danger');
+        
 
       }
       

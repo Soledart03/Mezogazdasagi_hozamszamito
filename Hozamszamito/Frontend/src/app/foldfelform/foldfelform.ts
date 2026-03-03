@@ -2,6 +2,7 @@ import { Component,EventEmitter, Output,Input, OnInit } from '@angular/core';
 import { Gazdaservice } from '../gazdaservice';
 import { Foldservice } from '../foldservice';
 import { Observable } from 'rxjs';
+import { AlertService } from '../alert-service';
 @Component({
   selector: 'app-foldfelform',
   standalone: false,
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
   styleUrl: './foldfelform.css',
 })
 export class Foldfelform implements OnInit {
-  constructor(private gserv:Gazdaservice, private foldser:Foldservice){}
+  constructor(private gserv:Gazdaservice, private foldser:Foldservice,private alertSer: AlertService){}
   gazdaId: number;
   ngOnInit() {
     
@@ -19,29 +20,12 @@ export class Foldfelform implements OnInit {
     
   }
   ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:0}
-  /*
-  foldHozzaad():void{
-    this.ujfold.gazda_id = this.gazdaId;
-    this.foldser.addFold(this.ujfold).subscribe({
-      next:()=>{
-        window.alert('Sikeres földhozzáadás!');
-        this.ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:0}
-        
-        this.closeMenu();
-      },
-      error:(err)=>{
-        console.log('Nem megy',this.ujfold.gazda_id)
-        window.alert(err.error.error);
-
-      }
-      
-    })
-  }
-    */
+ 
   foldHozzaad(){
     this.ujfold.gazda_id = this.gazdaId;
     console.log('MENTÉS ELŐTT:', this.ujfold);
     this.foldser.addFold(this.ujfold);
+    this.alertSer.show('Föld hozzáadva!', 'success');
     this.ujfold = {terulet:'',muvelesi_ag:'',helyrajzi_szam:'',elozo_evi_hasznositas:'',gazda_id:0}
     this.closeMenu();
   }
