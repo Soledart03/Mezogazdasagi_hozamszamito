@@ -50,11 +50,17 @@
     </li>
 
     <li class="list-group-item d-flex justify-content-between">
-      <span>Műtrágya:</span>
-      <span>{{getKivMutragya(x)?.fajta.split(" ").slice(0,2).join(" ")}}</span>
-    </li>
+  <span>Műtrágya:</span>
+  <span *ngIf="x.kiv_mutrid != 0">
+    {{ getKivMutragya(x)?.fajta.split(" ").slice(0,2).join(" ") }}
+  </span>
+  <span *ngIf="x.kiv_mutrid == 0">
+    Nincs
+  </span>
+</li>
 
-
+    <!--
+    
     <li class="list-group-item d-flex justify-content-between">
       <span>Műtrágya tömege:</span>
       <span>{{getKivMutragya(x)?.fajta.split(" ").slice(-1)}}</span>
@@ -64,7 +70,7 @@
       <span>Műtrágya ára:</span>
       <span>{{getKivMutragya(x)?.ar}} Ft/kg</span>
     </li>
-
+-->
   </ul>
 </div>
 
@@ -115,6 +121,17 @@
     </div>
   </div>
 </div>
-
+<div *ngIf="(terv$ | async) as tervek" 
+     class="card shadow-sm mt-4 mb-4" 
+     style="background-color: #d4edda; border-color: #a8d5b5;">
+  <div class="card-body text-center">
+    <h4 class="fw-bold" style="color: #2e7d4f;">
+      Összes tervezett bevétel
+    </h4>
+    <h2 class="fw-bold" style="color: #1a5c38;">
+      {{ osszesOsszeg(tervek) | number }} Ft
+    </h2>
+  </div>
+</div>
 
 
