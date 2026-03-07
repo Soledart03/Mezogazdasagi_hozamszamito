@@ -245,6 +245,7 @@ Vegosszeg(terv:any){
     parseInt(terv.tomeg) *
     tpk * 
     this.getNoveny(terv).termar;
+    vetomagar - (parseInt(terv.tomeg)+ this.getNoveny(terv).termar);
     if (terv.kiv_mutrid != 0) {
     vetomagar = vetomagar * 1.15;
   }
