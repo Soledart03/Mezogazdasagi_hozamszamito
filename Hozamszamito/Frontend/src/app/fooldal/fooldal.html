@@ -32,19 +32,17 @@
           
   
         
-          <div class="col-12 d-flex stats align-items-center">
-            <div>
-              <h4 *ngFor="let x of szamolo">{{ x['COUNT(*)'] }}</h4>
-              <span>Termőföld</span>
-            </div>
+          <div class="row stats mt-auto">
+  <div class="col-6">
+    <h4 *ngFor="let x of szamolo">{{ x['COUNT(*)'] }}</h4>
+    <span>Termőföld</span>
+  </div>
 
-            <div style="width: 4rem;"></div> 
-
-            <div class="col-12">
-              <h4 *ngFor="let x of szamolo2">+{{ x.atlag }}%</h4>
-              <span>Átlagos nyereségnövekedés</span>
-            </div>
-          </div>
+  <div class="col-6">
+    <h4 *ngFor="let x of szamolo2">+{{ x.atlag }}%</h4>
+    <span>Átlagos nyereségnövekedés</span>
+  </div>
+</div>
           <br>
           
           
