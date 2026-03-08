@@ -245,7 +245,7 @@ app.get('/api/inp_m', async (req,res)=>{
     
 })
 app.get('/api/hompket', async (req,res)=>{
-    db.query(`SELECT SUBSTRING_INDEX(AVG(kulonbseg)/10000,'.',1) AS atlag
+    db.query(`SELECT SUBSTRING_INDEX(AVG(kulonbseg)/100000,'.',1) AS atlag
 FROM (
     SELECT terv.fold_id,
            terv.osszeg - SUM(kiadas.osszeg) AS kulonbseg
