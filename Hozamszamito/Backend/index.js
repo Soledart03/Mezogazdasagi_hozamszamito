@@ -20,14 +20,14 @@ if (process.env.NODE_ENV !== 'test') {
     console.log('MySQL kapcsolódva.');
   });
 }
-
+/*
 app.post('/api/chat', async (req, res) => {
   try {
     const { message } = req.body;
     if (!message) {
       return res.status(400).json({ error: 'Nem adott meg üzenetet' });
     }
-    const response = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
+    const response = await fetch('https://text.pollinations.ai/openai', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ app.post('/api/chat', async (req, res) => {
             content: message
           }
   ],
-        model:'mistral',
+        model:'openai',
         max_tokens: 300
       })
     });
@@ -78,6 +78,84 @@ app.post('/api/chat', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+*/
+app.post('/api/chat', async (req, res) => {
+  try {
+    const { message } = req.body;
+    if (!message) {
+      return res.status(400).json({ error: 'Nem adott meg üzenetet' });
+    }
+
+    const response = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.POLLINATIONS_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'deepseek',
+        max_tokens: 2000,
+        messages: [
+          {
+            role: 'system',
+            content: `Egy mezőgazdászokat segítő, mezőgazdaságban profi chatbot vagy. 
+Illegális dolgokat vagy káromkodást soha nem használhatsz.
+Mindig magyarul válaszolj.`
+          },
+          {
+            role: 'user',
+            content: message
+          }
+        ]
+      })
+    });
+
+    const text = await response.text();
+    console.log('Pollinations státusz:', response.status);
+    console.log('Pollinations válasz:', text); // 👈 ezt nézd meg a konzolon!
+
+    if (!response.ok) {
+      return res.status(500).json({ error: 'Pollinations API hiba', details: text });
+    }
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      return res.status(500).json({ error: 'JSON parse hiba', raw: text });
+    }
+
+    // Részletes debug hogy lássuk a struktúrát
+    console.log('Parsed data:', JSON.stringify(data, null, 2));
+
+    const reply =
+      data?.choices?.[0]?.message?.content ||  // standard OpenAI formátum
+      data?.choices?.[0]?.text ||               // alternatív formátum
+      data?.text ||                             // egyszerű szöveges válasz
+      data?.content ||                          // másik lehetséges mező
+      null;
+
+    if (!reply) {
+      return res.status(500).json({ 
+        error: 'Üres válasz a modelltől',
+        debug: data  // 👈 visszaküldjük a teljes választ debughoz
+      });
+    }
+
+    res.json({ reply });
+
+  } catch (err) {
+    console.error('Chat hiba:', err);
+    res.status(500).json({ error: 'Szerver hiba', details: err.message });
+  }
+});
+
+
+
+
+
+
+
 
 const apiurl = '/api/gazda';
 app.get(apiurl+'/:id', async (req,res)=>{
