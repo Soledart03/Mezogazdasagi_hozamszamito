@@ -17,6 +17,7 @@ import { Sugo } from './sugo/sugo';
 import { Kiadasok } from './kiadasok/kiadasok';
 import { Kiadasfelform } from './kiadfelform/kiadfelform';
 import { AlertComponent } from './alert-component/alert-component';
+import { Adatvedelmi } from './adatvedelmi/adatvedelmi';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AlertComponent } from './alert-component/alert-component';
     Sugo,
     Kiadasok,
     Kiadasfelform,
-    AlertComponent
+    AlertComponent,
+    Adatvedelmi
   ],
   imports: [
     BrowserModule,

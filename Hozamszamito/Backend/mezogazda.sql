@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Dec 18. 11:29
+-- Létrehozás ideje: 2026. Már 08. 16:21
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -43,7 +43,16 @@ CREATE TABLE `fold` (
 INSERT INTO `fold` (`id`, `terulet`, `muvelesi_ag`, `helyrajzi_szam`, `elozo_evi_hasznositas`, `gazda_id`) VALUES
 (1, 12.50, 'szántó', '1234/1', 'búza', 1),
 (2, 8.00, 'rét', '5678/3', 'kukorica', 1),
-(3, 15.20, 'szántó', '9101/5', 'burgonya', 2);
+(3, 15.20, 'szántó', '9101/5', 'burgonya', 2),
+(4, 10.00, 'szántó', '2134/5', 'burgonya', 4),
+(5, 15.00, 'erdő', '2222/4', 'akác', 5),
+(7, 20.00, 'szántó', '1323/2', 'repce', 7),
+(9, 2.00, 'szántó', '045/133', 'őszi tritikálé', 13),
+(10, 15.00, 'szántók', '1225/7', 'kukorica', 8),
+(12, 20.00, 'szántó', '2123/23', 'burgonya', 8),
+(16, 10.00, 'szántó', '1232/32', 'burgonya', 14),
+(25, 10.00, 'szántó', '0236', 'napraforgó', 17),
+(26, 10.00, 'szántó', '285/6', 'kukorica', 18);
 
 -- --------------------------------------------------------
 
@@ -73,7 +82,12 @@ INSERT INTO `gazda_fiok` (`id`, `nev`, `email`, `jelszo`) VALUES
 (8, 'Koszta Mate', 'koszta2@gmail.com', '$2b$10$DJyHwGEXQH8fsGg2Vc.YweG.Dv6qTFZQ6IKQZQlBYd806RCQZpiJG'),
 (9, 'tesztfiok', 'teszt@gmail.com', '$2b$10$A.h.6Be3fwAVyeh8E0AZA.xs96lhSKZEVh63.t0.fie0YXrsHk2nG'),
 (10, 'Teó', 'teoka@gmail.com', '$2b$10$Dupx9LizdEE0kSK09I07fu5B36fWlS7xHgTCIgHQAzP2byPC17MQW'),
-(12, 'Teó', 'teoka2@gmail.com', '$2b$10$KgXCkb.qVrfS7XeiUom8ROUS4bukucF6Pvup7iohJV2sn1OX2GuOy');
+(12, 'Teó', 'teoka2@gmail.com', '$2b$10$KgXCkb.qVrfS7XeiUom8ROUS4bukucF6Pvup7iohJV2sn1OX2GuOy'),
+(13, 'Berki Balázs (gyilkos)', 'berkike13@gmail.com', '$2b$10$jIyYIvjMMzTxjlJr58pPKegHJNr1KnN3h9FK.GpcS36q8yn/MEh9.'),
+(14, 'Lakatos Sándor', 'sandor412@gmail.com', '$2b$10$wKL4SVsFWwRPJEP.Y9FkceZO8bAXULCGTYx4F.dG/TxV9Tf7j195G'),
+(16, 'Koszta Mate2', 'koszta22@gmail.com', '$2b$10$I..zFXkWAp127opst4pyp.EMfjbBg/KsRoKkGR6G/XCRkCbBxHb.S'),
+(17, 'Gecsey Zolta', 'zoltika@gmail.com', '$2b$10$RanpjFb14trP.LpmWWiPfuNlDh8mXl/FjhtyOihunPv4NxY0hiLoe'),
+(18, 'Gecsey Eszter', 'gecseyneeszter@gmail.com', '$2b$10$NN/.H8niwLNg8RncanRLWOI8xZRQ8jG/See3aZyWaCX1v73Ft989u');
 
 -- --------------------------------------------------------
 
@@ -94,7 +108,6 @@ CREATE TABLE `input_anyag` (
 
 INSERT INTO `input_anyag` (`id`, `inev`, `ar`, `fajta`) VALUES
 (1, 'Vetőmag', 176.00, 'Activus'),
-(2, 'Műtrágya', 18000.00, ''),
 (3, 'Növényvédőszer', 12000.00, ''),
 (5, 'Vetőmag', 178.00, 'AG Hurem'),
 (6, 'Vetőmag', 1300.00, 'KWS Advisio'),
@@ -147,27 +160,33 @@ CREATE TABLE `kiadas` (
   `osszeg` decimal(10,2) NOT NULL,
   `tipus` varchar(50) DEFAULT NULL,
   `leiras` varchar(255) DEFAULT NULL,
-  `fold_id` int(11) DEFAULT NULL,
-  `noveny_id` int(11) DEFAULT NULL,
-  `inputanyag_id` int(11) DEFAULT NULL
+  `fold_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `kiadas`
 --
 
-INSERT INTO `kiadas` (`id`, `datum`, `osszeg`, `tipus`, `leiras`, `fold_id`, `noveny_id`, `inputanyag_id`) VALUES
-(1, '2025-03-10', 25000.00, 'vetomag', 'Búza vetőmag', 1, 4, 1),
-(2, '2025-03-22', 18000.00, 'mutragya', 'NPK kijuttatás', 1, 4, 2),
-(3, '2025-04-01', 12000.00, 'novenyvedoszer', 'Gyomirtás', 1, 4, 3),
-(4, '2025-04-15', 30000.00, 'munka', 'Aratás', 1, 4, NULL),
-(5, '2025-04-05', 30000.00, 'vetomag', 'Kukorica vetőmag', 2, 6, 1),
-(6, '2025-04-20', 20000.00, 'mutragya', 'Kukorica tápanyag', 2, 6, 2),
-(7, '2025-05-10', 15000.00, 'ontozes', 'Kukorica öntözés', 2, 6, NULL),
-(8, '2025-06-01', 18000.00, 'uzemanyag', 'Traktor szántás', 2, 6, NULL),
-(9, '2025-03-18', 28000.00, 'vetomag', 'Burgonya ültetőanyag', 3, 4, 1),
-(10, '2025-04-01', 22000.00, 'mutragya', 'Burgonya műtrágya', 3, 4, 2),
-(11, '2025-04-20', 35000.00, 'munka', 'Betakarítás', 3, 4, NULL);
+INSERT INTO `kiadas` (`id`, `datum`, `osszeg`, `tipus`, `leiras`, `fold_id`) VALUES
+(1, '2025-03-10', 25000.00, 'vetomag', 'Búza vetőmag', 1),
+(2, '2025-03-22', 18000.00, 'mutragya', 'NPK kijuttatás', 1),
+(3, '2025-04-01', 12000.00, 'novenyvedoszer', 'Gyomirtás', 1),
+(4, '2025-04-15', 30000.00, 'munka', 'Aratás', 1),
+(5, '2025-04-05', 30000.00, 'vetomag', 'Kukorica vetőmag', 2),
+(6, '2025-04-20', 20000.00, 'mutragya', 'Kukorica tápanyag', 2),
+(7, '2025-05-10', 15000.00, 'ontozes', 'Kukorica öntözés', 2),
+(8, '2025-06-01', 18000.00, 'uzemanyag', 'Traktor szántás', 2),
+(9, '2025-03-18', 28000.00, 'vetomag', 'Burgonya ültetőanyag', 3),
+(10, '2025-04-01', 22000.00, 'mutragya', 'Burgonya műtrágya', 3),
+(11, '2025-04-20', 35000.00, 'munka', 'Betakarítás', 3),
+(15, '2028-10-04', 25000.00, 'munka', 'Jöttek Józsiék dologra vetni', 10),
+(17, '2026-03-13', 30000.00, 'munka', 'Elvitték a tehenek elől a takarmányt a Feriék', 12),
+(18, '2026-03-04', 50000.00, 'Műtrágya', 'Vettünk sok műtrágyát', 10),
+(19, '2026-03-13', 85000.00, 'Gázolaj', 'Vettünk gázolajat a föld munkálataihoz', 12),
+(21, '2026-03-06', 15000.00, 'munka', 'Kapálás', 10),
+(22, '2026-03-19', 25000.00, 'munka', 'Jöttek Józsiék verni a kapát', 25),
+(23, '2026-04-23', 50000.00, 'munka', 'Víz kiadás', 25),
+(24, '2026-03-01', 58000.00, 'munka', 'Szerves trágya kijuttatás', 26);
 
 -- --------------------------------------------------------
 
@@ -178,6 +197,7 @@ INSERT INTO `kiadas` (`id`, `datum`, `osszeg`, `tipus`, `leiras`, `fold_id`, `no
 CREATE TABLE `noveny` (
   `id` int(11) NOT NULL,
   `nnev` varchar(100) NOT NULL,
+  `termar` int(255) DEFAULT NULL,
   `kep` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
@@ -185,20 +205,20 @@ CREATE TABLE `noveny` (
 -- A tábla adatainak kiíratása `noveny`
 --
 
-INSERT INTO `noveny` (`id`, `nnev`, `kep`) VALUES
-(1, 'napraforgó', 'https://attic.sh/5jdhbrp2s777nlebkm3yshgmjt96'),
-(2, 'szója', 'https://static.vecteezy.com/system/resources/previews/038/035/195/non_2x/ai-generated-soya-beans-isolated-on-transparent-background-free-png.png'),
-(3, 'cukorrépa', 'https://attic.sh/4r1fptt64lh3tpy406xiw0ncn3ug'),
-(4, 'Búza', 'https://attic.sh/zbuguftuwt7hqm8woxzxfzvxx9hi'),
-(5, 'burgonya', 'https://static.vecteezy.com/system/resources/previews/040/211/346/non_2x/ai-generated-potato-clip-art-free-png.png'),
-(6, 'Kukorica', 'https://attic.sh/xu8f67d8jbj9f0njuzvdrxjjrcpg'),
-(7, 'tritikálé', 'https://static.vecteezy.com/system/resources/previews/035/656/186/non_2x/ai-generated-ear-of-wheat-spikelet-isolated-on-transparent-background-free-png.png'),
-(8, 'repce', 'https://static.vecteezy.com/system/resources/previews/023/234/791/non_2x/yellow-canola-flower-transparent-free-png.png'),
-(10, 'zab', 'https://imgproxy.attic.sh/insecure/f:webp/q:90/w:1200/plain/https://attic.sh/yggfrsgzwb41931w2redj846c1ro'),
-(11, 'árpa', 'https://cdn-icons-png.flaticon.com/512/3657/3657064.png'),
-(12, 'rozs', 'https://imgproxy.attic.sh/insecure/f:webp/q:90/w:1200/plain/https://attic.sh/m0me7n0r2g7gasxzctrfysffwha0'),
-(13, 'lucerna', 'https://imgproxy.attic.sh/insecure/f:webp/q:90/w:384/plain/https://attic.sh/9ctfnarry2gfqj5ogxcor55m0snz'),
-(15, 'cirok', 'https://thumbs.dreamstime.com/b/crop-sign-emoji-icon-illustration-wheat-vector-symbol-emoticon-design-clip-art-sign-comic-style-crop-sign-emoji-icon-illustration-408222366.jpg');
+INSERT INTO `noveny` (`id`, `nnev`, `termar`, `kep`) VALUES
+(1, 'napraforgó', 180, 'https://attic.sh/5jdhbrp2s777nlebkm3yshgmjt96'),
+(2, 'szója', 165, 'https://static.vecteezy.com/system/resources/previews/038/035/195/non_2x/ai-generated-soya-beans-isolated-on-transparent-background-free-png.png'),
+(3, 'cukorrépa', 25, 'https://attic.sh/4r1fptt64lh3tpy406xiw0ncn3ug'),
+(4, 'búza', 75, 'https://attic.sh/zbuguftuwt7hqm8woxzxfzvxx9hi'),
+(5, 'burgonya', 120, 'https://static.vecteezy.com/system/resources/previews/040/211/346/non_2x/ai-generated-potato-clip-art-free-png.png'),
+(6, 'kukorica', 75, 'https://attic.sh/xu8f67d8jbj9f0njuzvdrxjjrcpg'),
+(7, 'tritikálé', 70, 'https://static.vecteezy.com/system/resources/previews/035/656/186/non_2x/ai-generated-ear-of-wheat-spikelet-isolated-on-transparent-background-free-png.png'),
+(8, 'repce', 175, 'https://static.vecteezy.com/system/resources/previews/023/234/791/non_2x/yellow-canola-flower-transparent-free-png.png'),
+(10, 'zab', 70, 'https://imgproxy.attic.sh/insecure/f:webp/q:90/w:1200/plain/https://attic.sh/yggfrsgzwb41931w2redj846c1ro'),
+(11, 'árpa', 65, 'https://cdn-icons-png.flaticon.com/512/3657/3657064.png'),
+(12, 'rozs', 65, 'https://imgproxy.attic.sh/insecure/f:webp/q:90/w:1200/plain/https://attic.sh/m0me7n0r2g7gasxzctrfysffwha0'),
+(13, 'lucerna', 95, 'https://imgproxy.attic.sh/insecure/f:webp/q:90/w:384/plain/https://attic.sh/9ctfnarry2gfqj5ogxcor55m0snz'),
+(15, 'cirok', 70, 'https://thumbs.dreamstime.com/b/crop-sign-emoji-icon-illustration-wheat-vector-symbol-emoticon-design-clip-art-sign-comic-style-crop-sign-emoji-icon-illustration-408222366.jpg');
 
 -- --------------------------------------------------------
 
@@ -217,38 +237,38 @@ CREATE TABLE `noveny_input` (
 --
 
 INSERT INTO `noveny_input` (`noveny_id`, `inputanyag_id`, `termes_per_kilo`) VALUES
-(1, 10, 700.00),
-(1, 11, 740.00),
-(1, 12, 690.00),
-(2, 13, 675.00),
-(2, 14, 675.00),
-(2, 15, 675.00),
-(4, 1, 5.00),
-(4, 5, 5.00),
-(5, 16, 409.00),
-(5, 17, 374.00),
-(5, 18, 748.00),
-(6, 6, 1300.00),
-(6, 8, 1290.00),
-(6, 9, 1100.00),
-(7, 19, 173.00),
-(7, 20, 182.00),
-(7, 21, 170.00),
-(8, 22, 1070.00),
-(8, 23, 1050.00),
-(8, 24, 1100.00),
-(10, 25, 163.00),
-(10, 26, 375.00),
-(11, 27, 189.00),
-(11, 28, 227.00),
-(11, 29, 177.00),
-(12, 30, 314.00),
-(12, 31, 220.00),
-(13, 32, 4850.00),
-(13, 33, 1210.00),
-(15, 34, 4200.00),
-(15, 35, 4200.00),
-(15, 36, 2500.00);
+(1, 10, 300.00),
+(1, 11, 240.00),
+(1, 12, 290.00),
+(2, 13, 40.00),
+(2, 14, 50.00),
+(2, 15, 60.00),
+(4, 1, 25.00),
+(4, 5, 30.00),
+(5, 16, 20.00),
+(5, 17, 25.00),
+(5, 18, 30.00),
+(6, 6, 250.00),
+(6, 8, 275.00),
+(6, 9, 300.00),
+(7, 19, 30.00),
+(7, 20, 35.00),
+(7, 21, 40.00),
+(8, 22, 800.00),
+(8, 23, 850.00),
+(8, 24, 900.00),
+(10, 25, 30.00),
+(10, 26, 35.00),
+(11, 27, 40.00),
+(11, 28, 35.00),
+(11, 29, 50.00),
+(12, 30, 50.00),
+(12, 31, 28.00),
+(13, 32, 800.00),
+(13, 33, 710.00),
+(15, 34, 600.00),
+(15, 35, 740.00),
+(15, 36, 800.00);
 
 -- --------------------------------------------------------
 
@@ -260,17 +280,25 @@ CREATE TABLE `terv` (
   `id` int(11) NOT NULL,
   `fold_id` int(11) NOT NULL,
   `noveny_id` int(11) NOT NULL,
+  `kiv_vetoid` int(255) NOT NULL,
+  `kiv_mutrid` int(255) NOT NULL,
   `vetes_idopont` date DEFAULT NULL,
   `tomeg` decimal(10,2) DEFAULT NULL,
-  `osszeg` decimal(10,2) DEFAULT NULL
+  `osszeg` decimal(10,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `terv`
 --
 
-INSERT INTO `terv` (`id`, `fold_id`, `noveny_id`, `vetes_idopont`, `tomeg`, `osszeg`) VALUES
-(1, 1, 4, '2025-11-19', 15.00, 13200.00);
+INSERT INTO `terv` (`id`, `fold_id`, `noveny_id`, `kiv_vetoid`, `kiv_mutrid`, `vetes_idopont`, `tomeg`, `osszeg`) VALUES
+(1, 1, 4, 11, 40, '2025-11-19', 15.00, 132000),
+(21, 10, 6, 6, 0, '2027-03-27', 10.00, 227700),
+(23, 10, 8, 22, 0, '2028-03-20', 8.00, 947600),
+(24, 25, 2, 14, 40, '2026-04-20', 250.00, 2113125),
+(25, 10, 5, 18, 40, '2026-03-27', 500.00, 1821600),
+(26, 12, 8, 23, 0, '2026-03-27', 20.00, 2631200),
+(28, 26, 1, 10, 40, '2026-03-27', 75.00, 4231540);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -301,9 +329,7 @@ ALTER TABLE `input_anyag`
 --
 ALTER TABLE `kiadas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fold_id` (`fold_id`),
-  ADD KEY `noveny_id` (`noveny_id`),
-  ADD KEY `inputanyag_id` (`inputanyag_id`);
+  ADD KEY `fold_id` (`fold_id`);
 
 --
 -- A tábla indexei `noveny`
@@ -334,13 +360,13 @@ ALTER TABLE `terv`
 -- AUTO_INCREMENT a táblához `fold`
 --
 ALTER TABLE `fold`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT a táblához `gazda_fiok`
 --
 ALTER TABLE `gazda_fiok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT a táblához `input_anyag`
@@ -352,7 +378,7 @@ ALTER TABLE `input_anyag`
 -- AUTO_INCREMENT a táblához `kiadas`
 --
 ALTER TABLE `kiadas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT a táblához `noveny`
@@ -364,7 +390,7 @@ ALTER TABLE `noveny`
 -- AUTO_INCREMENT a táblához `terv`
 --
 ALTER TABLE `terv`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -380,9 +406,7 @@ ALTER TABLE `fold`
 -- Megkötések a táblához `kiadas`
 --
 ALTER TABLE `kiadas`
-  ADD CONSTRAINT `kiadas_ibfk_1` FOREIGN KEY (`fold_id`) REFERENCES `fold` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `kiadas_ibfk_2` FOREIGN KEY (`noveny_id`) REFERENCES `noveny` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `kiadas_ibfk_3` FOREIGN KEY (`inputanyag_id`) REFERENCES `input_anyag` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `kiadas_ibfk_1` FOREIGN KEY (`fold_id`) REFERENCES `fold` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `noveny_input`

@@ -8,6 +8,7 @@ import { Foldfelform } from './foldfelform/foldfelform';
 import { Terv } from './terv/terv';
 import{ Sugo } from './sugo/sugo';
 import { Kiadasok } from './kiadasok/kiadasok';
+import { Adatvedelmi } from './adatvedelmi/adatvedelmi';
 const routes: Routes = [
   {path:'register', component:Regcomp },
   {path:'login',component:Loginform},
@@ -16,8 +17,8 @@ const routes: Routes = [
   {path:'fold',component:Foldek},
   {path:'terv',component:Terv},
   {path:'sugo',component:Sugo},
-  {path:'kiad',component:Kiadasok}
-
+  {path:'kiad',component:Kiadasok},
+  {path:'adatvedelmi',component:Adatvedelmi}
 ];
 
 @NgModule({

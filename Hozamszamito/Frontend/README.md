@@ -2,6 +2,14 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
 
+Before running the server run the following install commands:
+
+```bash
+npm install
+npm install jspdf jspdf-autotable jasmine
+```
+
+
 ## Development server
 
 To start a local development server, run:

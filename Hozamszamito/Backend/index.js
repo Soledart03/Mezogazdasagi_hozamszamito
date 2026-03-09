@@ -20,65 +20,7 @@ if (process.env.NODE_ENV !== 'test') {
     console.log('MySQL kapcsolódva.');
   });
 }
-/*
-app.post('/api/chat', async (req, res) => {
-  try {
-    const { message } = req.body;
-    if (!message) {
-      return res.status(400).json({ error: 'Nem adott meg üzenetet' });
-    }
-    const response = await fetch('https://text.pollinations.ai/openai', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.POLLINATIONS_API_KEY}`
-      },
-      body: JSON.stringify({
-        messages: [
-          {
-            role: 'system',
-            content: "Egy mezőgazdászokat segítő, mezőgazdaságban profi chatbot vagy, illegális dogokat vagy káromkodást nem használhatsz soha. Mindig kötelezően magyarul beszélhetsz csak"
-          },
-          {
-            role: 'user',
-            content: message
-          }
-  ],
-        model:'openai',
-        max_tokens: 300
-      })
-    });
 
-    const text = await response.text();
- 
-    if (!response.ok) {
-      return res.status(500).json({
-        error: 'Pollinations API error',
-        details: text
-      });
-    }
-
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch {
-      return res.status(500).json({
-        error: 'Invalid JSON from Pollinations',
-        raw: text
-      });
-    }
-
-    res.json({
-     
-      reply: data.choices[0].message.content
-    });
-
-  } catch (err) {
-
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-*/
 app.post('/api/chat', async (req, res) => {
   try {
     const { message } = req.body;
@@ -111,8 +53,6 @@ Mindig magyarul válaszolj.`
     });
 
     const text = await response.text();
-    console.log('Pollinations státusz:', response.status);
-    console.log('Pollinations válasz:', text); // 👈 ezt nézd meg a konzolon!
 
     if (!response.ok) {
       return res.status(500).json({ error: 'Pollinations API hiba', details: text });
@@ -125,20 +65,18 @@ Mindig magyarul válaszolj.`
       return res.status(500).json({ error: 'JSON parse hiba', raw: text });
     }
 
-    // Részletes debug hogy lássuk a struktúrát
-    console.log('Parsed data:', JSON.stringify(data, null, 2));
 
     const reply =
-      data?.choices?.[0]?.message?.content ||  // standard OpenAI formátum
-      data?.choices?.[0]?.text ||               // alternatív formátum
-      data?.text ||                             // egyszerű szöveges válasz
-      data?.content ||                          // másik lehetséges mező
+      data?.choices?.[0]?.message?.content || 
+      data?.choices?.[0]?.text ||               
+      data?.text ||                             
+      data?.content ||                          
       null;
 
     if (!reply) {
       return res.status(500).json({ 
         error: 'Üres válasz a modelltől',
-        debug: data  // 👈 visszaküldjük a teljes választ debughoz
+        debug: data  
       });
     }
 
