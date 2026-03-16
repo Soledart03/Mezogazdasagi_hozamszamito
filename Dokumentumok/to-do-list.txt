@@ -10,6 +10,13 @@ npm run web
 npx expo install react-native-paper
 npx expo install react-native-vector-icons
 
+
+FONTOS!:
+AI chat - enterrel menjen
+adatvédelmi tájékozta elfogagó popup
+felosztani a weboldalt
+
+
 PPT:
 GitHub
 bootstrap, trello, discord???
