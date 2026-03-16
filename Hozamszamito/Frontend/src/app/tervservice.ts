@@ -1,12 +1,18 @@
   import { Injectable } from '@angular/core';
   import { HttpClient } from '@angular/common/http';
-  import { BehaviorSubject, Observable } from 'rxjs';
+  import { BehaviorSubject, Observable,Subject } from 'rxjs';
   const terv = 'foldlista';
   @Injectable({
     providedIn: 'root',
   })
   export class Tervservice {
     constructor(private http:HttpClient){}
+    private refreshTrigger = new Subject<void>();
+    refresh$ = this.refreshTrigger.asObservable();
+
+    triggerRefresh() {
+      this.refreshTrigger.next();
+    }
     private tervSubject = new BehaviorSubject<any[]>(this.loadFromStorage());
     terv$ = this.tervSubject.asObservable();
     tervek: any[] = [];
@@ -55,7 +61,7 @@
         next: ujterv => {
           const current = this.tervSubject.value;
           this.tervSubject.next([...current, ujterv]);
-          
+          this.triggerRefresh();
         },
         error: err => console.error(err)
       });
@@ -66,6 +72,7 @@
         next: () => {
           const updated = this.tervSubject.value.filter(f => f.id !== id);
           this.tervSubject.next(updated);
+          this.triggerRefresh();
         },
         error: err => console.error(err)
       });

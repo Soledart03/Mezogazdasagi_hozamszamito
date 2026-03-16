@@ -46,20 +46,21 @@
     <label class="form-label">Válassza ki a vetni kívánt magmennyiséget (kg)</label><br>
     <input [(ngModel)]="ujterv.tomeg" type="number" name="tomeg" required>
   </div>
-  <div >Szeretne műtrágyázni ebben a tervben?</div>
-<div class="form-check form-check-inline ">
-  <label class="form-check-label radio-option m2" for="flexRadioDefault2">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" [(ngModel)]="mutragyavane" value="igen">
-  
-    <span>Igen</span>
-  </label>
-  
-  <label class="form-check-label radio-option m-2" for="flexRadioDefault2">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" [(ngModel)]="mutragyavane" value="nem">
-
-    <span>Nem</span>
-  </label>
-</div>
+  <div class="mb-3">
+    <label class="form-label d-block">Szeretne műtrágyázni ebben a tervben?</label>
+    <div class="d-flex justify-content-center align-items-center gap-4">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" 
+               [(ngModel)]="mutragyavane" value="igen" id="radioIgen">
+        <label class="form-check-label" for="radioIgen">Igen</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" 
+               [(ngModel)]="mutragyavane" value="nem" id="radioNem">
+        <label class="form-check-label" for="radioNem">Nem</label>
+      </div>
+    </div>
+  </div>
   <div *ngIf="mutragyavane === 'igen'" class="mb-3">
     <label class="form-label">Válassza ki a műtrágya fajtáját </label><br>
     <select

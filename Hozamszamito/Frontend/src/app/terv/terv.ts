@@ -45,10 +45,13 @@ ngOnInit() {
     if (this.gazdaId !== 0) {
       this.foldser.loadFoldsByGazdaId(this.gazdaId);
     }
-
+   
     console.log('gazdaId:', this.gazdaId);
   });
-
+  this.reloadTervek();
+  this.tervser.refresh$.subscribe(() => {
+    this.reloadTervek();
+  });
   this.foldser.fold$.subscribe(folds => {
     this.foldId = folds?.[0]?.id ?? 0;
     
@@ -122,6 +125,26 @@ ngOnInit() {
 });
 */
   
+}
+reloadTervek() {
+  this.terv$ = this.gazdaser.gazda$.pipe(
+    filter(g => !!g),
+    switchMap(g =>
+      this.foldser.getFoldida(g.id).pipe(
+        switchMap(folds => {
+          const calls = folds.map(f => this.tervser.loadterv(f.id));
+          return forkJoin(calls);
+        }),
+        map((tervekTombje: any[][]) => tervekTombje.flat())
+      )
+    )
+  );
+
+  this.terv$.subscribe(tervek => {
+    tervek.forEach(t => this.loadKiadatok(t));
+  });
+
+  this.tervser.terv$ = this.terv$;
 }
 selectedTerv: any = null;
 kiadottcount: number = 0;
