@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 const Gazda_key = 'bejelentkezettGazda';
 
 @Injectable({
@@ -38,11 +39,15 @@ export class Gazdaservice {
 
   constructor(private http:HttpClient){}
   addGazda(gazda:{'nev','email','jelszo'}):Observable<any>{
-    return this.http.post(this.api,gazda);
+    return this.http.post(this.api, gazda).pipe(
+    catchError(err => throwError(() => err))
+  );
   }
   
   logc(gazda:{'nev','email','jelszo'}):Observable<any>{
-    return this.http.post(this.apilogin,gazda);
+    return this.http.post(this.apilogin, gazda).pipe(
+    catchError(err => throwError(() => err))
+  );
   }
   getGazda(id:number):Observable<any>{
     return this.http.get(this.api+'/'+id);

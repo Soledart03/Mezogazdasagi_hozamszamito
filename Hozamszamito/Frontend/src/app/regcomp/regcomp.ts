@@ -11,22 +11,24 @@ export class Regcomp {
   
   ujgazd = {nev:'',email:'',jelszo:''}
   constructor(private gserv:Gazdaservice,private alertSer: AlertService){}
-  gazdaHozzaad():void{
-    this.gserv.addGazda(this.ujgazd).subscribe({
-      next:()=>{
-        this.alertSer.show('Sikeres Regisztráció!', 'success');
-        
-        this.ujgazd = {nev:'',email:'',jelszo:''};
-        this.closeMenu();
-      },
-      error:(err)=>{
-        this.alertSer.show('Sikertelen regisztráció!' + err.error.error, 'danger');
-        
-
-      }
-      
-    })
+  gazdaHozzaad(): void {
+  if (!this.ujgazd.nev || !this.ujgazd.email || !this.ujgazd.jelszo) {
+    this.alertSer.show('Minden mezőt tölts ki!', 'warning');
+    return;
   }
+
+  this.gserv.addGazda(this.ujgazd).subscribe({
+    next: () => {
+      this.alertSer.show('Sikeres regisztráció!', 'success');
+      this.ujgazd = { nev: '', email: '', jelszo: '' };
+      this.closeMenu();
+    },
+    error: (err) => {
+      const uzenet = err?.error?.error || 'Szerver nem elérhető';
+      this.alertSer.show('Sikertelen regisztráció! ' + uzenet, 'danger');
+    }
+  });
+}
   @Input()IsMenu: boolean = false;
   @Input()show:boolean = true;
   @Output() close = new EventEmitter<void>();

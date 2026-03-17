@@ -108,21 +108,33 @@ app.get(apiurl+'/:id', async (req,res)=>{
 })
 
 
-app.post('/api/log', async (req,res)=>{
-    const {id, nev, email, jelszo} = req.body;
-    
-    db.query('SELECT id,nev,jelszo FROM gazda_fiok WHERE nev = ? AND email = ?',[nev,email],(err,results)=>{
-        if(err) throw err;
-        bcrypt.compare(jelszo,results[0].jelszo,(err,result)=>{
-            if(err) throw err;
-            if(!result){
-                
-                return res.status(401).json({error:'Helytelen jelszó'});
+app.post('/api/log', async (req, res) => {
+    const { nev, email, jelszo } = req.body;
+
+    if (!nev || !email || !jelszo) {
+        return res.status(400).json({ error: 'Hiányzó mezők' });
+    }
+
+    db.query('SELECT id, nev, jelszo FROM gazda_fiok WHERE nev = ? AND email = ?', [nev, email], (err, results) => {
+        if (err) {
+            console.error('DB hiba:', err);
+            return res.status(500).json({ error: 'Adatbázis hiba' });
+        }
+        if (!results || results.length === 0) {
+            return res.status(401).json({ error: 'Hibás felhasználónév vagy email' });
+        }
+
+        bcrypt.compare(jelszo, results[0].jelszo, (err, result) => {
+            if (err) {
+                console.error('Bcrypt hiba:', err);
+                return res.status(500).json({ error: 'Szerver hiba' });
             }
-            
-            res.json({success:true,id:results[0].id});
+            if (!result) {
+                return res.status(401).json({ error: 'Helytelen jelszó' });
+            }
+            res.json({ success: true, id: results[0].id });
         });
-    })
+    });
 });
 
 app.get('/api/gfold/:id',(req,res)=>{
@@ -133,17 +145,33 @@ app.get('/api/gfold/:id',(req,res)=>{
 });  
 
 app.post(apiurl, async (req, res) => {
-    const { nev, email, jelszo} = req.body;
-    const haspas = await bcrypt.hash(jelszo,10);
-    db.query(
-    'INSERT INTO gazda_fiok (nev, email, jelszo) VALUES (?, ?, ?)',
-    [nev, email, haspas],
-    (err, results) => {
-    if (err) throw err;
-    res.json({ id: results.insertId, nev, email, jelszo });
+    const { nev, email, jelszo } = req.body;
+
+    if (!nev || !email || !jelszo) {
+        return res.status(400).json({ error: 'Hiányzó mezők' });
     }
-    );
-   });
+
+    try {
+        const haspas = await bcrypt.hash(jelszo, 10);
+        db.query(
+            'INSERT INTO gazda_fiok (nev, email, jelszo) VALUES (?, ?, ?)',
+            [nev, email, haspas],
+            (err, results) => {
+                if (err) {
+                    if (err.code === 'ER_DUP_ENTRY') {
+                        return res.status(409).json({ error: 'Ez a felhasználónév vagy email már foglalt' });
+                    }
+                    console.error('DB hiba:', err);
+                    return res.status(500).json({ error: 'Adatbázis hiba' });
+                }
+                res.json({ id: results.insertId, nev, email });
+            }
+        );
+    } catch (err) {
+        console.error('Hash hiba:', err);
+        res.status(500).json({ error: 'Szerver hiba' });
+    }
+});
 
    
    app.get('/api/foldszam',(req,res)=>{
