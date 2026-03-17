@@ -60,9 +60,9 @@ export class Sugo {
   }
 
   handleEnter(event: KeyboardEvent) {
-  if (event.ctrlKey) {
-    this.sendMessage();
+  if (!event.shiftKey) { 
     event.preventDefault();
+    this.sendMessage();
   }
 }
 

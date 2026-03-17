@@ -12,9 +12,12 @@ npx expo install react-native-vector-icons
 
 
 FONTOS!:
+
 AI chat - enterrel menjen
 adatvédelmi tájékozta elfogagó popup
-felosztani a weboldalt
+
+
+PPT - felosztani a weboldalt
 
 
 PPT:

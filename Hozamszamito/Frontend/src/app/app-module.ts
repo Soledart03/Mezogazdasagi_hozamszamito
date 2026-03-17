@@ -18,6 +18,7 @@ import { Kiadasok } from './kiadasok/kiadasok';
 import { Kiadasfelform } from './kiadfelform/kiadfelform';
 import { AlertComponent } from './alert-component/alert-component';
 import { Adatvedelmi } from './adatvedelmi/adatvedelmi';
+import { AdatvedelmiPopup } from './adatvedelmi-popup/adatvedelmi-popup';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { Adatvedelmi } from './adatvedelmi/adatvedelmi';
     Kiadasok,
     Kiadasfelform,
     AlertComponent,
-    Adatvedelmi
+    Adatvedelmi,
+    AdatvedelmiPopup
   ],
   imports: [
     BrowserModule,
